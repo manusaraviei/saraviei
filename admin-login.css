@@ -1,0 +1,443 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            #4a321e 0%,
+            #21140c 45%,
+            #100b08 100%
+        );
+
+    color: #f1e5d2;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+}
+
+.pagina-login {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    position: relative;
+}
+
+.pagina-login::before {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(209, 170, 97, 0.07);
+
+    filter: blur(80px);
+
+    animation:
+        luzLogin 6s ease-in-out infinite;
+}
+
+@keyframes luzLogin {
+
+    0%,
+    100% {
+        transform: scale(0.9);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+.login-card {
+    width: 100%;
+
+    max-width: 470px;
+
+    padding: 55px 45px;
+
+    position: relative;
+
+    z-index: 2;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(48, 31, 20, 0.96),
+            rgba(24, 15, 10, 0.98)
+        );
+
+    border:
+        1px solid
+        rgba(209, 170, 97, 0.28);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0, 0, 0, 0.55),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.03);
+
+    animation:
+        cardEntrada 0.8s ease-out;
+}
+
+@keyframes cardEntrada {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo {
+    color: #d1aa61;
+
+    font-size: 22px;
+
+    letter-spacing: 4px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    margin-bottom: 20px;
+}
+
+.linha-dourada {
+    display: block;
+
+    width: 70px;
+
+    height: 1px;
+
+    margin:
+        0 auto 30px;
+
+    background: #d1aa61;
+
+    box-shadow:
+        0 0 15px
+        rgba(209, 170, 97, 0.4);
+}
+
+.etiqueta {
+    text-align: center;
+
+    color: #d1a957;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 14px;
+}
+
+.login-card h1 {
+    text-align: center;
+
+    font-size:
+        clamp(
+            34px,
+            6vw,
+            46px
+        );
+
+    font-weight: normal;
+
+    color: #f2e5d1;
+
+    margin-bottom: 15px;
+}
+
+.descricao {
+    text-align: center;
+
+    color: #bfae99;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    margin-bottom: 35px;
+}
+
+.campo {
+    margin-bottom: 22px;
+}
+
+.campo label {
+    display: block;
+
+    color: #e4d2b8;
+
+    font-size: 14px;
+
+    margin-bottom: 8px;
+}
+
+.campo input {
+    width: 100%;
+
+    padding: 15px 16px;
+
+    color: #f5eadb;
+
+    background:
+        rgba(10, 7, 5, 0.65);
+
+    border:
+        1px solid
+        rgba(209, 170, 97, 0.22);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    transition:
+        border-color 0.3s,
+        box-shadow 0.3s,
+        background 0.3s;
+}
+
+.campo input::placeholder {
+    color: #766657;
+}
+
+.campo input:focus {
+    border-color: #d1aa61;
+
+    background:
+        rgba(10, 7, 5, 0.85);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(209, 170, 97, 0.08);
+}
+
+.botao-entrar {
+    width: 100%;
+
+    padding: 16px 25px;
+
+    border: none;
+
+    border-radius: 35px;
+
+    color: #1b1008;
+
+    background: #d1aa61;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.35);
+
+    transition:
+        transform 0.35s,
+        background 0.35s,
+        box-shadow 0.35s;
+
+    animation:
+        botaoRespira 4s ease-in-out infinite;
+}
+
+@keyframes botaoRespira {
+
+    0%,
+    100% {
+        box-shadow:
+            0 10px 30px
+            rgba(0, 0, 0, 0.35);
+    }
+
+    50% {
+        box-shadow:
+            0 12px 38px
+            rgba(202, 158, 76, 0.25);
+    }
+}
+
+.botao-entrar:hover {
+    transform:
+        translateY(-4px);
+
+    background: #e2c17e;
+
+    box-shadow:
+        0 15px 40px
+        rgba(202, 158, 76, 0.35);
+}
+
+.botao-entrar:disabled {
+    opacity: 0.6;
+
+    cursor: wait;
+
+    transform: none;
+}
+
+.esqueci-senha {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding: 5px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #a9957e;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 13px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition:
+        color 0.3s,
+        transform 0.3s;
+}
+
+.esqueci-senha:hover {
+    color: #d1aa61;
+
+    transform:
+        translateY(-1px);
+}
+
+.mensagem {
+    min-height: 22px;
+
+    margin-top: 18px;
+
+    text-align: center;
+
+    color: #d8a6a6;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+.voltar {
+    display: block;
+
+    margin-top: 30px;
+
+    text-align: center;
+
+    color: #a9957e;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition:
+        color 0.3s,
+        transform 0.3s;
+}
+
+.voltar:hover {
+    color: #d1aa61;
+
+    transform:
+        translateX(-3px);
+}
+
+@media (max-width: 600px) {
+
+    .pagina-login {
+        padding: 20px 15px;
+    }
+
+    .login-card {
+        padding: 40px 25px;
+
+        border-radius: 18px;
+    }
+
+    .login-card h1 {
+        font-size: 34px;
+    }
+
+    .logo {
+        font-size: 18px;
+
+        letter-spacing: 3px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior:
+            auto !important;
+
+        transition-duration:
+            0.01ms !important;
+    }
+}

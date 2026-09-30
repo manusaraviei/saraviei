@@ -1,0 +1,3009 @@
+/* =========================================================
+   SARAVIEI — PAINEL ADMINISTRATIVO
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    background: #0d0907;
+    color: #eadcc8;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+
+/* =========================================================
+   PAINEL
+   ========================================================= */
+
+.painel-admin {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background: #0d0907;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 185px;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background:
+        linear-gradient(
+            180deg,
+            #15100d 0%,
+            #0f0b09 100%
+        );
+
+    border-right: 1px solid #3d2a19;
+
+    z-index: 1000;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.sidebar-cabecalho {
+    padding: 23px 15px 20px;
+
+    border-bottom: 1px solid #3d2a19;
+}
+
+.sidebar-logo {
+    color: #d4a04b;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 24px;
+    font-weight: 400;
+
+    letter-spacing: 2px;
+
+    line-height: 1;
+}
+
+.sidebar-subtitulo {
+    margin-top: 7px;
+
+    color: #846b4d;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 8px;
+    font-weight: 600;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   NAVEGAÇÃO
+   ========================================================= */
+
+.sidebar-navegacao {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    padding: 24px 6px 12px;
+}
+
+.botao-menu {
+    width: 100%;
+
+    min-height: 43px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 0 14px;
+
+    border: 1px solid transparent;
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: #bda681;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 11px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    appearance: none;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease;
+}
+
+.botao-menu:hover {
+    color: #d8ad5b;
+
+    background: #19110c;
+
+    border-color: #4d341d;
+}
+
+.botao-menu.ativo {
+    color: #e0b35b;
+
+    background:
+        linear-gradient(
+            90deg,
+            #21160f 0%,
+            #17100c 100%
+        );
+
+    border-color: #79572b;
+}
+
+.icone-menu {
+    width: 18px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #92724a;
+
+    font-size: 12px;
+}
+
+.botao-menu.ativo .icone-menu {
+    color: #d5a34d;
+}
+
+
+/* =========================================================
+   USUÁRIO
+   ========================================================= */
+
+.usuario-sidebar {
+    margin-top: auto;
+
+    padding: 14px 12px;
+
+    border-top: 1px solid #3d2a19;
+}
+
+.avatar-usuario {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #b98338,
+            #6e481e
+        );
+
+    color: #170e07;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 13px;
+}
+
+.dados-usuario {
+    margin-top: 8px;
+}
+
+.dados-usuario strong {
+    display: block;
+
+    color: #d2b487;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 11px;
+
+    font-weight: 400;
+}
+
+.dados-usuario span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #725c43;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+.botao-sair {
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 7px 9px;
+
+    border: 1px solid #4b3022;
+
+    border-radius: 4px;
+
+    background: transparent;
+
+    color: #9c705b;
+
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+.botao-sair:hover {
+    border-color: #714333;
+
+    color: #c4876d;
+}
+
+
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+   ========================================================= */
+
+.conteudo-admin,
+.conteudo-painel {
+    width: calc(100% - 185px);
+
+    min-height: 100vh;
+
+    margin-left: 185px;
+
+    padding: 47px 6.8% 70px;
+
+    background: #0d0907;
+}
+
+
+/* =========================================================
+   SEÇÕES
+   ========================================================= */
+
+.secao-painel {
+    width: 100%;
+}
+
+.secao-painel.oculta {
+    display: none;
+}
+
+
+/* =========================================================
+   CABEÇALHO DO DASHBOARD
+   ========================================================= */
+
+.cabecalho-pagina {
+    margin-bottom: 28px;
+}
+
+.eyebrow {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #9d7740;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+}
+
+.cabecalho-pagina h1 {
+    margin: 0;
+
+    color: #dfc18d;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 38px;
+
+    font-weight: 400;
+
+    line-height: 1.1;
+}
+
+.cabecalho-pagina p {
+    margin: 9px 0 0;
+
+    color: #806a51;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   GRID DASHBOARD
+   ========================================================= */
+
+.grid-dashboard {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(0, 1fr)
+        );
+
+    gap: 10px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   CARDS DASHBOARD
+   ========================================================= */
+
+.grid-dashboard .card-dashboard,
+.grid-dashboard .dashboard-card {
+    position: relative;
+
+    width: 100%;
+
+    height: 158px;
+
+    min-height: 158px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px 14px;
+
+    border: 1px solid #4d351e;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #19120e 0%,
+            #120c09 100%
+        );
+
+    text-align: center;
+
+    overflow: hidden;
+
+    flex: none;
+}
+
+.grid-dashboard .card-dashboard::before,
+.grid-dashboard .dashboard-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 38px;
+    height: 2px;
+
+    background: #c08b3d;
+}
+
+.grid-dashboard .card-dashboard .numero,
+.grid-dashboard .dashboard-card .numero,
+.grid-dashboard .card-dashboard strong,
+.grid-dashboard .dashboard-card strong {
+    display: block;
+
+    margin: 7px 0 9px;
+
+    color: #d4a04b;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 30px;
+
+    font-weight: 400;
+
+    line-height: 1;
+}
+
+.grid-dashboard .card-dashboard .titulo,
+.grid-dashboard .dashboard-card .titulo {
+    color: #cbb79a;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    line-height: 1.4;
+}
+
+.grid-dashboard .card-dashboard::after,
+.grid-dashboard .dashboard-card::after {
+    content: "→";
+
+    margin-top: 11px;
+
+    color: #b9853b;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   BLOCOS DO DASHBOARD
+   ========================================================= */
+
+.bloco-dashboard {
+    margin-top: 25px;
+}
+
+.titulo-bloco {
+    margin: 0 0 12px;
+
+    color: #c9aa78;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 18px;
+
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   ATALHOS
+   ========================================================= */
+
+.atalhos-dashboard {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(170px, 1fr)
+        );
+
+    gap: 8px;
+}
+
+.atalho-dashboard {
+    min-height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    padding: 11px 13px;
+
+    border: 1px solid #49331f;
+
+    border-radius: 6px;
+
+    background: #15100c;
+
+    color: #bda17a;
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease;
+}
+
+.atalho-dashboard:hover {
+    background: #1c130d;
+
+    border-color: #805b2a;
+
+    color: #d6ae60;
+}
+
+.atalho-icone {
+    color: #ae7c35;
+
+    font-size: 13px;
+}
+
+.atalho-seta {
+    color: #7d603b;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   CABEÇALHO COM BOTÃO
+   ========================================================= */
+
+.cabecalho-com-botao {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 24px;
+}
+
+.cabecalho-com-botao h1 {
+    margin: 0;
+
+    color: #d9a64d;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 38px;
+
+    font-weight: 400;
+}
+
+.cabecalho-com-botao p {
+    margin: 9px 0 0;
+
+    color: #806a51;
+
+    font-size: 11px;
+}
+
+.botao-principal {
+    min-height: 37px;
+
+    padding: 8px 15px;
+
+    border: 1px solid #a87632;
+
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #c19142,
+            #95672d
+        );
+
+    color: #1a1008;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.botao-principal:hover {
+    filter: brightness(1.12);
+}
+
+.botao-secundario {
+    min-height: 36px;
+
+    padding: 8px 14px;
+
+    border: 1px solid #51391f;
+
+    border-radius: 5px;
+
+    background: #17100c;
+
+    color: #c5a574;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+.botao-secundario:hover {
+    border-color: #805b2a;
+
+    color: #ddb25b;
+}
+
+.campo-select {
+    min-height: 37px;
+
+    padding: 7px 10px;
+
+    border: 1px solid #49331f;
+
+    border-radius: 5px;
+
+    background: #15100c;
+
+    color: #cdbb9e;
+
+    outline: none;
+}
+
+
+/* =========================================================
+   FORMULÁRIO
+   ========================================================= */
+
+.painel-formulario {
+    margin-bottom: 25px;
+
+    padding: 24px;
+
+    border: 1px solid #49331f;
+
+    border-radius: 8px;
+
+    background: #15100c;
+}
+
+.cabecalho-formulario h2 {
+    margin: 0 0 22px;
+
+    color: #d7bd91;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 22px;
+
+    font-weight: 400;
+}
+
+#form-produto {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 15px;
+}
+
+.campo {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.campo-largo {
+    grid-column: 1 / -1;
+}
+
+.campo label {
+    color: #a78d6b;
+
+    font-size: 10px;
+}
+
+.campo input,
+.campo textarea,
+.campo select {
+    width: 100%;
+
+    padding: 9px 10px;
+
+    border: 1px solid #44301d;
+
+    border-radius: 5px;
+
+    background: #0f0b08;
+
+    color: #ded0b9;
+
+    outline: none;
+}
+
+.campo input {
+    min-height: 37px;
+}
+
+.campo textarea {
+    resize: vertical;
+}
+
+.campo input:focus,
+.campo textarea:focus,
+.campo select:focus {
+    border-color: #88612e;
+}
+
+.campo-checkbox {
+    justify-content: center;
+}
+
+.campo-checkbox label {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #bfa988;
+}
+
+.campo-checkbox input {
+    width: 15px;
+
+    accent-color: #b9853b;
+}
+
+.acoes-formulario {
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    padding-top: 5px;
+}
+
+
+/* =========================================================
+   PRODUTOS
+   ========================================================= */
+
+.grade-produtos-admin {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(255px, 1fr)
+        );
+
+    gap: 18px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   CARD DE PRODUTO — PADRÃO SARAVIEI
+   ========================================================= */
+
+#produtos-container > article,
+#produtos-container > div {
+    position: relative;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: 300px;
+
+    padding: 0;
+
+    border: 1px solid #49331f;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #19120e 0%,
+            #120c09 100%
+        );
+}
+
+#produtos-container .produto-imagem,
+#produtos-container .imagem-produto,
+#produtos-container .card-imagem {
+    width: 100%;
+
+    height: 180px;
+
+    min-height: 180px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #4b301b 0%,
+            #17100c 72%
+        );
+
+    color: #c79a50;
+
+    font-size: 55px;
+}
+
+#produtos-container .produto-imagem img,
+#produtos-container .imagem-produto img,
+#produtos-container .card-imagem img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+#produtos-container .produto-info,
+#produtos-container .card-produto-info {
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+
+    padding: 16px;
+}
+
+#produtos-container .produto-categoria,
+#produtos-container .card-categoria {
+    display: inline-block;
+
+    width: fit-content;
+
+    margin-bottom: 8px;
+
+    padding: 4px 7px;
+
+    border: 1px solid #49331f;
+
+    border-radius: 3px;
+
+    background: #120c09;
+
+    color: #b9873c;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+#produtos-container h3,
+#produtos-container .produto-nome,
+#produtos-container .card-produto-nome {
+    margin: 0 0 8px;
+
+    color: #d9c29f;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 18px;
+
+    font-weight: 400;
+
+    line-height: 1.25;
+}
+
+#produtos-container p,
+#produtos-container .produto-descricao,
+#produtos-container .card-produto-descricao {
+    margin: 0;
+
+    color: #927b61;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+#produtos-container .produto-final,
+#produtos-container .card-acoes,
+#produtos-container .produto-acoes,
+#produtos-container .card-produto-admin-acoes,
+#produtos-container .acoes-produto {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: auto;
+
+    padding-top: 16px;
+}
+
+#produtos-container button {
+    min-height: 33px;
+
+    padding: 7px 12px;
+
+    border: 1px solid #5a4023;
+
+    border-radius: 4px;
+
+    background: #19120d;
+
+    color: #c9a56d;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    appearance: none;
+
+    box-shadow: none;
+
+    transition: .2s ease;
+}
+
+#produtos-container button:hover {
+    background: #26180f;
+
+    border-color: #8a622e;
+
+    color: #dfb55e;
+}
+
+#produtos-container .botao-editar,
+#produtos-container .botao-editar-produto,
+#produtos-container button[data-acao="editar"] {
+    border-color: #79572b;
+
+    background: #25170d;
+
+    color: #d5aa5f;
+}
+
+#produtos-container .botao-excluir,
+#produtos-container .botao-remover,
+#produtos-container button[data-acao="excluir"],
+#produtos-container button[data-acao="remover"] {
+    border-color: #553125;
+
+    background: #1b100d;
+
+    color: #b87862;
+}
+
+
+/* =========================================================
+   FILTRO DE CATEGORIAS
+   ========================================================= */
+
+#filtro-colecoes {
+    min-width: 190px;
+
+    min-height: 37px;
+
+    padding: 7px 32px 7px 11px;
+
+    border: 1px solid #49331f;
+
+    border-radius: 5px;
+
+    background-color: #15100c;
+
+    color: #cdbb9e;
+
+    font-size: 11px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+#filtro-colecoes:hover,
+#filtro-colecoes:focus {
+    border-color: #805b2a;
+}
+
+
+/* =========================================================
+   HOME
+   ========================================================= */
+
+.grade-home {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(250px, 1fr)
+        );
+
+    gap: 13px;
+}
+
+.acoes-home {
+    margin-top: 20px;
+}
+
+#mensagem-home {
+    margin-top: 10px;
+
+    color: #c29a58;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   COLEÇÕES
+   ========================================================= */
+
+.grade-colecoes,
+#lista-colecoes {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(220px, 1fr)
+        );
+
+    gap: 14px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   CARD DE COLEÇÃO
+   ========================================================= */
+
+#lista-colecoes > article,
+#lista-colecoes > div {
+    position: relative;
+
+    min-height: 150px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    padding: 19px;
+
+    border: 1px solid #4d351e;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #19120e 0%,
+            #120c09 100%
+        );
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease;
+}
+
+#lista-colecoes > article:hover,
+#lista-colecoes > div:hover {
+    transform: translateY(-2px);
+
+    border-color: #805b2a;
+}
+
+#lista-colecoes h3 {
+    margin: 0 0 8px;
+
+    color: #dcc5a2;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 18px;
+
+    font-weight: 400;
+}
+
+#lista-colecoes p {
+    margin: 0;
+
+    color: #8f785d;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   BOTÕES DE COLEÇÕES
+   ========================================================= */
+
+#lista-colecoes button {
+    min-height: 32px;
+
+    padding: 7px 11px;
+
+    border: 1px solid #5a4023;
+
+    border-radius: 4px;
+
+    background: #19120d;
+
+    color: #c9a56d;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    appearance: none;
+
+    box-shadow: none;
+
+    transition: .2s ease;
+}
+
+#lista-colecoes button:hover {
+    background: #26180f;
+
+    border-color: #8a622e;
+
+    color: #dfb55e;
+}
+
+#lista-colecoes button:first-child {
+    border-color: #79572b;
+
+    color: #d5aa5f;
+}
+
+#lista-colecoes button:last-child {
+    border-color: #553125;
+
+    color: #b87862;
+}
+
+
+/* =========================================================
+   PEDIDOS
+   ========================================================= */
+
+.filtros-pedidos {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-bottom: 17px;
+}
+
+.filtro-pedido {
+    min-height: 34px;
+
+    padding: 7px 12px;
+
+    border: 1px solid #4d351e;
+
+    border-radius: 5px;
+
+    background: #15100c;
+
+    color: #b99a6d;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    appearance: none;
+
+    box-shadow: none;
+
+    outline: none;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease;
+}
+
+.filtro-pedido:hover {
+    background: #21160f;
+
+    border-color: #805b2a;
+
+    color: #dcb15d;
+}
+
+.filtro-pedido.ativo {
+    background:
+        linear-gradient(
+            180deg,
+            #8d612b,
+            #68451f
+        );
+
+    border-color: #b27c35;
+
+    color: #f3dfbd;
+
+    box-shadow:
+        0 0 0 1px rgba(192, 139, 61, .12);
+}
+
+.contador-pedidos {
+    margin-bottom: 15px;
+
+    color: #87715a;
+
+    font-size: 11px;
+}
+
+.contador-pedidos strong {
+    color: #d1a04e;
+}
+
+.grade-pedidos {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(280px, 1fr)
+        );
+
+    gap: 13px;
+}
+
+.card-pedido {
+    position: relative;
+
+    min-width: 0;
+
+    padding: 17px;
+
+    border: 1px solid #49331f;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #19120e 0%,
+            #120c09 100%
+        );
+
+    color: #d8c6aa;
+
+    cursor: pointer;
+
+    transition:
+        border-color .2s ease,
+        transform .2s ease;
+}
+
+.card-pedido:hover {
+    border-color: #805b2a;
+
+    transform: translateY(-2px);
+}
+
+.card-pedido strong {
+    color: #d6aa5a;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 17px;
+
+    font-weight: 400;
+}
+
+.card-pedido small {
+    color: #806a51;
+
+    font-size: 9px;
+}
+
+.card-pedido p {
+    margin: 8px 0 0;
+
+    color: #a68d6d;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   DETALHES DO PEDIDO
+   ========================================================= */
+
+#pedido-detalhes {
+    margin-top: 20px;
+
+    padding: 22px;
+
+    border: 1px solid #49331f;
+
+    border-radius: 8px;
+
+    background: #15100c;
+}
+
+#pedido-detalhes-titulo {
+    margin: 0;
+
+    color: #d8bb87;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 25px;
+
+    font-weight: 400;
+}
+
+#pedido-detalhes-data {
+    margin-top: 6px;
+
+    color: #806a51;
+
+    font-size: 10px;
+}
+
+#pedido-status {
+    margin-top: 14px;
+
+    min-height: 37px;
+
+    padding: 8px 10px;
+
+    border: 1px solid #49331f;
+
+    border-radius: 5px;
+
+    background: #100b08;
+
+    color: #cdbb9e;
+
+    outline: none;
+}
+
+#pedido-cliente,
+#pedido-itens,
+#pedido-entrega,
+#pedido-financeiro,
+#pedido-pagamento,
+#pedido-status-rastreio {
+    margin-top: 18px;
+
+    padding: 16px;
+
+    border: 1px solid #3f2d1c;
+
+    border-radius: 6px;
+
+    background: #110c09;
+}
+
+#pedido-cliente h3,
+#pedido-itens h3,
+#pedido-entrega h3,
+#pedido-financeiro h3,
+#pedido-pagamento h3,
+#pedido-status-rastreio h3 {
+    margin: 0 0 10px;
+
+    color: #c9a873;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 16px;
+
+    font-weight: 400;
+}
+
+#pedido-rastreio-input {
+    width: 100%;
+
+    min-height: 37px;
+
+    padding: 8px 10px;
+
+    border: 1px solid #44301d;
+
+    border-radius: 5px;
+
+    background: #0f0b08;
+
+    color: #ded0b9;
+
+    outline: none;
+}
+
+#pedido-rastreio-input:focus {
+    border-color: #88612e;
+}
+
+#pedido-itens-container {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+/* =========================================================
+   MENSAGENS
+   ========================================================= */
+
+.mensagem-produto,
+#mensagem-status-pedido,
+#mensagem-rastreio {
+    min-height: 17px;
+
+    margin-top: 9px;
+
+    color: #c29a58;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+.estado-carregando,
+.estado-vazio,
+.aviso-colecoes {
+    padding: 24px;
+
+    border: 1px dashed #49331f;
+
+    border-radius: 7px;
+
+    color: #816b53;
+
+    font-size: 11px;
+
+    text-align: center;
+
+    background: #110c09;
+}
+
+.estado-vazio-icone {
+    margin-bottom: 8px;
+
+    color: #a97734;
+
+    font-size: 24px;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .conteudo-admin,
+    .conteudo-painel {
+        padding-left: 35px;
+
+        padding-right: 35px;
+    }
+
+    .grid-dashboard {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .sidebar {
+        width: 175px;
+    }
+
+    .conteudo-admin,
+    .conteudo-painel {
+        width: calc(100% - 175px);
+
+        margin-left: 175px;
+
+        padding: 35px 22px 50px;
+    }
+
+    .cabecalho-com-botao {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    #form-produto {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-largo {
+        grid-column: auto;
+    }
+
+}
+
+
+@media (max-width: 560px) {
+
+    .sidebar {
+        position: static;
+
+        width: 100%;
+
+        height: auto;
+
+        min-height: auto;
+    }
+
+    .painel-admin {
+        display: block;
+    }
+
+    .conteudo-admin,
+    .conteudo-painel {
+        width: 100%;
+
+        margin-left: 0;
+
+        padding: 28px 18px 45px;
+    }
+
+    .grid-dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .atalhos-dashboard {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   CORREÇÃO EXCLUSIVA — CARDS SUPERIORES DO DASHBOARD
+   ========================================================= */
+
+#secao-dashboard .grid-dashboard {
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(0, 1fr)
+        ) !important;
+
+    gap: 10px !important;
+
+    width: 100% !important;
+}
+
+#secao-dashboard .grid-dashboard .card-dashboard,
+#secao-dashboard .grid-dashboard .dashboard-card {
+    position: relative !important;
+
+    width: 100% !important;
+
+    height: 158px !important;
+
+    min-height: 158px !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    padding: 20px 14px !important;
+
+    border: 1px solid #4d351e !important;
+
+    border-radius: 8px !important;
+
+    background:
+        linear-gradient(
+            145deg,
+            #19120e 0%,
+            #120c09 100%
+        ) !important;
+
+    text-align: center !important;
+
+    overflow: hidden !important;
+
+    flex: none !important;
+}
+
+#secao-dashboard .grid-dashboard .card-dashboard::before,
+#secao-dashboard .grid-dashboard .dashboard-card::before {
+    content: "" !important;
+
+    position: absolute !important;
+
+    top: 0 !important;
+
+    left: 0 !important;
+
+    width: 38px !important;
+
+    height: 2px !important;
+
+    background: #c08b3d !important;
+}
+
+#secao-dashboard .grid-dashboard .card-dashboard .numero,
+#secao-dashboard .grid-dashboard .dashboard-card .numero,
+#secao-dashboard .grid-dashboard .card-dashboard strong,
+#secao-dashboard .grid-dashboard .dashboard-card strong {
+    display: block !important;
+
+    margin: 7px 0 9px !important;
+
+    color: #d4a04b !important;
+
+    font-family: Georgia, "Times New Roman", serif !important;
+
+    font-size: 30px !important;
+
+    font-weight: 400 !important;
+
+    line-height: 1 !important;
+}
+
+#secao-dashboard .grid-dashboard .card-dashboard .titulo,
+#secao-dashboard .grid-dashboard .dashboard-card .titulo {
+    color: #cbb79a !important;
+
+    font-size: 12px !important;
+
+    font-weight: 500 !important;
+
+    line-height: 1.4 !important;
+}
+
+#secao-dashboard .grid-dashboard .card-dashboard::after,
+#secao-dashboard .grid-dashboard .dashboard-card::after {
+    content: "→" !important;
+
+    margin-top: 11px !important;
+
+    color: #b9853b !important;
+
+    font-size: 14px !important;
+}
+
+
+/* =========================================================
+   AJUSTE DO FORMULÁRIO DE PRODUTO — SARAVIEI
+   ========================================================= */
+
+/* Nome do campo mais próximo da linha */
+#form-produto .campo {
+    gap: 3px;
+}
+
+#form-produto .campo label {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   CATEGORIAS — PADRÃO SARAVIEI
+   ========================================================= */
+
+#produto-colecoes,
+.seletor-colecoes {
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        ) !important;
+
+    gap: 7px !important;
+
+    width: 100% !important;
+}
+
+#produto-colecoes .check-opcao,
+.seletor-colecoes .check-opcao {
+    display: flex !important;
+
+    align-items: center !important;
+
+    gap: 8px !important;
+
+    min-height: 34px !important;
+
+    padding: 7px 10px !important;
+
+    border: 1px solid #3f2d1c !important;
+
+    border-radius: 5px !important;
+
+    background: #100b08 !important;
+
+    color: #cdbb9e !important;
+
+    font-size: 10px !important;
+
+    line-height: 1.25 !important;
+
+    box-sizing: border-box !important;
+}
+
+#produto-colecoes .check-opcao input[type="checkbox"],
+.seletor-colecoes .check-opcao input[type="checkbox"] {
+    appearance: none !important;
+
+    -webkit-appearance: none !important;
+
+    width: 15px !important;
+
+    min-width: 15px !important;
+
+    max-width: 15px !important;
+
+    height: 15px !important;
+
+    min-height: 15px !important;
+
+    max-height: 15px !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    border: 1px solid #72532b !important;
+
+    border-radius: 3px !important;
+
+    background: #0c0806 !important;
+
+    cursor: pointer !important;
+
+    box-sizing: border-box !important;
+}
+
+#produto-colecoes .check-opcao input[type="checkbox"]:checked,
+.seletor-colecoes .check-opcao input[type="checkbox"]:checked {
+    border-color: #b9853b !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c99a4c,
+            #9b6b2e
+        ) !important;
+}
+
+#produto-colecoes .check-opcao input[type="checkbox"]:checked::after,
+.seletor-colecoes .check-opcao input[type="checkbox"]:checked::after {
+    content: "✓" !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    color: #160d07 !important;
+
+    font-size: 11px !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1 !important;
+}
+
+#produto-colecoes .check-opcao label,
+.seletor-colecoes .check-opcao label {
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    color: #cdbb9e !important;
+
+    font-size: 10px !important;
+
+    line-height: 1.25 !important;
+
+    cursor: pointer !important;
+}
+
+#produto-colecoes .check-opcao:hover,
+.seletor-colecoes .check-opcao:hover {
+    border-color: #76552b !important;
+
+    background: #17100c !important;
+}
+
+
+/* =========================================================
+   ATIVO E DESTAQUE
+   ========================================================= */
+
+#form-produto .campo-checkbox {
+    justify-content: flex-start !important;
+
+    gap: 4px !important;
+}
+
+#form-produto .campo-checkbox label {
+    display: flex !important;
+
+    align-items: center !important;
+
+    gap: 8px !important;
+
+    margin: 0 !important;
+
+    color: #bfa988 !important;
+
+    font-size: 10px !important;
+
+    line-height: 1.3 !important;
+}
+
+#form-produto .campo-checkbox input[type="checkbox"] {
+    appearance: none !important;
+
+    -webkit-appearance: none !important;
+
+    width: 15px !important;
+
+    min-width: 15px !important;
+
+    max-width: 15px !important;
+
+    height: 15px !important;
+
+    min-height: 15px !important;
+
+    max-height: 15px !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    border: 1px solid #72532b !important;
+
+    border-radius: 3px !important;
+
+    background: #0c0806 !important;
+
+    cursor: pointer !important;
+
+    box-sizing: border-box !important;
+}
+
+#form-produto .campo-checkbox input[type="checkbox"]:checked {
+    border-color: #b9853b !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c99a4c,
+            #9b6b2e
+        ) !important;
+}
+
+#form-produto .campo-checkbox input[type="checkbox"]:checked::after {
+    content: "✓" !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    color: #160d07 !important;
+
+    font-size: 11px !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1 !important;
+}
+
+
+@media (max-width: 700px) {
+
+    #produto-colecoes,
+    .seletor-colecoes {
+        grid-template-columns:
+            1fr !important;
+    }
+
+}
+/* =========================================================
+   PERSONALIZADOS — SARAVIEI
+   ========================================================= */
+
+#secao-personalizados .filtros-personalizados {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 22px 0 15px;
+}
+
+#secao-personalizados .filtro-personalizado {
+    min-height: 34px;
+    padding: 7px 12px;
+    border: 1px solid #4d351e;
+    border-radius: 5px;
+    background: #15100c;
+    color: #b99a6d;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 10px;
+    cursor: pointer;
+    appearance: none;
+    outline: none;
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease;
+}
+
+#secao-personalizados .filtro-personalizado:hover {
+    background: #21160f;
+    border-color: #805b2a;
+    color: #dcb15d;
+}
+
+#secao-personalizados .filtro-personalizado.ativo {
+    background:
+        linear-gradient(
+            180deg,
+            #8d612b,
+            #68451f
+        );
+    border-color: #b27c35;
+    color: #f3dfbd;
+    box-shadow:
+        0 0 0 1px rgba(192, 139, 61, .12);
+}
+
+
+/* =========================================================
+   CONTADOR
+   ========================================================= */
+
+#secao-personalizados .contador-personalizados {
+    margin-bottom: 15px;
+    color: #87715a;
+    font-size: 11px;
+}
+
+#secao-personalizados .contador-personalizados strong {
+    color: #d1a04e;
+}
+
+
+/* =========================================================
+   GRADE DOS PERSONALIZADOS
+   ========================================================= */
+
+#secao-personalizados .grade-personalizados {
+    display: grid;
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(280px, 1fr)
+        );
+    gap: 13px;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+#secao-personalizados .card-personalizado {
+    position: relative;
+    min-width: 0;
+    padding: 17px;
+    border: 1px solid #49331f;
+    border-radius: 8px;
+    background:
+        linear-gradient(
+            145deg,
+            #19120e 0%,
+            #120c09 100%
+        );
+    color: #d8c6aa;
+    cursor: pointer;
+    overflow: hidden;
+    transition:
+        border-color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+#secao-personalizados .card-personalizado::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 38px;
+    height: 2px;
+    background: #c08b3d;
+}
+
+#secao-personalizados .card-personalizado:hover {
+    border-color: #805b2a;
+    transform: translateY(-2px);
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, .22);
+}
+
+
+/* =========================================================
+   CABEÇALHO DO CARD
+   ========================================================= */
+
+#secao-personalizados .card-pedido-cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+#secao-personalizados .pedido-identificacao strong {
+    color: #d6a34e;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+#secao-personalizados .status-pedido {
+    display: inline-flex;
+    align-items: center;
+    min-height: 25px;
+    padding: 4px 8px;
+    border: 1px solid #49331f;
+    border-radius: 4px;
+    background: #120c09;
+    color: #b9873c;
+    font-size: 8px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+}
+
+#secao-personalizados .status-em_analise,
+#secao-personalizados .status-aguardando_informacoes,
+#secao-personalizados .status-orcamento_enviado,
+#secao-personalizados .status-aprovado,
+#secao-personalizados .status-em_producao,
+#secao-personalizados .status-finalizado {
+    color: #d0a052;
+}
+
+#secao-personalizados .status-cancelado {
+    color: #b87862;
+    border-color: #553125;
+}
+
+
+/* =========================================================
+   CORPO DO CARD
+   ========================================================= */
+
+#secao-personalizados .personalizado-card-corpo {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+#secao-personalizados .personalizado-card-imagem-wrap {
+    width: 76px;
+    height: 76px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 1px solid #49331f;
+    border-radius: 6px;
+    background: #100b08;
+}
+
+#secao-personalizados .personalizado-card-imagem {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#secao-personalizados .personalizado-card-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c08b3d;
+    font-size: 20px;
+}
+
+#secao-personalizados .personalizado-card-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#secao-personalizados .personalizado-card-info strong {
+    color: #dfc7a4;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+#secao-personalizados .personalizado-card-info span {
+    color: #b99d76;
+    font-size: 11px;
+}
+
+#secao-personalizados .personalizado-card-info small {
+    color: #806b53;
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   RODAPÉ DO CARD
+   ========================================================= */
+
+#secao-personalizados .personalizado-card-rodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid #302117;
+}
+
+#secao-personalizados .personalizado-card-rodape span:first-child {
+    color: #806b53;
+    font-size: 9px;
+}
+
+#secao-personalizados .personalizado-card-rodape span:last-child {
+    color: #c08b3d;
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   DETALHES
+   ========================================================= */
+
+#secao-personalizados .personalizado-detalhes {
+    margin-top: 22px;
+    padding: 22px;
+    border: 1px solid #49331f;
+    border-radius: 8px;
+    background:
+        linear-gradient(
+            145deg,
+            #19120e 0%,
+            #120c09 100%
+        );
+}
+
+#secao-personalizados .pedido-detalhes-cabecalho {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+#secao-personalizados .label-pedido {
+    display: block;
+    margin-bottom: 5px;
+    color: #bd8b3e;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+#secao-personalizados .pedido-detalhes-cabecalho h2 {
+    margin: 0;
+    color: #d9a64d;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+#secao-personalizados .botao-fechar-pedido {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #51391f;
+    border-radius: 5px;
+    background: #15100c;
+    color: #c5a574;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+#secao-personalizados .botao-fechar-pedido:hover {
+    border-color: #805b2a;
+    color: #ddb25b;
+}
+
+
+/* =========================================================
+   STATUS NO TOPO
+   ========================================================= */
+
+#secao-personalizados .personalizado-status-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    border: 1px solid #49331f;
+    border-radius: 6px;
+    background: #15100c;
+}
+
+#secao-personalizados .personalizado-status-topo span {
+    color: #8e775c;
+    font-size: 10px;
+}
+
+#secao-personalizados .personalizado-status-topo strong {
+    color: #d0a052;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   BLOCOS DE DETALHES
+   ========================================================= */
+
+#secao-personalizados .pedido-bloco {
+    margin-bottom: 13px;
+    padding: 18px;
+    border: 1px solid #49331f;
+    border-radius: 7px;
+    background: #15100c;
+}
+
+#secao-personalizados .pedido-bloco-titulo {
+    margin-bottom: 12px;
+    color: #c08b3d;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+#secao-personalizados .pedido-dados-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+#secao-personalizados .pedido-dado {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#secao-personalizados .pedido-dado span {
+    color: #806b53;
+    font-size: 9px;
+}
+
+#secao-personalizados .pedido-dado strong {
+    color: #d5c1a3;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   TEXTO DO PEDIDO
+   ========================================================= */
+
+#secao-personalizados .personalizado-titulo-pedido {
+    color: #dfc7a4;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    line-height: 1.35;
+}
+
+#secao-personalizados .personalizado-texto-longo {
+    color: #c7b49a;
+    font-size: 12px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   TAMANHO
+   ========================================================= */
+
+#secao-personalizados .personalizado-tamanho {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 7px 13px;
+    border: 1px solid #5a4023;
+    border-radius: 5px;
+    background: #19120d;
+    color: #d5aa5f;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   REFERÊNCIAS
+   ========================================================= */
+
+#secao-personalizados .personalizado-referencias {
+    display: grid;
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(120px, 1fr)
+        );
+    gap: 10px;
+}
+
+#secao-personalizados .personalizado-referencia {
+    display: block;
+    overflow: hidden;
+    border: 1px solid #49331f;
+    border-radius: 6px;
+    background: #100b08;
+    text-decoration: none;
+}
+
+#secao-personalizados .personalizado-referencia:hover {
+    border-color: #805b2a;
+}
+
+#secao-personalizados .personalizado-referencia img {
+    display: block;
+    width: 100%;
+    height: 125px;
+    object-fit: cover;
+}
+
+#secao-personalizados .personalizado-referencia span {
+    display: block;
+    padding: 7px;
+    color: #c08b3d;
+    font-size: 9px;
+    text-align: center;
+}
+
+#secao-personalizados .personalizado-sem-referencias,
+#secao-personalizados .personalizado-referencia-sem-url {
+    color: #806b53;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   OBSERVAÇÕES INTERNAS
+   ========================================================= */
+
+#secao-personalizados .personalizado-bloco-interno {
+    border-color: #5a4023;
+}
+
+#secao-personalizados .personalizado-observacoes {
+    width: 100%;
+    min-height: 105px;
+    padding: 10px;
+    resize: vertical;
+    border: 1px solid #49331f;
+    border-radius: 5px;
+    background: #0f0b08;
+    color: #d8c6aa;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    line-height: 1.5;
+    outline: none;
+}
+
+#secao-personalizados .personalizado-observacoes:focus {
+    border-color: #805b2a;
+}
+
+
+/* =========================================================
+   STATUS / AÇÕES
+   ========================================================= */
+
+#secao-personalizados .personalizado-bloco-status {
+    margin-bottom: 0;
+}
+
+#secao-personalizados .personalizado-bloco-status .select-principal {
+    width: 100%;
+    min-height: 38px;
+    padding: 8px 10px;
+    border: 1px solid #49331f;
+    border-radius: 5px;
+    background: #0f0b08;
+    color: #cdbb9e;
+    outline: none;
+}
+
+#secao-personalizados .personalizado-bloco-status .select-principal:focus {
+    border-color: #805b2a;
+}
+
+#secao-personalizados .personalizado-acoes {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+
+/* =========================================================
+   ESTADO VAZIO / CARREGAMENTO
+   ========================================================= */
+
+#secao-personalizados .estado-vazio {
+    padding: 40px 25px;
+    border: 1px solid #49331f;
+    border-radius: 8px;
+    background: #15100c;
+    text-align: center;
+}
+
+#secao-personalizados .estado-vazio-icone {
+    color: #c08b3d;
+    font-size: 25px;
+}
+
+#secao-personalizados .estado-vazio strong {
+    display: block;
+    margin-top: 10px;
+    color: #d7bd92;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+#secao-personalizados .estado-vazio span {
+    display: block;
+    margin-top: 7px;
+    color: #88735b;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    #secao-personalizados .pedido-dados-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #secao-personalizados .personalizado-status-topo {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    #secao-personalizados .personalizado-card-corpo {
+        align-items: flex-start;
+    }
+
+    #secao-personalizados .personalizado-detalhes {
+        padding: 15px;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    #secao-personalizados .grade-personalizados {
+        grid-template-columns: 1fr;
+    }
+
+    #secao-personalizados .personalizado-referencias {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+/* =========================================================
+   UPLOAD DE IMAGEM DO PRODUTO
+   ========================================================= */
+
+.campo-imagem-produto {
+    grid-column: 1 / -1;
+}
+
+.area-upload-imagem {
+    position: relative;
+    width: 100%;
+}
+
+.area-upload-imagem input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.botao-upload-imagem {
+    min-height: 92px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    padding: 18px;
+
+    border: 1px dashed #684a29;
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #19120e 0%,
+            #100b08 100%
+        );
+
+    color: #cda866;
+
+    cursor: pointer;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        transform .2s ease;
+}
+
+.botao-upload-imagem:hover {
+    border-color: #b9853b;
+
+    background:
+        linear-gradient(
+            145deg,
+            #21170f 0%,
+            #140d09 100%
+        );
+
+    transform: translateY(-1px);
+}
+
+.icone-upload {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #805b2a;
+    border-radius: 50%;
+
+    color: #d3a65a;
+
+    font-size: 17px;
+}
+
+.botao-upload-imagem span:not(.icone-upload) {
+    color: #d7bd91;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 14px;
+}
+
+.botao-upload-imagem small {
+    color: #806c54;
+
+    font-size: 9px;
+
+    letter-spacing: .3px;
+}
+
+
+/* =========================================================
+   PRÉVIA DA IMAGEM
+   ========================================================= */
+
+.preview-imagem-produto {
+    margin-top: 10px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 10px;
+
+    border: 1px solid #49331f;
+    border-radius: 7px;
+
+    background: #100b08;
+}
+
+.preview-imagem-produto[hidden] {
+    display: none;
+}
+
+.preview-imagem-produto img {
+    width: 82px;
+    height: 82px;
+
+    flex: 0 0 82px;
+
+    object-fit: cover;
+
+    border: 1px solid #5c4123;
+    border-radius: 6px;
+
+    background: #17100c;
+}
+
+.preview-imagem-info {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.preview-imagem-info span {
+    color: #bfa988;
+
+    font-size: 10px;
+
+    letter-spacing: .5px;
+}
+
+.botao-remover-imagem {
+    width: fit-content;
+
+    padding: 6px 9px;
+
+    border: 1px solid #5b3428;
+    border-radius: 4px;
+
+    background: #170e0b;
+
+    color: #bd806c;
+
+    font-size: 9px;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.botao-remover-imagem:hover {
+    border-color: #8a4938;
+
+    background: #24130f;
+
+    color: #d69a84;
+}
+
+
+/* =========================================================
+   STATUS DO UPLOAD
+   ========================================================= */
+
+.status-upload-imagem {
+    min-height: 16px;
+
+    margin-top: 7px;
+
+    font-size: 10px;
+}
+
+.status-upload-imagem.carregando {
+    color: #b99558;
+}
+
+.status-upload-imagem.sucesso {
+    color: #8fba82;
+}
+
+.status-upload-imagem.erro {
+    color: #c98270;
+}
+
+
+/* =========================================================
+   CARDS DE PRODUTO — REFINAMENTO
+   ========================================================= */
+
+#produtos-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(220px, 1fr)
+        );
+
+    gap: 14px;
+
+    width: 100%;
+}
+
+
+#produtos-container > article,
+#produtos-container > div {
+    min-height: 260px;
+
+    border: 1px solid #49331f;
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #19120e 0%,
+            #100b08 100%
+        );
+
+    overflow: hidden;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+#produtos-container > article:hover,
+#produtos-container > div:hover {
+    transform: translateY(-2px);
+
+    border-color: #735329;
+
+    box-shadow:
+        0 10px 25px rgba(
+            0,
+            0,
+            0,
+            .22
+        );
+}
+
+
+/* =========================================================
+   IMAGEM DOS CARDS
+   ========================================================= */
+
+#produtos-container .produto-imagem,
+#produtos-container .imagem-produto {
+    width: 100%;
+
+    height: 180px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #25190f 0%,
+            #100b08 72%
+        );
+
+    background-size: cover;
+    background-position: center;
+
+    border-bottom: 1px solid #3e2c1b;
+}
+
+
+#produtos-container img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+#produtos-container .produto-info {
+    padding: 14px;
+}
+
+
+#produtos-container h3 {
+    margin: 5px 0 6px;
+
+    color: #dec9a5;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 17px;
+
+    font-weight: 400;
+}
+
+
+#produtos-container p {
+    margin: 0 0 10px;
+
+    color: #89745b;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+#produtos-container .produto-categoria {
+    color: #a77c3e;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+}
+
+
+#produtos-container button {
+    min-height: 30px;
+
+    padding: 6px 10px;
+
+    border: 1px solid #51391f;
+    border-radius: 4px;
+
+    background: #17100c;
+
+    color: #c6a36a;
+
+    font-size: 9px;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+
+#produtos-container button:hover {
+    border-color: #805b2a;
+
+    color: #dfb55e;
+
+    background: #21160e;
+}
+
+
+@media (max-width: 750px) {
+
+    #produtos-container {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-imagem-produto {
+        grid-column: auto;
+    }
+
+}

@@ -1,0 +1,1935 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: #120d09;
+    color: #f1e5d2;
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.cabecalho {
+    height: 76px;
+    width: 100%;
+    padding: 0 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(20, 13, 8, 0.96);
+    border-bottom: 1px solid rgba(194, 153, 78, 0.3);
+}
+
+.logo {
+    color: #d8b56b;
+    text-decoration: none;
+
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.menu {
+    display: flex;
+    gap: 38px;
+}
+
+.menu a {
+    color: #eadfce;
+    text-decoration: none;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: #d5ad5e;
+}
+
+.botao-carrinho {
+    padding: 10px 20px;
+
+    color: #eee1cd;
+    background: transparent;
+
+    border: 1px solid #9f783d;
+    border-radius: 30px;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.botao-carrinho:hover {
+    background: #b58b45;
+    color: #170d07;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero-preto {
+    height: calc(100vh - 76px);
+    min-height: 700px;
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+
+    background: #120b07;
+}
+
+
+/* =========================================
+   IMAGEM DE FUNDO
+========================================= */
+
+.hero-imagem {
+    position: absolute;
+    inset: -3%;
+
+    z-index: 1;
+
+    background-image: url("hero-saraviei.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    transform: scale(1.05);
+
+    animation: movimentoCena 18s ease-in-out infinite alternate;
+}
+
+@keyframes movimentoCena {
+    0% {
+        transform: scale(1.05) translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform: scale(1.085) translate3d(-0.5%, -0.4%, 0);
+    }
+
+    100% {
+        transform: scale(1.12) translate3d(0.8%, 0.4%, 0);
+    }
+}
+
+
+/* =========================================
+   SOMBRA SOBRE A IMAGEM
+========================================= */
+
+.hero-sombra {
+    position: absolute;
+    inset: 0;
+
+    z-index: 2;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(10, 6, 3, 0.92) 0%,
+            rgba(18, 11, 7, 0.72) 30%,
+            rgba(18, 11, 7, 0.28) 62%,
+            rgba(8, 5, 2, 0.42) 100%
+        );
+
+    animation: respiracaoLuz 9s ease-in-out infinite;
+}
+
+@keyframes respiracaoLuz {
+    0%,
+    100% {
+        opacity: 0.92;
+    }
+
+    50% {
+        opacity: 0.82;
+    }
+}
+
+
+/* =========================================
+   LUZ QUENTE SOBRE A CENA
+========================================= */
+
+.hero-preto::after {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    right: 8%;
+    top: 12%;
+
+    z-index: 3;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(218, 156, 67, 0.16) 0%,
+            rgba(170, 111, 38, 0.08) 35%,
+            transparent 72%
+        );
+
+    filter: blur(18px);
+
+    animation: luzAmbiente 5s ease-in-out infinite;
+}
+
+@keyframes luzAmbiente {
+    0%,
+    100% {
+        transform: scale(0.92);
+        opacity: 0.65;
+    }
+
+    50% {
+        transform: scale(1.08);
+        opacity: 1;
+    }
+}
+
+
+/* =========================================
+   TEXTO DO HERO
+========================================= */
+
+.hero-conteudo {
+    position: relative;
+    z-index: 30;
+
+    width: 55%;
+    margin-left: 8%;
+
+    animation: entradaTexto 1.5s ease-out both;
+}
+
+@keyframes entradaTexto {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.linha-decorativa {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 25px;
+
+    color: #d6b36a;
+
+    font-size: 13px;
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+
+.linha-decorativa span {
+    width: 35px;
+    height: 1px;
+
+    background: #c49a51;
+}
+
+.hero-conteudo h1 {
+    color: #f5e8d4;
+
+    font-size: clamp(48px, 6vw, 82px);
+    line-height: 0.98;
+    font-weight: normal;
+
+    margin-bottom: 30px;
+
+    text-shadow:
+        0 4px 25px rgba(0, 0, 0, 0.7);
+
+    animation: tituloRespira 7s ease-in-out infinite;
+}
+
+@keyframes tituloRespira {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+.hero-conteudo h1 strong {
+    color: #d0a75a;
+    font-weight: normal;
+}
+
+.hero-conteudo p {
+    max-width: 600px;
+
+    color: #e0d2bd;
+
+    font-size: 17px;
+    line-height: 1.8;
+
+    margin-bottom: 32px;
+
+    text-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+
+/* =========================================
+   BOTÃO PRINCIPAL
+========================================= */
+
+.botao-principal {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 16px 29px;
+
+    color: #1b1008;
+    background: #d1aa61;
+
+    text-decoration: none;
+
+    border-radius: 35px;
+    border: none;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35);
+
+    transition:
+        transform 0.35s,
+        background 0.35s,
+        box-shadow 0.35s;
+
+    animation: botaoRespira 4s ease-in-out infinite;
+}
+
+@keyframes botaoRespira {
+    0%,
+    100% {
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    50% {
+        box-shadow:
+            0 12px 38px rgba(202, 158, 76, 0.25);
+    }
+}
+
+.botao-principal:hover {
+    transform: translateY(-5px);
+
+    background: #e2c17e;
+
+    box-shadow:
+        0 15px 40px rgba(202, 158, 76, 0.35);
+}
+
+
+/* =========================================
+   FOLHAS
+========================================= */
+
+.folha-flutuante {
+    position: absolute;
+
+    z-index: 20;
+
+    width: 34px;
+    height: 16px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #394b26,
+            #75884b
+        );
+
+    border-radius: 100% 0 100% 0;
+
+    opacity: 0;
+
+    filter:
+        drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+
+    animation: folhaPasseando 10s ease-in-out infinite;
+}
+
+.folha-flutuante::before {
+    content: "";
+
+    position: absolute;
+
+    width: 30px;
+    height: 1px;
+
+    left: 2px;
+    top: 8px;
+
+    background: rgba(193, 202, 131, 0.75);
+
+    transform: rotate(-20deg);
+}
+
+.folha-1 {
+    left: 51%;
+    top: 20%;
+    animation-delay: 0s;
+}
+
+.folha-2 {
+    left: 72%;
+    top: 30%;
+
+    transform: scale(0.7);
+
+    animation-delay: 2.5s;
+}
+
+.folha-3 {
+    left: 84%;
+    top: 64%;
+
+    transform: scale(0.8);
+
+    animation-delay: 5s;
+}
+
+.folha-4 {
+    left: 46%;
+    top: 77%;
+
+    transform: scale(0.6);
+
+    animation-delay: 7s;
+}
+
+@keyframes folhaPasseando {
+    0% {
+        opacity: 0;
+
+        transform:
+            translate3d(-20px, 40px, 0)
+            rotate(-25deg);
+    }
+
+    15% {
+        opacity: 0.75;
+    }
+
+    35% {
+        transform:
+            translate3d(25px, -20px, 0)
+            rotate(15deg);
+    }
+
+    55% {
+        opacity: 0.95;
+
+        transform:
+            translate3d(65px, -65px, 0)
+            rotate(55deg);
+    }
+
+    75% {
+        opacity: 0.55;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate3d(125px, -150px, 0)
+            rotate(120deg);
+    }
+}
+
+
+/* =========================================
+   FUMAÇA DO AMBIENTE
+========================================= */
+
+.fumaca {
+    position: absolute;
+
+    z-index: 18;
+
+    width: 90px;
+    height: 180px;
+
+    bottom: 17%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(238, 229, 210, 0.3) 0%,
+            rgba(218, 208, 189, 0.13) 35%,
+            transparent 72%
+        );
+
+    filter: blur(11px);
+
+    opacity: 0;
+
+    animation: fumaçaSubindo 7s ease-in-out infinite;
+}
+
+.fumaca::before,
+.fumaca::after {
+    content: "";
+
+    position: absolute;
+
+    width: 75%;
+    height: 75%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(230, 221, 205, 0.18),
+            transparent 70%
+        );
+
+    filter: blur(8px);
+}
+
+.fumaca::before {
+    left: -25px;
+    top: 35px;
+
+    animation: fumacaLateral 4s ease-in-out infinite;
+}
+
+.fumaca::after {
+    right: -25px;
+    top: 70px;
+
+    animation: fumacaLateral 5s ease-in-out infinite reverse;
+}
+
+.fumaca-1 {
+    left: 66%;
+    animation-delay: 0s;
+}
+
+.fumaca-2 {
+    left: 73%;
+    animation-delay: 2.2s;
+}
+
+.fumaca-3 {
+    left: 81%;
+    animation-delay: 4.4s;
+}
+
+@keyframes fumaçaSubindo {
+    0% {
+        opacity: 0;
+
+        transform:
+            translate3d(0, 80px, 0)
+            scale(0.45)
+            rotate(-5deg);
+    }
+
+    18% {
+        opacity: 0.65;
+    }
+
+    45% {
+        opacity: 0.42;
+
+        transform:
+            translate3d(-25px, -30px, 0)
+            scale(0.95)
+            rotate(8deg);
+    }
+
+    70% {
+        opacity: 0.25;
+
+        transform:
+            translate3d(35px, -150px, 0)
+            scale(1.35)
+            rotate(-8deg);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate3d(-15px, -310px, 0)
+            scale(1.8)
+            rotate(15deg);
+    }
+}
+
+@keyframes fumacaLateral {
+    0%,
+    100% {
+        transform:
+            translateX(-15px)
+            scale(0.8);
+    }
+
+    50% {
+        transform:
+            translateX(25px)
+            scale(1.2);
+    }
+}
+
+
+/* =========================================
+   PARTÍCULAS DE LUZ
+========================================= */
+
+.brilho {
+    position: absolute;
+
+    z-index: 22;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #e0bb68;
+
+    box-shadow:
+        0 0 12px #d9aa4b,
+        0 0 28px rgba(217, 170, 75, 0.5);
+
+    animation: brilho 4s ease-in-out infinite;
+}
+
+.brilho-1 {
+    left: 67%;
+    top: 24%;
+}
+
+.brilho-2 {
+    left: 84%;
+    top: 42%;
+
+    animation-delay: 1.4s;
+}
+
+.brilho-3 {
+    left: 73%;
+    top: 76%;
+
+    animation-delay: 2.8s;
+}
+
+@keyframes brilho {
+    0%,
+    100% {
+        opacity: 0.1;
+        transform: scale(0.4) translateY(0);
+    }
+
+    25% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.7) translateY(-12px);
+    }
+
+    75% {
+        opacity: 0.4;
+    }
+}
+
+
+/* =========================================
+   INDICADOR DE SCROLL
+========================================= */
+
+.indicador-scroll {
+    position: absolute;
+
+    z-index: 30;
+
+    bottom: 28px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: rgba(239, 225, 203, 0.65);
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 9px;
+}
+
+.indicador-scroll span {
+    width: 1px;
+    height: 35px;
+
+    background: #c59b52;
+
+    animation: indicador 1.8s ease-in-out infinite;
+}
+
+@keyframes indicador {
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scaleY(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+
+/* =========================================
+   INTRODUÇÃO
+========================================= */
+
+.introducao {
+    padding: 120px 25px 100px;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #3d2b1c,
+            #1a1009 70%
+        );
+}
+
+.ornamento {
+    color: #c99d4f;
+
+    font-size: 22px;
+
+    margin-bottom: 25px;
+}
+
+.pequeno-titulo {
+    display: block;
+
+    color: #bd9650;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    font-weight: bold;
+
+    margin-bottom: 18px;
+}
+
+.introducao h2 {
+    max-width: 850px;
+
+    margin: auto auto 25px;
+
+    color: #f0e2cd;
+
+    font-size: clamp(34px, 4vw, 55px);
+
+    line-height: 1.1;
+
+    font-weight: normal;
+}
+
+.introducao p {
+    max-width: 720px;
+
+    margin: auto;
+
+    color: #c9baa5;
+
+    font-size: 17px;
+
+    line-height: 1.9;
+}
+
+.linha-ornamental {
+    max-width: 350px;
+
+    margin: 45px auto 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    color: #bd9650;
+}
+
+.linha-ornamental span {
+    flex: 1;
+
+    height: 1px;
+
+    background: rgba(189, 150, 80, 0.35);
+}
+
+
+/* =========================================
+   COLEÇÕES
+   CARROSSEL HORIZONTAL
+========================================= */
+
+.categorias {
+    padding: 105px 0 115px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #21150e 0%,
+            #140c08 65%,
+            #0f0906 100%
+        );
+
+    overflow: hidden;
+}
+
+.categorias .titulo-secao {
+    text-align: center;
+
+    margin-bottom: 48px;
+
+    padding: 0 25px;
+}
+
+.categorias .titulo-secao > span {
+    display: block;
+
+    color: #bd9650;
+
+    font-size: 12px;
+
+    letter-spacing: 5px;
+
+    font-weight: bold;
+
+    margin-bottom: 18px;
+}
+
+.categorias .titulo-secao h2 {
+    color: #f0e2cd;
+
+    font-size: clamp(42px, 5vw, 66px);
+
+    line-height: 1.05;
+
+    font-weight: normal;
+
+    margin-bottom: 16px;
+}
+
+.categorias .titulo-secao p {
+    color: #c9baa5;
+
+    font-size: 16px;
+}
+
+
+/* -----------------------------------------
+   TRILHO HORIZONTAL
+----------------------------------------- */
+
+.grade-categorias {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    gap: 18px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    padding: 8px max(6vw, 60px) 25px;
+
+    scroll-snap-type: x proximity;
+
+    scroll-behavior: smooth;
+
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+}
+
+.grade-categorias::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* -----------------------------------------
+   CARD DA COLEÇÃO
+----------------------------------------- */
+
+.categoria {
+    position: relative;
+
+    flex: 0 0 280px;
+
+    width: 280px;
+    min-width: 280px;
+
+    height: 395px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    padding: 27px 23px;
+
+    overflow: hidden;
+
+    text-decoration: none;
+
+    color: #f2e5d1;
+
+    border: 1px solid rgba(194, 153, 78, 0.55);
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #382214,
+            #160c07 78%
+        );
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.35);
+
+    scroll-snap-align: start;
+
+    transition:
+        transform 0.45s ease,
+        border-color 0.45s ease,
+        box-shadow 0.45s ease;
+}
+
+.categoria::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.05) 0%,
+            rgba(0, 0, 0, 0.08) 25%,
+            rgba(0, 0, 0, 0.58) 62%,
+            rgba(8, 4, 2, 0.97) 100%
+        );
+}
+
+.categoria::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: -70px;
+    top: -65px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(214, 171, 87, 0.22),
+            transparent 70%
+        );
+
+    filter: blur(10px);
+
+    transition: 0.5s;
+}
+
+.categoria:hover {
+    transform: translateY(-9px);
+
+    border-color: rgba(220, 177, 91, 0.9);
+
+    box-shadow:
+        0 25px 55px rgba(0, 0, 0, 0.5),
+        0 0 28px rgba(201, 157, 79, 0.08);
+}
+
+.categoria:hover::after {
+    transform: scale(1.25);
+
+    opacity: 1;
+}
+
+
+/* -----------------------------------------
+   FUNDOS INDIVIDUAIS DAS COLEÇÕES
+----------------------------------------- */
+
+.categoria-ere {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(85, 46, 18, 0.15),
+            rgba(17, 8, 4, 0.92)
+        ),
+        radial-gradient(
+            circle at 50% 20%,
+            #8c5523,
+            #251209 70%
+        );
+}
+
+.categoria-preto {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(54, 69, 27, 0.12),
+            rgba(12, 10, 6, 0.94)
+        ),
+        radial-gradient(
+            circle at 50% 20%,
+            #53603a,
+            #1a160c 70%
+        );
+}
+
+.categoria-exu {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(91, 17, 8, 0.2),
+            rgba(11, 5, 3, 0.95)
+        ),
+        radial-gradient(
+            circle at 50% 20%,
+            #641b12,
+            #180704 70%
+        );
+}
+
+.categoria-pombagira {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(109, 19, 39, 0.18),
+            rgba(16, 5, 7, 0.96)
+        ),
+        radial-gradient(
+            circle at 50% 20%,
+            #762238,
+            #1b070b 70%
+        );
+}
+
+.categoria-caboclo {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(47, 69, 35, 0.15),
+            rgba(7, 10, 6, 0.95)
+        ),
+        radial-gradient(
+            circle at 50% 20%,
+            #52613c,
+            #11150c 70%
+        );
+}
+
+.categoria-orixa {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(16, 43, 68, 0.16),
+            rgba(5, 8, 13, 0.96)
+        ),
+        radial-gradient(
+            circle at 50% 20%,
+            #294764,
+            #080c12 70%
+        );
+}
+
+
+/* -----------------------------------------
+   ÍCONE
+----------------------------------------- */
+
+.categoria-icone {
+    position: absolute;
+
+    z-index: 2;
+
+    top: 225px;
+    left: 23px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #e0bb68;
+
+    font-size: 25px;
+
+    border-radius: 50%;
+
+    background: rgba(10, 6, 3, 0.42);
+
+    border: 1px solid rgba(211, 169, 87, 0.38);
+
+    backdrop-filter: blur(5px);
+}
+
+
+/* -----------------------------------------
+   TEXTO
+----------------------------------------- */
+
+.categoria-texto {
+    position: relative;
+
+    z-index: 3;
+}
+
+.categoria-texto span {
+    display: block;
+
+    color: #d5ae61;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+.categoria-texto h3 {
+    color: #f2e6d3;
+
+    font-size: 25px;
+
+    font-weight: normal;
+
+    margin-bottom: 10px;
+}
+
+.categoria-texto p {
+    color: #c8b9a4;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+
+    max-width: 225px;
+}
+
+
+/* -----------------------------------------
+   SETA
+----------------------------------------- */
+
+.categoria .seta {
+    position: absolute;
+
+    z-index: 4;
+
+    right: 22px;
+    bottom: 25px;
+
+    color: #d6ae60;
+
+    font-size: 22px;
+
+    transition: 0.35s;
+}
+
+.categoria:hover .seta {
+    transform: translateX(7px);
+
+    color: #f0cc7b;
+}
+
+
+/* -----------------------------------------
+   PEQUENO INDICADOR DE ROLAGEM
+----------------------------------------- */
+
+.categorias::after {
+    content: "←  deslize para explorar  →";
+
+    display: block;
+
+    width: fit-content;
+
+    margin: 22px auto 0;
+
+    color: rgba(210, 176, 105, 0.55);
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================
+   PEÇAS
+========================================= */
+
+.pecas {
+    padding: 110px 7% 130px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #21150e,
+            #342217
+        );
+}
+
+.titulo-secao {
+    text-align: center;
+
+    margin-bottom: 60px;
+}
+
+.titulo-secao h2 {
+    color: #f0e2cd;
+
+    font-size: clamp(34px, 4vw, 55px);
+
+    font-weight: normal;
+
+    margin-bottom: 15px;
+}
+
+.titulo-secao p {
+    color: #bcae9a;
+}
+
+
+/* =========================================
+   PRODUTOS
+========================================= */
+
+.grade-produtos {
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 28px;
+}
+
+.produto {
+    background: #2a1c13;
+
+    border: 1px solid rgba(192, 151, 75, 0.2);
+
+    overflow: hidden;
+
+    transition: 0.4s;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+.produto:hover {
+    transform: translateY(-10px);
+
+    border-color: rgba(207, 163, 77, 0.55);
+}
+
+.produto-imagem {
+    height: 280px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.imagem-ervas {
+    background:
+        radial-gradient(
+            circle at center,
+            #8a693e,
+            #302115
+        );
+}
+
+.imagem-madeira {
+    background:
+        radial-gradient(
+            circle at center,
+            #76502b,
+            #21140b
+        );
+}
+
+.imagem-placa {
+    background:
+        radial-gradient(
+            circle at center,
+            #6e583b,
+            #24170d
+        );
+}
+
+.mini-pote {
+    position: relative;
+
+    width: 100px;
+    height: 75px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #352012,
+            #80552d,
+            #2a170b
+        );
+
+    border-radius: 15px 15px 45% 45%;
+}
+
+.mini-pote span {
+    position: absolute;
+
+    width: 7px;
+    height: 45px;
+
+    background: #597037;
+
+    bottom: 55px;
+
+    border-radius: 50%;
+}
+
+.mini-pote span:nth-child(1) {
+    left: 20px;
+    transform: rotate(-20deg);
+}
+
+.mini-pote span:nth-child(2) {
+    left: 45px;
+    transform: rotate(5deg);
+}
+
+.mini-pote span:nth-child(3) {
+    left: 70px;
+    transform: rotate(20deg);
+}
+
+.mini-folha {
+    position: absolute;
+
+    width: 50px;
+    height: 25px;
+
+    background: #61763d;
+
+    border-radius: 100% 0;
+
+    right: 30px;
+    top: 75px;
+
+    transform: rotate(25deg);
+}
+
+.mini-incensario {
+    width: 120px;
+    height: 55px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8d6033,
+            #321a0b
+        );
+
+    border-radius: 10px 10px 40px 40px;
+
+    position: relative;
+}
+
+.brasa {
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+
+    background: #e17a25;
+
+    top: -8px;
+    left: 50px;
+
+    box-shadow:
+        0 0 20px #e17a25;
+
+    animation: brasa 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes brasa {
+    from {
+        box-shadow:
+            0 0 10px #e17a25;
+    }
+
+    to {
+        box-shadow:
+            0 0 35px #f2b34b;
+    }
+}
+
+.fumaca-produto {
+    position: absolute;
+
+    width: 70px;
+    height: 100px;
+
+    top: 55px;
+    left: calc(50% - 35px);
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(225, 215, 195, 0.25),
+            transparent 70%
+        );
+
+    filter: blur(8px);
+
+    animation: fumacaProduto 4s infinite ease-in-out;
+}
+
+@keyframes fumacaProduto {
+    0%,
+    100% {
+        transform:
+            translateY(25px)
+            scale(0.7);
+
+        opacity: 0;
+    }
+
+    50% {
+        transform:
+            translateY(-30px)
+            scale(1.2);
+
+        opacity: 0.7;
+    }
+}
+
+.placa-relevo {
+    padding: 35px 28px;
+
+    color: #d6b36c;
+
+    border: 2px solid #a77c3d;
+
+    background: #29190e;
+
+    font-size: 22px;
+
+    letter-spacing: 4px;
+
+    box-shadow:
+        inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.produto-info {
+    padding: 27px;
+}
+
+.produto-categoria {
+    color: #b68d4b;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    font-weight: bold;
+}
+
+.produto-info h3 {
+    color: #eee0ca;
+
+    font-size: 24px;
+
+    font-weight: normal;
+
+    margin: 10px 0;
+}
+
+.produto-info p {
+    color: #bcae9b;
+
+    line-height: 1.65;
+
+    font-size: 14px;
+
+    min-height: 70px;
+}
+
+.produto-final {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 22px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid rgba(190, 151, 77, 0.18);
+}
+
+.produto-final strong {
+    color: #dfbd77;
+
+    font-size: 20px;
+}
+
+.produto-final button {
+    padding: 9px 16px;
+
+    color: #d9b86c;
+
+    background: transparent;
+
+    border: 1px solid #8e6937;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.produto-final button:hover {
+    background: #b58b45;
+    color: #1a0f08;
+}
+
+
+/* =========================================
+   PERSONALIZADOS
+========================================= */
+
+.personalizados {
+    padding: 120px 25px;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #4a321e,
+            #1a0f09 70%
+        );
+}
+
+.personalizados-conteudo {
+    max-width: 700px;
+
+    margin: auto;
+}
+
+.ornamento-dourado {
+    color: #d1a957;
+
+    font-size: 25px;
+
+    margin-bottom: 20px;
+}
+
+.personalizados h2 {
+    color: #f2e5d1;
+
+    font-size: clamp(38px, 4vw, 58px);
+
+    font-weight: normal;
+
+    margin-bottom: 20px;
+}
+
+.personalizados p {
+    color: #c9baa5;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+.rodape {
+    padding: 55px 25px;
+
+    text-align: center;
+
+    background: #0d0805;
+
+    color: #a99a86;
+}
+
+.rodape .logo {
+    display: inline-block;
+
+    margin-bottom: 15px;
+}
+
+.rodape p {
+    margin-bottom: 18px;
+}
+
+.voltar {
+    color: #caa35a;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.voltar:hover {
+    color: #f0cc7b;
+}
+
+
+/* =========================================
+   CELULAR
+========================================= */
+
+@media (max-width: 900px) {
+
+    .menu {
+        display: none;
+    }
+
+    .hero-preto {
+        min-height: 780px;
+    }
+
+    .hero-conteudo {
+        width: 75%;
+        margin-left: 7%;
+    }
+
+    .hero-conteudo h1 {
+        font-size: 58px;
+    }
+
+    .grade-produtos {
+        grid-template-columns: 1fr;
+        max-width: 520px;
+    }
+
+    .categoria {
+        flex-basis: 265px;
+        width: 265px;
+        min-width: 265px;
+        height: 380px;
+    }
+
+    .grade-categorias {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .cabecalho {
+        padding: 0 5%;
+    }
+
+    .logo {
+        font-size: 15px;
+        letter-spacing: 2px;
+    }
+
+    .botao-carrinho {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .hero-preto {
+        min-height: 760px;
+    }
+
+    .hero-imagem {
+        background-position: 65% center;
+    }
+
+    .hero-sombra {
+        background:
+            linear-gradient(
+                90deg,
+                rgba(15, 9, 5, 0.94) 0%,
+                rgba(18, 11, 7, 0.72) 65%,
+                rgba(10, 6, 3, 0.3) 100%
+            );
+    }
+
+    .hero-conteudo {
+        width: 88%;
+        margin-left: 6%;
+    }
+
+    .hero-conteudo h1 {
+        font-size: 45px;
+    }
+
+    .hero-conteudo p {
+        font-size: 15px;
+    }
+
+    .introducao {
+        padding: 90px 25px;
+    }
+
+    .categorias {
+        padding: 85px 0 90px;
+    }
+
+    .categorias .titulo-secao {
+        margin-bottom: 35px;
+    }
+
+    .categorias .titulo-secao h2 {
+        font-size: 40px;
+    }
+
+    .grade-categorias {
+        gap: 14px;
+
+        padding-left: 25px;
+        padding-right: 25px;
+        padding-bottom: 18px;
+    }
+
+    .categoria {
+        flex-basis: 245px;
+        width: 245px;
+        min-width: 245px;
+
+        height: 355px;
+
+        padding: 23px 20px;
+    }
+
+    .categoria-icone {
+        top: 205px;
+        left: 20px;
+    }
+
+    .categoria-texto h3 {
+        font-size: 23px;
+    }
+
+    .categoria-texto p {
+        font-size: 12px;
+    }
+
+    .pecas {
+        padding: 90px 5%;
+    }
+
+    .personalizados {
+        padding: 90px 25px;
+    }
+}
+/* =========================================================
+   CATEGORIAS DE PRODUTOS SARAVIEI
+========================================================= */
+
+.categoria-impressao {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(56, 35, 22, 0.96),
+            rgba(25, 16, 10, 0.98)
+        );
+}
+
+.categoria-velas {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(93, 60, 25, 0.96),
+            rgba(34, 20, 10, 0.98)
+        );
+}
+
+.categoria-defumacao {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(34, 63, 42, 0.96),
+            rgba(12, 28, 18, 0.98)
+        );
+}
+
+.categoria-acessorios {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(55, 42, 67, 0.96),
+            rgba(24, 17, 30, 0.98)
+        );
+}
+
+.categoria-decoracao {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(72, 50, 26, 0.96),
+            rgba(28, 19, 11, 0.98)
+        );
+}
+
+.categoria-personalizados {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(70, 42, 55, 0.96),
+            rgba(28, 16, 22, 0.98)
+        );
+}
+
+.categoria-kits {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(67, 51, 27, 0.96),
+            rgba(27, 20, 10, 0.98)
+        );
+}
+
+.categoria-artigos {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(43, 43, 52, 0.96),
+            rgba(18, 18, 22, 0.98)
+        );
+}
+
+
+/* =========================================================
+   BOTÃO VER PRODUTO
+========================================================= */
+
+.botao-ver-produto {
+    border: none;
+    border-radius: 25px;
+
+    padding: 10px 16px;
+
+    background: #d1aa61;
+    color: #1b1008;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.botao-ver-produto:hover {
+    background: #e2c17e;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.25);
+}

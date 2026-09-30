@@ -1,0 +1,2565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Produto | Saraviei</title>
+
+    <link
+        rel="stylesheet"
+        href="produto.css"
+    >
+
+    <style>
+        .botao-adicionar {
+            appearance: none;
+            -webkit-appearance: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 56px;
+            padding: 16px 24px;
+            color: #1b1008;
+            background: #d1aa61;
+            border: 1px solid #d1aa61;
+            border-radius: 35px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            opacity: 1;
+            filter: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s, opacity 0.3s;
+        }
+
+        .botao-adicionar:hover:not(:disabled) {
+            transform: translateY(-3px);
+            background: #e2c17e;
+            border-color: #e2c17e;
+            box-shadow: 0 14px 35px rgba(202, 158, 76, 0.3);
+        }
+
+        .botao-adicionar:active:not(:disabled) {
+            transform: translateY(-1px);
+        }
+
+        .botao-adicionar:disabled {
+            cursor: not-allowed;
+            opacity: 0.55;
+            filter: grayscale(0.15);
+        }
+
+        .produto-esgotado-aviso {
+            display: none;
+            margin: 18px 0;
+            padding: 14px 16px;
+            border: 1px solid rgba(196, 154, 76, .45);
+            border-radius: 14px;
+            background: rgba(196, 154, 76, .08);
+            font-weight: 700;
+            line-height: 1.45;
+        }
+
+        .produto-esgotado-aviso.visivel {
+            display: block;
+        }
+
+        .quantidade button:disabled,
+        .cor:disabled {
+            cursor: not-allowed;
+            opacity: .45;
+        }
+    
+        .opcoes-variacao {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .botao-opcao-variacao {
+            min-width: 48px;
+            min-height: 42px;
+            padding: 8px 14px;
+            border: 1px solid rgba(118, 80, 43, .45);
+            border-radius: 999px;
+            background: #fffaf3;
+            color: #3b2718;
+            cursor: pointer;
+            font: inherit;
+            transition: .2s ease;
+        }
+
+        .botao-opcao-variacao:hover:not(:disabled) {
+            transform: translateY(-1px);
+            border-color: #76502b;
+        }
+
+        .botao-opcao-variacao.selecionado {
+            border-color: #76502b;
+            box-shadow: 0 0 0 2px rgba(118, 80, 43, .14);
+            font-weight: 700;
+        }
+
+        .botao-opcao-variacao:disabled {
+            opacity: .42;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        .botao-opcao-variacao.indisponivel {
+            opacity: .42;
+            text-decoration: line-through;
+        }
+
+        .produto-combinacao-aviso {
+            display: none;
+            margin: 12px 0 0;
+            font-size: 14px;
+            opacity: .78;
+        }
+
+        .produto-combinacao-aviso.visivel {
+            display: block;
+        }
+
+    
+        /* =====================================================
+           COMPATIBILIDADE COM O PRODUTO.CSS ATUAL
+           ===================================================== */
+
+        body {
+            background: #120f0c;
+            color: #f4ead9;
+        }
+
+        main {
+            display: block;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .produto-detalhe {
+            min-height: 100vh;
+            padding: 150px 7% 100px;
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 80px;
+            align-items: center;
+            background:
+                radial-gradient(
+                    circle at 25% 45%,
+                    rgba(115, 82, 48, 0.18),
+                    transparent 38%
+                ),
+                #120f0c;
+        }
+
+        .produto-visual {
+            width: 100%;
+        }
+
+        .produto-imagem-detalhe {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            min-height: 420px;
+            overflow: hidden;
+            border-radius: 18px;
+            border: 1px solid rgba(201, 155, 82, 0.18);
+            background:
+                radial-gradient(
+                    circle at center,
+                    #896b4d 0%,
+                    #624831 35%,
+                    #36271d 72%,
+                    #211811 100%
+                );
+            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .produto-imagem-detalhe::before {
+            content: "";
+            position: absolute;
+            width: 65%;
+            height: 65%;
+            border-radius: 50%;
+            border: 1px solid rgba(235, 201, 131, 0.15);
+            animation: produtoCirculo 12s linear infinite;
+            pointer-events: none;
+        }
+
+        .produto-imagem-detalhe::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.05),
+                    transparent 35%,
+                    rgba(0, 0, 0, 0.22)
+                );
+            pointer-events: none;
+        }
+
+        .produto-simbolo {
+            position: relative;
+            z-index: 2;
+            width: 210px;
+            height: 210px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(209, 175, 117, 0.25),
+                    rgba(53, 39, 28, 0.65)
+                );
+            box-shadow: 0 30px 45px rgba(0, 0, 0, 0.35);
+            animation: produtoFlutuar 5s ease-in-out infinite;
+            font-size: 7rem;
+        }
+
+        .produto-informacoes {
+            max-width: 570px;
+            width: 100%;
+        }
+
+        .produto-informacoes h1 {
+            margin: 0 0 22px;
+            color: #f1dfc1;
+            font-size: clamp(2.8rem, 5vw, 5rem);
+            font-weight: normal;
+            line-height: 1;
+        }
+
+        .produto-categoria {
+            display: block;
+            margin-bottom: 18px;
+            color: #c99b52;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.68rem;
+            font-weight: bold;
+            letter-spacing: 0.25em;
+        }
+
+        .produto-descricao {
+            max-width: 510px;
+            color: rgba(244, 234, 217, 0.64);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .controle-produto {
+            margin: 30px 0;
+        }
+
+        .controle-produto > span {
+            display: block;
+            margin-bottom: 12px;
+            color: rgba(244, 234, 217, 0.7);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .opcoes-variacao {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .botao-opcao-variacao {
+            min-width: 48px;
+            min-height: 42px;
+            padding: 8px 14px;
+            border: 1px solid rgba(201, 155, 82, 0.35);
+            border-radius: 999px;
+            background: rgba(201, 155, 82, 0.06);
+            color: #f1dfc1;
+            cursor: pointer;
+            font: inherit;
+            transition: 0.2s ease;
+        }
+
+        .botao-opcao-variacao:hover:not(:disabled) {
+            transform: translateY(-1px);
+            border-color: #c99b52;
+        }
+
+        .botao-opcao-variacao.selecionado {
+            border-color: #e1c27d;
+            background: rgba(201, 155, 82, 0.14);
+            box-shadow: 0 0 0 2px rgba(201, 155, 82, 0.12);
+            font-weight: 700;
+        }
+
+        .botao-opcao-variacao:disabled {
+            opacity: 0.42;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        .produto-combinacao-aviso {
+            display: none;
+            margin: 12px 0 0;
+            color: rgba(244, 234, 217, 0.58);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .produto-combinacao-aviso.visivel {
+            display: block;
+        }
+
+        .quantidade {
+            display: flex;
+            align-items: center;
+            width: max-content;
+            height: 34px;
+            border: 1px solid rgba(201, 155, 82, 0.25);
+        }
+
+        .quantidade button {
+            width: 34px;
+            height: 32px;
+            border: 0;
+            background: transparent;
+            color: #d7b875;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .quantidade button:disabled {
+            cursor: not-allowed;
+            opacity: 0.4;
+        }
+
+        .quantidade strong {
+            min-width: 35px;
+            text-align: center;
+            color: #f1dfc1;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.8rem;
+        }
+
+        .preco-produto {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin: 25px 0;
+        }
+
+        .preco-produto span {
+            min-height: 18px;
+            color: rgba(244, 234, 217, 0.35);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.8rem;
+            text-decoration: line-through;
+        }
+
+        .preco-produto strong {
+            color: #e0c17d;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .botao-adicionar {
+            width: 100%;
+            min-height: 56px;
+            padding: 17px 25px;
+            border: 1px solid #c99b52;
+            border-radius: 0;
+            background: #c99b52;
+            color: #17130f;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.76rem;
+            font-weight: bold;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .botao-adicionar:hover:not(:disabled) {
+            background: #dfbd78;
+            border-color: #dfbd78;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(201, 155, 82, 0.15);
+        }
+
+        .botao-adicionar:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .voltar-produtos {
+            display: inline-block;
+            margin-top: 22px;
+            color: rgba(244, 234, 217, 0.5);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            transition: color 0.3s ease;
+        }
+
+        .voltar-produtos:hover {
+            color: #d8b36a;
+        }
+
+        .produto-esgotado-aviso {
+            display: none;
+            margin: 18px 0;
+            padding: 14px 16px;
+            border: 1px solid rgba(196, 154, 76, 0.45);
+            border-radius: 10px;
+            background: rgba(196, 154, 76, 0.08);
+            color: #f1dfc1;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.82rem;
+            line-height: 1.45;
+        }
+
+        .produto-esgotado-aviso.visivel {
+            display: block;
+        }
+
+        .produto-extra {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 0;
+            padding: 70px 7%;
+            border-top: 1px solid rgba(201, 155, 82, 0.12);
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(201, 155, 82, 0.07),
+                    transparent 55%
+                ),
+                #1a1510;
+        }
+
+        .produto-extra > div {
+            padding: 10px;
+        }
+
+        .produto-extra > div > span {
+            display: block;
+            margin-bottom: 16px;
+            color: #c99b52;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.68rem;
+            font-weight: bold;
+            letter-spacing: 0.25em;
+        }
+
+        .produto-extra h2 {
+            margin-bottom: 14px;
+            color: #f1dfc1;
+            font-size: 1.5rem;
+            font-weight: normal;
+        }
+
+        .produto-extra p {
+            color: rgba(244, 234, 217, 0.55);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.85rem;
+            line-height: 1.8;
+        }
+
+        @keyframes produtoCirculo {
+            from {
+                transform: rotate(0deg) scale(1);
+            }
+            to {
+                transform: rotate(360deg) scale(1.05);
+            }
+        }
+
+        @keyframes produtoFlutuar {
+            0%, 100% {
+                transform: translateY(0) rotate(-2deg);
+            }
+            50% {
+                transform: translateY(-12px) rotate(2deg);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .produto-detalhe {
+                grid-template-columns: 1fr;
+                gap: 55px;
+                padding-top: 130px;
+            }
+
+            .produto-informacoes {
+                max-width: 100%;
+            }
+
+            .produto-extra {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .produto-detalhe {
+                padding: 115px 6% 70px;
+            }
+
+            .produto-imagem-detalhe {
+                min-height: 300px;
+            }
+
+            .produto-simbolo {
+                width: 160px;
+                height: 160px;
+                font-size: 5rem;
+            }
+
+            .produto-informacoes h1 {
+                font-size: 3rem;
+            }
+
+            .menu {
+                display: none;
+            }
+
+            .produto-extra {
+                padding: 55px 7%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- CABEÇALHO -->
+
+    <header class="cabecalho">
+
+        <div class="logo">
+            SARAVIEI
+        </div>
+
+        <nav class="menu">
+
+            <a href="index.html">
+                Início
+            </a>
+
+            <a href="index.html#categorias">
+                Coleções
+            </a>
+
+            <a href="index.html#produtos">
+                Produtos
+            </a>
+
+            <a href="index.html#personalizados">
+                Personalizados
+            </a>
+
+        </nav>
+
+        <button
+            class="botao-carrinho"
+            type="button"
+            onclick="window.location.href='carrinho.html'"
+        >
+            🛒 Carrinho
+        </button>
+
+    </header>
+
+
+    <!-- PRODUTO -->
+
+    <main>
+
+        <section class="produto-detalhe">
+
+            <div class="produto-visual">
+
+                <div
+                    class="produto-imagem-detalhe"
+                    id="produtoImagem"
+                >
+
+                    <div
+                        class="produto-simbolo"
+                        id="produtoSimbolo"
+                    >
+                        ✨
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="produto-informacoes">
+
+                <span
+                    class="produto-categoria"
+                    id="produtoCategoria"
+                >
+                    PRODUTO SARAVIEI
+                </span>
+
+
+                <h1 id="produtoNome">
+                    Carregando produto...
+                </h1>
+
+
+                <p
+                    class="produto-descricao"
+                    id="produtoDescricao"
+                >
+                    Carregando informações da peça...
+                </p>
+
+
+                <!-- OPÇÕES DE COR E TAMANHO -->
+
+                <div
+                    class="controle-produto"
+                    id="controleCor"
+                    hidden
+                >
+
+                    <span>
+                        Cor
+                    </span>
+
+                    <div
+                        class="opcoes-variacao"
+                        id="opcoesCores"
+                    ></div>
+
+                </div>
+
+
+                <div
+                    class="controle-produto"
+                    id="controleTamanho"
+                    hidden
+                >
+
+                    <span>
+                        Tamanho
+                    </span>
+
+                    <div
+                        class="opcoes-variacao"
+                        id="opcoesTamanhos"
+                    ></div>
+
+                </div>
+
+
+                <p
+                    class="produto-combinacao-aviso"
+                    id="produtoCombinacaoAviso"
+                ></p>
+
+
+                <!-- QUANTIDADE -->
+
+                <div class="controle-produto">
+
+                    <span>
+                        Quantidade
+                    </span>
+
+                    <div class="quantidade">
+
+                        <button
+                            type="button"
+                            id="diminuirQuantidade"
+                        >
+                            −
+                        </button>
+
+                        <strong id="quantidade">
+                            1
+                        </strong>
+
+                        <button
+                            type="button"
+                            id="aumentarQuantidade"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PREÇO -->
+
+                <div
+                    class="produto-esgotado-aviso"
+                    id="produtoEsgotadoAviso"
+                >
+                    Este produto está esgotado no momento e não pode ser adicionado ao carrinho.
+                </div>
+
+
+                <div class="preco-produto">
+
+                    <span id="precoAntigo"></span>
+
+                    <strong id="preco">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <!-- BOTÃO -->
+
+                <button
+                    type="button"
+                    class="botao-adicionar"
+                    id="botaoAdicionar"
+                >
+                    Adicionar ao carrinho
+                </button>
+
+
+                <a
+                    href="index.html#produtos"
+                    class="voltar-produtos"
+                >
+                    ← Voltar para produtos
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- INFORMAÇÕES -->
+
+        <section class="produto-extra">
+
+            <div>
+
+                <span>
+                    PRODUÇÃO
+                </span>
+
+                <h2>
+                    Produção Saraviei
+                </h2>
+
+                <p>
+                    Cada produto é preparado com cuidado, conforme a sua categoria e proposta.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    ENVIO
+                </span>
+
+                <h2>
+                    Correios
+                </h2>
+
+                <p>
+                    O frete é calculado separadamente
+                    e fica por conta do cliente.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    PERSONALIZAÇÃO
+                </span>
+
+                <h2>
+                    Fale conosco
+                </h2>
+
+                <p>
+                    Para grandes quantidades ou peças
+                    personalizadas, entre em contato pelo WhatsApp.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+
+    <footer class="rodape">
+
+        <div class="logo">
+            SARAVIEI
+        </div>
+
+        <p>
+            Impressões 3D feitas com carinho e respeito.
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://gmimzvnuvraletepczrp.supabase.co";
+
+        const SUPABASE_ANON_KEY =
+            "sb_publishable_NtJmSYaKmuQuLY2QvfQKLQ_rFA8Ceqx";
+
+        const CHAVE_CARRINHO =
+            "atelieDoAxeCarrinho";
+
+
+        const parametros =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        const produtoId =
+            parametros.get("id");
+
+
+        const elementos = {
+
+            imagem:
+                document.getElementById(
+                    "produtoImagem"
+                ),
+
+            simbolo:
+                document.getElementById(
+                    "produtoSimbolo"
+                ),
+
+            categoria:
+                document.getElementById(
+                    "produtoCategoria"
+                ),
+
+            nome:
+                document.getElementById(
+                    "produtoNome"
+                ),
+
+            descricao:
+                document.getElementById(
+                    "produtoDescricao"
+                ),
+
+            preco:
+                document.getElementById(
+                    "preco"
+                ),
+
+            precoAntigo:
+                document.getElementById(
+                    "precoAntigo"
+                ),
+
+            quantidade:
+                document.getElementById(
+                    "quantidade"
+                ),
+
+            botaoAdicionar:
+                document.getElementById(
+                    "botaoAdicionar"
+                ),
+
+            avisoEsgotado:
+                document.getElementById(
+                    "produtoEsgotadoAviso"
+                ),
+
+            controleCor:
+                document.getElementById(
+                    "controleCor"
+                ),
+
+            opcoesCores:
+                document.getElementById(
+                    "opcoesCores"
+                ),
+
+            controleTamanho:
+                document.getElementById(
+                    "controleTamanho"
+                ),
+
+            opcoesTamanhos:
+                document.getElementById(
+                    "opcoesTamanhos"
+                ),
+
+            combinacaoAviso:
+                document.getElementById(
+                    "produtoCombinacaoAviso"
+                )
+
+        };
+
+
+        let produtoAtual =
+            null;
+
+
+        let variacoesProduto =
+            [];
+
+
+        let quantidadeAtual =
+            1;
+
+
+        let corSelecionada =
+            "";
+
+
+        let tamanhoSelecionado =
+            "";
+
+
+        let varianteSelecionada =
+            null;
+
+
+        function escaparHTML(valor) {
+
+            if (
+                valor === null ||
+                valor === undefined
+            ) {
+                return "";
+            }
+
+            return String(valor)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+
+        }
+
+
+        function formatarPreco(valor) {
+
+            const numero =
+                Number(valor);
+
+            if (
+                !Number.isFinite(numero)
+            ) {
+                return "R$ 0,00";
+            }
+
+            return numero.toLocaleString(
+                "pt-BR",
+                {
+                    style: "currency",
+                    currency: "BRL"
+                }
+            );
+
+        }
+
+
+        function obterNome(produto) {
+
+            return (
+                produto.nome ||
+                produto.name ||
+                produto.titulo ||
+                produto.title ||
+                "Produto Saraviei"
+            );
+
+        }
+
+
+        function obterDescricao(produto) {
+
+            return (
+                produto.descricao ||
+                produto.description ||
+                "Peça produzida em impressão 3D."
+            );
+
+        }
+
+
+        function obterCategoria(produto) {
+
+            return (
+                produto.colecao ||
+                produto.categoria ||
+                produto.category ||
+                "SARAVIEI"
+            );
+
+        }
+
+
+        function obterPrecoBase(produto) {
+
+            const preco =
+                Number(
+                    produto?.preco
+                );
+
+            return Number.isFinite(preco)
+                ? preco
+                : 0;
+
+        }
+
+
+        function obterPrecoPromocionalBase(produto) {
+
+            const promocional =
+                Number(
+                    produto?.preco_promocional
+                );
+
+            return (
+                Number.isFinite(promocional) &&
+                promocional > 0
+            )
+                ? promocional
+                : null;
+
+        }
+
+
+        function obterPrecoAtual() {
+
+            if (varianteSelecionada) {
+                const promocional =
+                    Number(
+                        varianteSelecionada.preco_promocional
+                    );
+
+                if (
+                    Number.isFinite(promocional) &&
+                    promocional > 0
+                ) {
+                    return promocional;
+                }
+
+                const preco =
+                    Number(
+                        varianteSelecionada.preco
+                    );
+
+                return Number.isFinite(preco)
+                    ? preco
+                    : 0;
+            }
+
+            const promocional =
+                obterPrecoPromocionalBase(
+                    produtoAtual
+                );
+
+            if (promocional !== null) {
+                return promocional;
+            }
+
+            return obterPrecoBase(
+                produtoAtual
+            );
+
+        }
+
+
+        function obterPrecoNormalAtual() {
+
+            if (varianteSelecionada) {
+                const preco =
+                    Number(
+                        varianteSelecionada.preco
+                    );
+
+                return Number.isFinite(preco)
+                    ? preco
+                    : obterPrecoBase(
+                        produtoAtual
+                    );
+            }
+
+            return obterPrecoBase(
+                produtoAtual
+            );
+
+        }
+
+
+        function obterPrecoPromocionalAtual() {
+
+            if (varianteSelecionada) {
+                const promocional =
+                    Number(
+                        varianteSelecionada.preco_promocional
+                    );
+
+                return (
+                    Number.isFinite(promocional) &&
+                    promocional > 0
+                )
+                    ? promocional
+                    : null;
+            }
+
+            return obterPrecoPromocionalBase(
+                produtoAtual
+            );
+
+        }
+
+
+        function gerarUrlImagemStorage(caminho) {
+
+            if (!caminho) {
+                return "";
+            }
+
+            caminho =
+                String(caminho).trim();
+
+            if (
+                /^https?:\/\//i.test(
+                    caminho
+                )
+            ) {
+                return caminho;
+            }
+
+            caminho =
+                caminho.replace(
+                    /^\/+/,
+                    ""
+                );
+
+            if (
+                caminho.startsWith(
+                    "storage/v1/object/public/"
+                )
+            ) {
+                return `${SUPABASE_URL}/${caminho}`;
+            }
+
+            const partes =
+                caminho
+                    .split("/")
+                    .filter(Boolean)
+                    .map(
+                        (parte) =>
+                            encodeURIComponent(
+                                parte
+                            )
+                    );
+
+            return `${SUPABASE_URL}/storage/v1/object/public/produtos/${partes.join("/")}`;
+
+        }
+
+
+        function obterImagem(produto) {
+
+            if (!produto) {
+                return "";
+            }
+
+            if (produto.imagem_url) {
+                return String(
+                    produto.imagem_url
+                ).trim();
+            }
+
+            if (produto.imagem_path) {
+                return gerarUrlImagemStorage(
+                    produto.imagem_path
+                );
+            }
+
+            return (
+                produto.imagem ||
+                produto.image_url ||
+                produto.foto_url ||
+                produto.image ||
+                produto.foto ||
+                ""
+            );
+
+        }
+
+
+        function produtoEsgotado(produto) {
+
+            return (
+                produto?.esgotado === true ||
+                produto?.esgotado === 1 ||
+                produto?.esgotado === "1" ||
+                String(
+                    produto?.esgotado
+                ).toLowerCase() === "true"
+            );
+
+        }
+
+
+        function varianteEsgotada(variante) {
+
+            if (!variante) {
+                return true;
+            }
+
+            const estoque =
+                Number(
+                    variante.estoque
+                );
+
+            return (
+                variante.esgotado === true ||
+                variante.esgotado === 1 ||
+                variante.esgotado === "1" ||
+                String(
+                    variante.esgotado
+                ).toLowerCase() === "true" ||
+                !Number.isFinite(estoque) ||
+                estoque <= 0
+            );
+
+        }
+
+
+        function obterCampo(produto, nomes) {
+
+            for (
+                const nome
+                of nomes
+            ) {
+
+                if (
+                    produto?.[nome] !== undefined &&
+                    produto?.[nome] !== null
+                ) {
+                    return produto[nome];
+                }
+
+            }
+
+            return null;
+
+        }
+
+
+        function obterOpcoesUnicas(campo) {
+
+            return [
+                ...new Set(
+                    variacoesProduto
+                        .map(
+                            (variante) =>
+                                String(
+                                    variante?.[campo] || ""
+                                ).trim()
+                        )
+                        .filter(Boolean)
+                )
+            ];
+
+        }
+
+
+        function encontrarVariante() {
+
+            const temCor =
+                produtoAtual?.tem_cor === true;
+
+            const temTamanho =
+                produtoAtual?.tem_tamanho === true;
+
+            if (!temCor && !temTamanho) {
+                return null;
+            }
+
+            return (
+                variacoesProduto.find(
+                    (variante) => {
+
+                        const corConfere =
+                            !temCor ||
+                            String(
+                                variante.cor || ""
+                            ).trim() ===
+                            String(
+                                corSelecionada || ""
+                            ).trim();
+
+                        const tamanhoConfere =
+                            !temTamanho ||
+                            String(
+                                variante.tamanho || ""
+                            ).trim() ===
+                            String(
+                                tamanhoSelecionado || ""
+                            ).trim();
+
+                        return (
+                            corConfere &&
+                            tamanhoConfere
+                        );
+
+                    }
+                ) ||
+                null
+            );
+
+        }
+
+
+        function selecionarPrimeirasOpcoes() {
+
+            const temCor =
+                produtoAtual?.tem_cor === true;
+
+            const temTamanho =
+                produtoAtual?.tem_tamanho === true;
+
+            const cores =
+                obterOpcoesUnicas(
+                    "cor"
+                );
+
+            const tamanhos =
+                obterOpcoesUnicas(
+                    "tamanho"
+                );
+
+            if (temCor) {
+                corSelecionada =
+                    cores[0] || "";
+            } else {
+                corSelecionada = "";
+            }
+
+            if (temTamanho) {
+                tamanhoSelecionado =
+                    tamanhos[0] || "";
+            } else {
+                tamanhoSelecionado = "";
+            }
+
+            varianteSelecionada =
+                encontrarVariante();
+
+        }
+
+
+        function renderizarOpcoesVariacao() {
+
+            const temCor =
+                produtoAtual?.tem_cor === true;
+
+            const temTamanho =
+                produtoAtual?.tem_tamanho === true;
+
+
+            if (elementos.controleCor) {
+                elementos.controleCor.hidden =
+                    !temCor;
+            }
+
+
+            if (elementos.controleTamanho) {
+                elementos.controleTamanho.hidden =
+                    !temTamanho;
+            }
+
+
+            if (
+                elementos.opcoesCores &&
+                temCor
+            ) {
+
+                const cores =
+                    obterOpcoesUnicas(
+                        "cor"
+                    );
+
+                elementos.opcoesCores.innerHTML =
+                    cores
+                        .map(
+                            (cor) => `
+                                <button
+                                    type="button"
+                                    class="botao-opcao-variacao ${
+                                        cor === corSelecionada
+                                            ? "selecionado"
+                                            : ""
+                                    }"
+                                    data-tipo-opcao="cor"
+                                    data-valor-opcao="${escaparHTML(cor)}"
+                                >
+                                    ${escaparHTML(cor)}
+                                </button>
+                            `
+                        )
+                        .join("");
+
+            } else if (elementos.opcoesCores) {
+                elementos.opcoesCores.innerHTML = "";
+            }
+
+
+            if (
+                elementos.opcoesTamanhos &&
+                temTamanho
+            ) {
+
+                const tamanhos =
+                    obterOpcoesUnicas(
+                        "tamanho"
+                    );
+
+                elementos.opcoesTamanhos.innerHTML =
+                    tamanhos
+                        .map(
+                            (tamanho) => `
+                                <button
+                                    type="button"
+                                    class="botao-opcao-variacao ${
+                                        tamanho === tamanhoSelecionado
+                                            ? "selecionado"
+                                            : ""
+                                    }"
+                                    data-tipo-opcao="tamanho"
+                                    data-valor-opcao="${escaparHTML(tamanho)}"
+                                >
+                                    ${escaparHTML(tamanho)}
+                                </button>
+                            `
+                        )
+                        .join("");
+
+            } else if (elementos.opcoesTamanhos) {
+                elementos.opcoesTamanhos.innerHTML = "";
+            }
+
+
+            configurarCliquesOpcoes();
+
+            atualizarDisponibilidadeOpcoes();
+
+        }
+
+
+        function configurarCliquesOpcoes() {
+
+            document
+                .querySelectorAll(
+                    ".botao-opcao-variacao"
+                )
+                .forEach(
+                    (botao) => {
+
+                        botao.addEventListener(
+                            "click",
+                            () => {
+
+                                if (
+                                    botao.disabled
+                                ) {
+                                    return;
+                                }
+
+                                const tipo =
+                                    botao.dataset.tipoOpcao;
+
+                                const valor =
+                                    botao.dataset.valorOpcao || "";
+
+                                if (tipo === "cor") {
+                                    corSelecionada =
+                                        valor;
+                                }
+
+                                if (
+                                    tipo ===
+                                    "tamanho"
+                                ) {
+                                    tamanhoSelecionado =
+                                        valor;
+                                }
+
+                                quantidadeAtual =
+                                    1;
+
+                                varianteSelecionada =
+                                    encontrarVariante();
+
+                                renderizarOpcoesVariacao();
+                                atualizarPreco();
+                                atualizarQuantidade();
+                                atualizarEstadoEsgotado();
+
+                            }
+                        );
+
+                    }
+                );
+
+        }
+
+
+        function combinacaoDisponivel(
+            cor,
+            tamanho
+        ) {
+
+            const temCor =
+                produtoAtual?.tem_cor === true;
+
+            const temTamanho =
+                produtoAtual?.tem_tamanho === true;
+
+            return variacoesProduto.some(
+                (variante) => {
+
+                    if (
+                        temCor &&
+                        String(
+                            variante.cor || ""
+                        ).trim() !==
+                        String(
+                            cor || ""
+                        ).trim()
+                    ) {
+                        return false;
+                    }
+
+                    if (
+                        temTamanho &&
+                        String(
+                            variante.tamanho || ""
+                        ).trim() !==
+                        String(
+                            tamanho || ""
+                        ).trim()
+                    ) {
+                        return false;
+                    }
+
+                    return !varianteEsgotada(
+                        variante
+                    );
+
+                }
+            );
+
+        }
+
+
+        function atualizarDisponibilidadeOpcoes() {
+
+            if (!produtoAtual) {
+                return;
+            }
+
+            const temCor =
+                produtoAtual.tem_cor === true;
+
+            const temTamanho =
+                produtoAtual.tem_tamanho === true;
+
+
+            document
+                .querySelectorAll(
+                    '.botao-opcao-variacao[data-tipo-opcao="cor"]'
+                )
+                .forEach(
+                    (botao) => {
+
+                        const valor =
+                            botao.dataset.valorOpcao || "";
+
+                        const disponivel =
+                            combinacaoDisponivel(
+                                valor,
+                                temTamanho
+                                    ? tamanhoSelecionado
+                                    : ""
+                            );
+
+                        botao.disabled =
+                            !disponivel;
+
+                        botao.classList.toggle(
+                            "indisponivel",
+                            !disponivel
+                        );
+
+                    }
+                );
+
+
+            document
+                .querySelectorAll(
+                    '.botao-opcao-variacao[data-tipo-opcao="tamanho"]'
+                )
+                .forEach(
+                    (botao) => {
+
+                        const valor =
+                            botao.dataset.valorOpcao || "";
+
+                        const disponivel =
+                            combinacaoDisponivel(
+                                temCor
+                                    ? corSelecionada
+                                    : "",
+                                valor
+                            );
+
+                        botao.disabled =
+                            !disponivel;
+
+                        botao.classList.toggle(
+                            "indisponivel",
+                            !disponivel
+                        );
+
+                    }
+                );
+
+        }
+
+
+        function atualizarQuantidade() {
+
+            if (elementos.quantidade) {
+                elementos.quantidade.textContent =
+                    quantidadeAtual;
+            }
+
+        }
+
+
+        function atualizarPreco() {
+
+            if (!produtoAtual) {
+                return;
+            }
+
+
+            const precoUnitario =
+                obterPrecoAtual();
+
+
+            const total =
+                precoUnitario *
+                quantidadeAtual;
+
+
+            elementos.preco.textContent =
+                formatarPreco(
+                    total
+                );
+
+
+            const precoNormal =
+                obterPrecoNormalAtual();
+
+            const precoPromocional =
+                obterPrecoPromocionalAtual();
+
+
+            if (
+                precoPromocional !== null &&
+                precoNormal >
+                precoPromocional
+            ) {
+
+                elementos.precoAntigo.textContent =
+                    formatarPreco(
+                        precoNormal *
+                        quantidadeAtual
+                    );
+
+            } else {
+
+                elementos.precoAntigo.textContent =
+                    "";
+
+            }
+
+        }
+
+
+        function atualizarEstadoEsgotado() {
+
+            const produtoIndisponivel =
+                produtoEsgotado(
+                    produtoAtual
+                );
+
+            const temVariacoes =
+                produtoAtual?.tem_cor === true ||
+                produtoAtual?.tem_tamanho === true;
+
+            const varianteIndisponivel =
+                temVariacoes &&
+                (
+                    !varianteSelecionada ||
+                    varianteEsgotada(
+                        varianteSelecionada
+                    )
+                );
+
+            const esgotado =
+                produtoIndisponivel ||
+                varianteIndisponivel;
+
+
+            const controlesQuantidade =
+                document.querySelectorAll(
+                    "#diminuirQuantidade, #aumentarQuantidade"
+                );
+
+
+            controlesQuantidade.forEach(
+                (botao) => {
+                    botao.disabled =
+                        esgotado;
+                }
+            );
+
+
+            if (
+                !esgotado &&
+                varianteSelecionada
+            ) {
+
+                const estoque =
+                    Number(
+                        varianteSelecionada.estoque
+                    );
+
+                if (
+                    Number.isFinite(estoque) &&
+                    estoque > 0
+                ) {
+                    quantidadeAtual =
+                        Math.min(
+                            quantidadeAtual,
+                            estoque
+                        );
+
+                    document
+                        .getElementById(
+                            "aumentarQuantidade"
+                        )
+                        .disabled =
+                        quantidadeAtual >= estoque;
+                }
+
+            }
+
+
+            if (elementos.botaoAdicionar) {
+                elementos.botaoAdicionar.disabled =
+                    esgotado;
+
+                elementos.botaoAdicionar.textContent =
+                    esgotado
+                        ? (
+                            produtoIndisponivel
+                                ? "Produto esgotado"
+                                : "Variação esgotada"
+                        )
+                        : "Adicionar ao carrinho";
+            }
+
+
+            if (elementos.avisoEsgotado) {
+                elementos.avisoEsgotado.classList.toggle(
+                    "visivel",
+                    esgotado
+                );
+
+                if (esgotado) {
+                    elementos.avisoEsgotado.textContent =
+                        produtoIndisponivel
+                            ? "Este produto está esgotado no momento e não pode ser adicionado ao carrinho."
+                            : "Esta combinação de cor/tamanho está esgotada no momento.";
+                }
+            }
+
+
+            if (elementos.combinacaoAviso) {
+
+                const mostrar =
+                    temVariacoes &&
+                    (
+                        !varianteSelecionada ||
+                        varianteIndisponivel
+                    ) &&
+                    !produtoIndisponivel;
+
+                elementos.combinacaoAviso.classList.toggle(
+                    "visivel",
+                    mostrar
+                );
+
+                elementos.combinacaoAviso.textContent =
+                    mostrar
+                        ? "Essa combinação de cor e tamanho não está disponível."
+                        : "";
+
+            }
+
+        }
+
+
+        function carregarVisual(produto) {
+
+            const imagem =
+                obterImagem(produto);
+
+
+            if (imagem) {
+
+                elementos.imagem.style.backgroundImage =
+                    "url('" +
+                    imagem.replaceAll(
+                        "'",
+                        "\\'"
+                    ) +
+                    "')";
+
+                elementos.imagem.style.backgroundSize =
+                    "cover";
+
+                elementos.imagem.style.backgroundPosition =
+                    "center";
+
+                elementos.imagem.style.backgroundRepeat =
+                    "no-repeat";
+
+
+                elementos.simbolo.style.display =
+                    "none";
+
+            } else {
+
+                elementos.imagem.style.backgroundImage =
+                    "radial-gradient(circle at center, #76502b, #21140b)";
+
+                elementos.simbolo.style.display =
+                    "block";
+
+            }
+
+        }
+
+
+        function preencherProduto(produto) {
+
+            produtoAtual =
+                produto;
+
+
+            elementos.nome.textContent =
+                obterNome(
+                    produto
+                );
+
+
+            elementos.categoria.textContent =
+                String(
+                    obterCategoria(
+                        produto
+                    )
+                ).toUpperCase();
+
+
+            elementos.descricao.textContent =
+                obterDescricao(
+                    produto
+                );
+
+
+            carregarVisual(
+                produto
+            );
+
+
+            quantidadeAtual =
+                1;
+
+            corSelecionada =
+                "";
+
+            tamanhoSelecionado =
+                "";
+
+            varianteSelecionada =
+                null;
+
+            selecionarPrimeirasOpcoes();
+
+            renderizarOpcoesVariacao();
+
+            atualizarQuantidade();
+
+            atualizarPreco();
+
+            atualizarEstadoEsgotado();
+
+        }
+
+
+        function mostrarErro(mensagem) {
+
+            elementos.nome.textContent =
+                "Produto não encontrado";
+
+
+            elementos.categoria.textContent =
+                "SARAVIEI";
+
+
+            elementos.descricao.textContent =
+                mensagem;
+
+
+            elementos.preco.textContent =
+                "";
+
+
+            elementos.precoAntigo.textContent =
+                "";
+
+
+            elementos.botaoAdicionar.disabled =
+                true;
+
+        }
+
+
+        async function buscarVariacoesProduto(
+            id
+        ) {
+
+            const url =
+                SUPABASE_URL +
+                "/rest/v1/product_variants" +
+                "?select=*" +
+                "&product_id=eq." +
+                encodeURIComponent(
+                    String(id)
+                ) +
+                "&order=ordem.asc,created_at.asc";
+
+
+            const resposta =
+                await fetch(
+                    url,
+                    {
+                        method: "GET",
+
+                        headers: {
+
+                            "apikey":
+                                SUPABASE_ANON_KEY,
+
+                            "Authorization":
+                                "Bearer " +
+                                SUPABASE_ANON_KEY,
+
+                            "Content-Type":
+                                "application/json"
+
+                        }
+                    }
+                );
+
+
+            if (!resposta.ok) {
+
+                const texto =
+                    await resposta.text();
+
+                throw new Error(
+                    texto ||
+                    "Erro ao consultar as variações do produto."
+                );
+
+            }
+
+
+            const dados =
+                await resposta.json();
+
+
+            return Array.isArray(
+                dados
+            )
+                ? dados
+                : [];
+
+        }
+
+
+        async function carregarProduto() {
+
+            if (!produtoId) {
+
+                mostrarErro(
+                    "Este produto não possui um identificador válido."
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                const url =
+                    SUPABASE_URL +
+                    "/rest/v1/products" +
+                    "?select=*" +
+                    "&id=eq." +
+                    encodeURIComponent(
+                        produtoId
+                    ) +
+                    "&limit=1";
+
+
+                const resposta =
+                    await fetch(
+                        url,
+                        {
+                            method: "GET",
+
+                            headers: {
+
+                                "apikey":
+                                    SUPABASE_ANON_KEY,
+
+                                "Authorization":
+                                    "Bearer " +
+                                    SUPABASE_ANON_KEY,
+
+                                "Content-Type":
+                                    "application/json"
+
+                            }
+                        }
+                    );
+
+
+                if (!resposta.ok) {
+
+                    const texto =
+                        await resposta.text();
+
+                    throw new Error(
+                        texto ||
+                        "Erro ao consultar o produto."
+                    );
+
+                }
+
+
+                const dados =
+                    await resposta.json();
+
+
+                if (
+                    !Array.isArray(dados) ||
+                    dados.length === 0
+                ) {
+
+                    mostrarErro(
+                        "A peça não foi encontrada no catálogo."
+                    );
+
+                    return;
+
+                }
+
+
+                const produto =
+                    dados[0];
+
+
+                variacoesProduto =
+                    [];
+
+
+                if (
+                    produto.tem_cor === true ||
+                    produto.tem_tamanho === true
+                ) {
+                    variacoesProduto =
+                        await buscarVariacoesProduto(
+                            produto.id
+                        );
+                }
+
+
+                preencherProduto(
+                    produto
+                );
+
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao carregar produto:",
+                    erro
+                );
+
+
+                mostrarErro(
+                    "Não foi possível carregar os dados desta peça."
+                );
+
+            }
+
+        }
+
+
+        function adicionarAoCarrinho() {
+
+            if (!produtoAtual) {
+                return;
+            }
+
+
+            const temVariacoes =
+                produtoAtual.tem_cor === true ||
+                produtoAtual.tem_tamanho === true;
+
+
+            if (
+                produtoEsgotado(
+                    produtoAtual
+                )
+            ) {
+                alert(
+                    "Este produto está esgotado e não pode ser adicionado ao carrinho."
+                );
+
+                return;
+            }
+
+
+            if (
+                temVariacoes &&
+                (
+                    !varianteSelecionada ||
+                    varianteEsgotada(
+                        varianteSelecionada
+                    )
+                )
+            ) {
+                alert(
+                    "Escolha uma combinação de cor/tamanho disponível."
+                );
+
+                return;
+            }
+
+
+            const precoNormal =
+                obterPrecoNormalAtual();
+
+
+            const precoPromocional =
+                obterPrecoPromocionalAtual();
+
+
+            const estoque =
+                varianteSelecionada
+                    ? Number(
+                        varianteSelecionada.estoque
+                    )
+                    : null;
+
+
+            if (
+                Number.isFinite(estoque) &&
+                estoque > 0 &&
+                quantidadeAtual > estoque
+            ) {
+                quantidadeAtual =
+                    estoque;
+
+                atualizarQuantidade();
+
+                return;
+            }
+
+
+            const item = {
+
+                id:
+                    produtoAtual.id,
+
+                variant_id:
+                    varianteSelecionada?.id ||
+                    null,
+
+                nome:
+                    obterNome(
+                        produtoAtual
+                    ),
+
+                colecao:
+                    obterCategoria(
+                        produtoAtual
+                    ),
+
+                preco:
+                    precoNormal,
+
+                precoPromocional:
+                    precoPromocional,
+
+                cor:
+                    corSelecionada,
+
+                tamanho:
+                    tamanhoSelecionado,
+
+                estoque:
+                    Number.isFinite(
+                        estoque
+                    )
+                        ? estoque
+                        : null,
+
+                esgotado:
+                    false,
+
+                quantidade:
+                    quantidadeAtual,
+
+                imagem_url:
+                    obterImagem(
+                        produtoAtual
+                    ),
+
+                peso_gramas:
+                    obterCampo(
+                        produtoAtual,
+                        [
+                            "peso_gramas",
+                            "pesoGramas",
+                            "peso"
+                        ]
+                    ),
+
+                altura_cm:
+                    obterCampo(
+                        produtoAtual,
+                        [
+                            "altura_cm",
+                            "alturaCm",
+                            "altura"
+                        ]
+                    ),
+
+                largura_cm:
+                    obterCampo(
+                        produtoAtual,
+                        [
+                            "largura_cm",
+                            "larguraCm",
+                            "largura"
+                        ]
+                    ),
+
+                comprimento_cm:
+                    obterCampo(
+                        produtoAtual,
+                        [
+                            "comprimento_cm",
+                            "comprimentoCm",
+                            "comprimento"
+                        ]
+                    )
+
+            };
+
+
+            let carrinho = [];
+
+
+            try {
+
+                carrinho =
+                    JSON.parse(
+                        localStorage.getItem(
+                            CHAVE_CARRINHO
+                        )
+                    ) || [];
+
+            } catch {
+
+                carrinho = [];
+
+            }
+
+
+            const existente =
+                carrinho.find(
+                    (itemCarrinho) => {
+
+                        if (
+                            String(
+                                itemCarrinho.id
+                            ) !==
+                            String(
+                                produtoAtual.id
+                            )
+                        ) {
+                            return false;
+                        }
+
+                        if (
+                            varianteSelecionada?.id
+                        ) {
+                            return (
+                                String(
+                                    itemCarrinho.variant_id ||
+                                    ""
+                                ) ===
+                                String(
+                                    varianteSelecionada.id
+                                )
+                            );
+                        }
+
+                        return (
+                            String(
+                                itemCarrinho.cor || ""
+                            ) ===
+                            String(
+                                corSelecionada || ""
+                            ) &&
+                            String(
+                                itemCarrinho.tamanho || ""
+                            ) ===
+                            String(
+                                tamanhoSelecionado || ""
+                            )
+                        );
+
+                    }
+                );
+
+
+            if (existente) {
+
+                const novaQuantidade =
+                    Number(
+                        existente.quantidade || 0
+                    ) +
+                    quantidadeAtual;
+
+                if (
+                    Number.isFinite(estoque) &&
+                    estoque > 0 &&
+                    novaQuantidade > estoque
+                ) {
+                    alert(
+                        `Só há ${estoque} unidade(s) dessa combinação em estoque.`
+                    );
+
+                    return;
+                }
+
+                existente.quantidade =
+                    novaQuantidade;
+
+            } else {
+
+                carrinho.push(
+                    item
+                );
+
+            }
+
+
+            localStorage.setItem(
+                CHAVE_CARRINHO,
+                JSON.stringify(
+                    carrinho
+                )
+            );
+
+
+            window.location.href =
+                "carrinho.html";
+
+        }
+
+
+        document
+            .getElementById(
+                "diminuirQuantidade"
+            )
+            .addEventListener(
+                "click",
+                function() {
+
+                    if (
+                        !produtoAtual ||
+                        produtoEsgotado(
+                            produtoAtual
+                        ) ||
+                        (
+                            varianteSelecionada &&
+                            varianteEsgotada(
+                                varianteSelecionada
+                            )
+                        )
+                    ) {
+                        return;
+                    }
+
+
+                    if (
+                        quantidadeAtual > 1
+                    ) {
+
+                        quantidadeAtual--;
+
+                        atualizarQuantidade();
+
+                        atualizarPreco();
+
+                        atualizarEstadoEsgotado();
+
+                    }
+
+                }
+            );
+
+
+        document
+            .getElementById(
+                "aumentarQuantidade"
+            )
+            .addEventListener(
+                "click",
+                function() {
+
+                    if (
+                        !produtoAtual ||
+                        produtoEsgotado(
+                            produtoAtual
+                        ) ||
+                        (
+                            varianteSelecionada &&
+                            varianteEsgotada(
+                                varianteSelecionada
+                            )
+                        )
+                    ) {
+                        return;
+                    }
+
+
+                    const estoque =
+                        varianteSelecionada
+                            ? Number(
+                                varianteSelecionada.estoque
+                            )
+                            : null;
+
+
+                    if (
+                        Number.isFinite(
+                            estoque
+                        ) &&
+                        estoque > 0 &&
+                        quantidadeAtual >= estoque
+                    ) {
+                        return;
+                    }
+
+
+                    quantidadeAtual++;
+
+                    atualizarQuantidade();
+
+                    atualizarPreco();
+
+                    atualizarEstadoEsgotado();
+
+                }
+            );
+
+
+        elementos.botaoAdicionar.addEventListener(
+            "click",
+            adicionarAoCarrinho
+        );
+
+
+        carregarProduto();
+
+    </script>
+
+</body>
+
+</html>

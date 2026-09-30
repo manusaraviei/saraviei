@@ -1,0 +1,460 @@
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #24170e 0%,
+            #110b08 42%,
+            #090605 100%
+        );
+
+    color: #eadcc8;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+
+button,
+input {
+    font: inherit;
+}
+
+
+.pagina-conta {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+}
+
+
+.conta-card {
+    width: 100%;
+    max-width: 470px;
+
+    padding: 42px 42px 32px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #18100c 0%,
+            #0e0907 100%
+        );
+
+    border: 1px solid #49331f;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.45);
+
+    text-align: center;
+}
+
+
+.logo {
+    display: inline-block;
+
+    color: #d4a04b;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 30px;
+
+    letter-spacing: 4px;
+
+    text-decoration: none;
+}
+
+
+.linha-dourada {
+    display: block;
+
+    width: 55px;
+    height: 2px;
+
+    margin: 16px auto 28px;
+
+    background: #b9853b;
+}
+
+
+.abas-conta {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 5px;
+
+    margin-bottom: 32px;
+
+    padding: 4px;
+
+    background: #100b08;
+
+    border: 1px solid #392719;
+
+    border-radius: 7px;
+}
+
+
+.aba-conta {
+    min-height: 42px;
+
+    border: 1px solid transparent;
+
+    border-radius: 5px;
+
+    background: transparent;
+
+    color: #8f7b63;
+
+    cursor: pointer;
+
+    transition:
+        color .2s ease,
+        background .2s ease,
+        border-color .2s ease;
+}
+
+
+.aba-conta:hover {
+    color: #d4a04b;
+}
+
+
+.aba-conta.ativa {
+    color: #d8ad5b;
+
+    background: #21160f;
+
+    border-color: #4d351f;
+}
+
+
+.painel-conta {
+    display: none;
+
+    text-align: left;
+}
+
+
+.painel-conta.ativo {
+    display: block;
+}
+
+
+.etiqueta {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #a67a3c;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 10px;
+
+    letter-spacing: 2.5px;
+}
+
+
+.painel-conta h1 {
+    margin: 0 0 12px;
+
+    color: #eee0ca;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 31px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+}
+
+
+.descricao {
+    margin: 0 0 28px;
+
+    color: #a99a86;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+.campo {
+    margin-bottom: 18px;
+}
+
+
+.campo label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #cbb79a;
+
+    font-size: 12px;
+}
+
+
+.campo input {
+    width: 100%;
+
+    height: 46px;
+
+    padding: 0 14px;
+
+    border: 1px solid #4a3421;
+
+    border-radius: 6px;
+
+    outline: none;
+
+    background: #0d0907;
+
+    color: #eadcc8;
+
+    font-size: 13px;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.campo input::placeholder {
+    color: #655646;
+}
+
+
+.campo input:focus {
+    border-color: #a97939;
+
+    box-shadow:
+        0 0 0 3px rgba(169, 121, 57, 0.10);
+}
+
+
+.botao-conta {
+    width: 100%;
+
+    min-height: 48px;
+
+    margin-top: 5px;
+
+    border: 1px solid #b9853b;
+
+    border-radius: 6px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #b9853b 0%,
+            #8f6129 100%
+        );
+
+    color: #160e08;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        filter .2s ease;
+}
+
+
+.botao-conta:hover {
+    filter: brightness(1.08);
+
+    transform: translateY(-1px);
+}
+
+
+.botao-conta:disabled {
+    opacity: .55;
+
+    cursor: wait;
+
+    transform: none;
+}
+
+
+.botao-link {
+    display: block;
+
+    margin: 17px auto 0;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #a67a3c;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+
+.botao-link:hover {
+    color: #d4a04b;
+
+    text-decoration: underline;
+}
+
+
+.mensagem {
+    min-height: 20px;
+
+    margin: 16px 0 0;
+
+    color: #bfae98;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    text-align: center;
+}
+
+
+.mensagem.erro {
+    color: #d39a8d;
+}
+
+
+.mensagem.sucesso {
+    color: #b9b079;
+}
+
+
+.conta-resumo {
+    margin: 25px 0;
+
+    border-top: 1px solid #352519;
+
+    border-bottom: 1px solid #352519;
+}
+
+
+.resumo-item {
+    padding: 15px 0;
+
+    border-bottom: 1px solid #2b1e15;
+}
+
+
+.resumo-item:last-child {
+    border-bottom: 0;
+}
+
+
+.resumo-item span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #876c4d;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+.resumo-item strong {
+    display: block;
+
+    color: #d8c8b1;
+
+    font-size: 13px;
+
+    font-weight: 400;
+}
+
+
+.voltar {
+    display: inline-block;
+
+    margin-top: 30px;
+
+    color: #987448;
+
+    font-size: 12px;
+
+    text-decoration: none;
+}
+
+
+.voltar:hover {
+    color: #d4a04b;
+}
+
+
+@media (max-width: 560px) {
+
+    .pagina-conta {
+        padding: 20px 14px;
+    }
+
+
+    .conta-card {
+        padding: 32px 24px 26px;
+    }
+
+
+    .logo {
+        font-size: 26px;
+    }
+
+
+    .painel-conta h1 {
+        font-size: 27px;
+    }
+
+}

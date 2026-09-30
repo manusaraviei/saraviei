@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Personalize sua ideia | Saraviei</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #24170e 0%,
+                    #110c08 42%,
+                    #080604 100%
+                );
+
+            color: #d8c6a8;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+        .cabecalho {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 30px;
+
+            padding: 20px 6%;
+
+            background: rgba(8, 6, 4, 0.96);
+
+            border-bottom: 1px solid #3d2a19;
+
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            color: #d3a653;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 25px;
+            letter-spacing: 3px;
+            font-weight: 600;
+
+            white-space: nowrap;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+
+            gap: 26px;
+        }
+
+        .menu a {
+            color: #bca98b;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            transition:
+                color .2s ease;
+        }
+
+        .menu a:hover {
+            color: #d5ad60;
+        }
+
+        .botao-carrinho {
+            padding: 10px 17px;
+
+            border: 1px solid #70512b;
+            border-radius: 25px;
+
+            background: transparent;
+
+            color: #d6b26a;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            transition:
+                background .2s ease,
+                border-color .2s ease;
+        }
+
+        .botao-carrinho:hover {
+            background: #24170e;
+            border-color: #a77a39;
+        }
+
+        .pagina {
+            width: 100%;
+            max-width: 920px;
+
+            margin: 0 auto;
+
+            padding: 75px 24px 90px;
+        }
+
+        .cabecalho-pagina {
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+        .ornamento {
+            margin-bottom: 15px;
+
+            color: #c99b4b;
+
+            font-size: 25px;
+        }
+
+        .etiqueta {
+            display: block;
+
+            margin-bottom: 12px;
+
+            color: #a77d3c;
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
+        .cabecalho-pagina h1 {
+            margin: 0 0 16px;
+
+            color: #e0c58f;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: clamp(34px, 5vw, 52px);
+
+            font-weight: 400;
+        }
+
+        .cabecalho-pagina p {
+            max-width: 650px;
+
+            margin: 0 auto;
+
+            color: #a99578;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+        }
+
+        .formulario {
+            padding: 35px;
+
+            border: 1px solid #49321e;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #19110c 0%,
+                    #0f0a07 100%
+                );
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, .30);
+        }
+
+        .campo {
+            margin-bottom: 25px;
+        }
+
+        .campo label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #d0b68a;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .campo .explicacao {
+            display: block;
+
+            margin-top: -2px;
+            margin-bottom: 10px;
+
+            color: #806e57;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        textarea {
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border: 1px solid #48311e;
+            border-radius: 7px;
+
+            outline: none;
+
+            background: #0a0705;
+
+            color: #dfcfb5;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease;
+        }
+
+        input[type="text"],
+        input[type="tel"] {
+            min-height: 48px;
+        }
+
+        textarea {
+            min-height: 150px;
+
+            resize: vertical;
+
+            line-height: 1.6;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #9a6d32;
+
+            box-shadow:
+                0 0 0 2px rgba(154, 109, 50, .10);
+        }
+
+        .linha {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 20px;
+        }
+
+        .opcoes-tamanho {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 12px;
+        }
+
+        .opcao-tamanho {
+            position: relative;
+        }
+
+        .opcao-tamanho input {
+            position: absolute;
+
+            opacity: 0;
+
+            pointer-events: none;
+        }
+
+        .opcao-tamanho label {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-height: 52px;
+
+            margin: 0;
+
+            padding: 10px;
+
+            border: 1px solid #49321e;
+            border-radius: 7px;
+
+            background: #0a0705;
+
+            color: #aa977b;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            transition:
+                background .2s ease,
+                border-color .2s ease,
+                color .2s ease;
+        }
+
+        .opcao-tamanho label:hover {
+            border-color: #75532c;
+        }
+
+        .opcao-tamanho input:checked + label {
+            border-color: #b98438;
+
+            background: #21150c;
+
+            color: #dfbb73;
+
+            box-shadow:
+                inset 0 0 0 1px rgba(185, 132, 56, .15);
+        }
+
+        .referencias {
+            padding: 20px;
+
+            border: 1px dashed #594027;
+            border-radius: 8px;
+
+            background: rgba(10, 7, 5, .65);
+        }
+
+        .input-arquivos {
+            display: block;
+
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #48311e;
+            border-radius: 7px;
+
+            background: #0a0705;
+
+            color: #9f8d73;
+
+            cursor: pointer;
+
+            font-size: 13px;
+        }
+
+        .input-arquivos::file-selector-button {
+            margin-right: 12px;
+
+            padding: 9px 13px;
+
+            border: 1px solid #74522b;
+            border-radius: 5px;
+
+            background: #1d130c;
+
+            color: #d0a95d;
+
+            cursor: pointer;
+        }
+
+        .contador-imagens {
+            display: block;
+
+            margin-top: 9px;
+
+            color: #75634e;
+
+            font-size: 11px;
+        }
+
+        .previsualizacoes {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 10px;
+
+            margin-top: 15px;
+        }
+
+        .previsualizacao {
+            position: relative;
+
+            aspect-ratio: 1 / 1;
+
+            overflow: hidden;
+
+            border: 1px solid #4d351f;
+            border-radius: 7px;
+
+            background: #080604;
+        }
+
+        .previsualizacao img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+        }
+
+        .aviso {
+            margin: 30px 0;
+
+            padding: 18px 20px;
+
+            border: 1px solid #765124;
+            border-radius: 8px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #26180c,
+                    #171007
+                );
+
+            color: #dcb875;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        .texto-final {
+            margin: 25px 0 30px;
+
+            color: #9f8d73;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        .botao-enviar {
+            display: block;
+
+            width: 100%;
+
+            min-height: 56px;
+
+            border: 1px solid #d1a052;
+            border-radius: 7px;
+
+            background: #c39242;
+
+            color: #120b06;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            cursor: pointer;
+
+            transition:
+                transform .2s ease,
+                background .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .botao-enviar:hover:not(:disabled) {
+            transform: translateY(-2px);
+
+            background: #dbb064;
+
+            box-shadow:
+                0 10px 30px rgba(193, 142, 59, .20);
+        }
+
+        .botao-enviar:disabled {
+            cursor: wait;
+
+            opacity: .65;
+        }
+
+        .mensagem {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 15px;
+
+            border-radius: 7px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        .mensagem.sucesso {
+            display: block;
+
+            border: 1px solid #3e643f;
+
+            background: #101b11;
+
+            color: #a7cda8;
+        }
+
+        .mensagem.erro {
+            display: block;
+
+            border: 1px solid #6b3830;
+
+            background: #1d0e0b;
+
+            color: #dca59d;
+        }
+
+        .voltar {
+            display: block;
+
+            margin-top: 30px;
+
+            color: #8e795f;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            font-size: 13px;
+        }
+
+        .voltar:hover {
+            color: #c8a260;
+        }
+
+        @media (max-width: 760px) {
+
+            .cabecalho {
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .menu {
+                order: 3;
+
+                width: 100%;
+
+                justify-content: center;
+
+                flex-wrap: wrap;
+            }
+
+            .linha {
+                grid-template-columns: 1fr;
+            }
+
+            .opcoes-tamanho {
+                grid-template-columns: 1fr;
+            }
+
+            .previsualizacoes {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .formulario {
+                padding: 23px;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+
+            .pagina {
+                padding:
+                    50px 15px 60px;
+            }
+
+            .cabecalho {
+                padding: 17px 15px;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .menu {
+                gap: 15px;
+            }
+
+            .menu a {
+                font-size: 12px;
+            }
+
+            .formulario {
+                padding: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <header class="cabecalho">
+
+        <div class="logo">
+            SARAVIEI
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="index.html">
+                Início
+            </a>
+
+            <a href="index.html#categorias">
+                Coleções
+            </a>
+
+            <a href="index.html#produtos">
+                Produtos
+            </a>
+
+            <a href="index.html#personalizados">
+                Personalizados
+            </a>
+
+        </nav>
+
+
+        <button
+            type="button"
+            class="botao-carrinho"
+            onclick="window.location.href='carrinho.html'"
+        >
+            🛒 Carrinho
+        </button>
+
+    </header>
+
+
+    <main class="pagina">
+
+
+        <section class="cabecalho-pagina">
+
+            <div class="ornamento">
+                ✦
+            </div>
+
+            <span class="etiqueta">
+                DO SEU JEITO
+            </span>
+
+            <h1>
+                Tem uma ideia?
+            </h1>
+
+            <p>
+                Conte para nós o que você imaginou.
+                Quanto mais detalhes você compartilhar,
+                melhor conseguiremos entender o seu projeto.
+            </p>
+
+        </section>
+
+
+        <form
+            id="form-personalizado"
+            class="formulario"
+        >
+
+
+            <!-- NOME + WHATSAPP -->
+
+            <div class="linha">
+
+                <div class="campo">
+
+                    <label for="nome">
+                        Nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Seu nome"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="whatsapp">
+                        WhatsApp
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="whatsapp"
+                        name="whatsapp"
+                        placeholder="(21) 99999-9999"
+                        autocomplete="tel"
+                        required
+                    >
+
+                    <span class="explicacao">
+                        Precisamos de um WhatsApp válido,
+                        pois entraremos em contato por ele.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- TÍTULO -->
+
+            <div class="campo">
+
+                <label for="titulo">
+                    O que você gostaria de criar?
+                </label>
+
+                <span class="explicacao">
+                    É por esse campo que identificaremos
+                    o seu pedido.
+                </span>
+
+                <input
+                    type="text"
+                    id="titulo"
+                    name="titulo"
+                    placeholder="Ex.: Exu sentado"
+                    required
+                >
+
+            </div>
+
+
+            <!-- DESCRIÇÃO -->
+
+            <div class="campo">
+
+                <label for="descricao">
+                    Descrição
+                </label>
+
+                <span class="explicacao">
+                    Aqui você pode contar todos os detalhes.
+                    Explique da forma mais completa possível
+                    como você gostaria que sua peça fosse.
+                </span>
+
+                <textarea
+                    id="descricao"
+                    name="descricao"
+                    placeholder="Conte todos os detalhes daquilo que você deseja..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <!-- REFERÊNCIAS -->
+
+            <div class="campo">
+
+                <label for="referencias">
+                    Você tem alguma referência?
+                </label>
+
+                <span class="explicacao">
+                    Envie até 4 imagens de referência.
+                    Aceitamos somente imagens.
+                </span>
+
+                <div class="referencias">
+
+                    <input
+                        type="file"
+                        id="referencias"
+                        name="referencias"
+                        class="input-arquivos"
+                        accept="image/*"
+                        multiple
+                    >
+
+                    <span
+                        class="contador-imagens"
+                        id="contador-imagens"
+                    >
+                        Nenhuma imagem selecionada.
+                    </span>
+
+                    <div
+                        class="previsualizacoes"
+                        id="previsualizacoes"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TAMANHO -->
+
+            <div class="campo">
+
+                <label>
+                    Qual tamanho?
+                </label>
+
+                <span class="explicacao">
+                    Escolha uma opção.
+                </span>
+
+                <div class="opcoes-tamanho">
+
+
+                    <div class="opcao-tamanho">
+
+                        <input
+                            type="radio"
+                            id="tamanho-pequeno"
+                            name="tamanho"
+                            value="pequeno"
+                            required
+                        >
+
+                        <label for="tamanho-pequeno">
+                            Pequeno
+                        </label>
+
+                    </div>
+
+
+                    <div class="opcao-tamanho">
+
+                        <input
+                            type="radio"
+                            id="tamanho-medio"
+                            name="tamanho"
+                            value="medio"
+                        >
+
+                        <label for="tamanho-medio">
+                            Médio
+                        </label>
+
+                    </div>
+
+
+                    <div class="opcao-tamanho">
+
+                        <input
+                            type="radio"
+                            id="tamanho-grande"
+                            name="tamanho"
+                            value="grande"
+                        >
+
+                        <label for="tamanho-grande">
+                            Grande
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- DETALHE -->
+
+            <div class="campo">
+
+                <label for="detalhe">
+                    Algum detalhe que não pode faltar?
+                </label>
+
+                <textarea
+                    id="detalhe"
+                    name="detalhe"
+                    placeholder="Conte se existe algum detalhe específico que não pode faltar na peça..."
+                ></textarea>
+
+            </div>
+
+
+            <!-- AVISO -->
+
+            <div class="aviso">
+
+                <strong>
+                    FIQUE ATENTO!
+                </strong>
+
+                <br>
+
+                ENTRAREMOS EM CONTATO PELO WHATSAPP!
+
+            </div>
+
+
+            <!-- TEXTO OFICIAL -->
+
+            <p class="texto-final">
+
+                Cada projeto é analisado individualmente.
+                Após recebermos sua ideia, entraremos em
+                contato para confirmar detalhes e apresentar
+                o orçamento. Por isso, é importante que dê
+                a descrição completa daquilo que deseja.
+                AXÉ! ✨
+
+            </p>
+
+
+            <button
+                type="submit"
+                class="botao-enviar"
+                id="botao-enviar"
+            >
+                ENVIAR IDEIA
+            </button>
+
+
+            <div
+                class="mensagem"
+                id="mensagem"
+            ></div>
+
+
+        </form>
+
+
+        <a
+            href="index.html"
+            class="voltar"
+        >
+            ← Voltar para a loja
+        </a>
+
+
+    </main>
+
+
+    <script>
+
+        /* =====================================================
+           SUPABASE
+           ===================================================== */
+
+        const SUPABASE_URL =
+            "https://gmimzvnuvraletepczrp.supabase.co";
+
+        const SUPABASE_ANON_KEY =
+            "sb_publishable_NtJmSYaKmuQuLY2QvfQKLQ_rFA8Ceqx";
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_ANON_KEY
+            );
+
+
+        /* =====================================================
+           ELEMENTOS
+           ===================================================== */
+
+        const formulario =
+            document.getElementById(
+                "form-personalizado"
+            );
+
+        const campoReferencias =
+            document.getElementById(
+                "referencias"
+            );
+
+        const previsualizacoes =
+            document.getElementById(
+                "previsualizacoes"
+            );
+
+        const contadorImagens =
+            document.getElementById(
+                "contador-imagens"
+            );
+
+        const botaoEnviar =
+            document.getElementById(
+                "botao-enviar"
+            );
+
+        const mensagem =
+            document.getElementById(
+                "mensagem"
+            );
+
+
+        /* =====================================================
+           FUNÇÃO — MOSTRAR MENSAGEM
+           ===================================================== */
+
+        function mostrarMensagem(
+            texto,
+            tipo
+        ) {
+
+            mensagem.textContent = texto;
+
+            mensagem.className =
+                "mensagem " + tipo;
+
+        }
+
+
+        /* =====================================================
+           FUNÇÃO — LIMPAR MENSAGEM
+           ===================================================== */
+
+        function limparMensagem() {
+
+            mensagem.textContent = "";
+
+            mensagem.className =
+                "mensagem";
+
+        }
+
+
+        /* =====================================================
+           FUNÇÃO — VALIDAR WHATSAPP
+           ===================================================== */
+
+        function normalizarWhatsApp(
+            valor
+        ) {
+
+            return valor
+                .replace(/\D/g, "");
+
+        }
+
+
+        /* =====================================================
+           FUNÇÃO — PREVISUALIZAR IMAGENS
+           ===================================================== */
+
+        campoReferencias.addEventListener(
+            "change",
+            function () {
+
+                limparMensagem();
+
+                previsualizacoes.innerHTML =
+                    "";
+
+                const arquivos =
+                    Array.from(
+                        campoReferencias.files
+                    );
+
+
+                if (
+                    arquivos.length === 0
+                ) {
+
+                    contadorImagens.textContent =
+                        "Nenhuma imagem selecionada.";
+
+                    return;
+                }
+
+
+                if (
+                    arquivos.length > 4
+                ) {
+
+                    campoReferencias.value =
+                        "";
+
+                    contadorImagens.textContent =
+                        "Nenhuma imagem selecionada.";
+
+                    mostrarMensagem(
+                        "Você pode enviar no máximo 4 imagens.",
+                        "erro"
+                    );
+
+                    return;
+                }
+
+
+                const arquivosInvalidos =
+                    arquivos.filter(
+                        function (arquivo) {
+
+                            return !arquivo.type.startsWith(
+                                "image/"
+                            );
+
+                        }
+                    );
+
+
+                if (
+                    arquivosInvalidos.length > 0
+                ) {
+
+                    campoReferencias.value =
+                        "";
+
+                    contadorImagens.textContent =
+                        "Nenhuma imagem selecionada.";
+
+                    mostrarMensagem(
+                        "Envie somente arquivos de imagem.",
+                        "erro"
+                    );
+
+                    return;
+                }
+
+
+                contadorImagens.textContent =
+                    arquivos.length === 1
+                        ? "1 imagem selecionada."
+                        : arquivos.length +
+                          " imagens selecionadas.";
+
+
+                arquivos.forEach(
+                    function (arquivo) {
+
+                        const container =
+                            document.createElement(
+                                "div"
+                            );
+
+                        container.className =
+                            "previsualizacao";
+
+
+                        const imagem =
+                            document.createElement(
+                                "img"
+                            );
+
+                        imagem.src =
+                            URL.createObjectURL(
+                                arquivo
+                            );
+
+                        imagem.alt =
+                            "Imagem de referência";
+
+
+                        container.appendChild(
+                            imagem
+                        );
+
+                        previsualizacoes.appendChild(
+                            container
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           FUNÇÃO — ENVIAR IMAGENS
+           ===================================================== */
+
+        async function enviarImagens(
+            arquivos,
+            pasta
+        ) {
+
+            const imagens =
+                [];
+
+
+            for (
+                let indice = 0;
+                indice < arquivos.length;
+                indice++
+            ) {
+
+                const arquivo =
+                    arquivos[indice];
+
+
+                if (
+                    !arquivo.type.startsWith(
+                        "image/"
+                    )
+                ) {
+
+                    throw new Error(
+                        "Todos os arquivos precisam ser imagens."
+                    );
+
+                }
+
+
+                /*
+                 * Limite de segurança:
+                 * 5 MB por imagem.
+                 */
+
+                if (
+                    arquivo.size >
+                    5 * 1024 * 1024
+                ) {
+
+                    throw new Error(
+                        "Cada imagem pode ter no máximo 5 MB."
+                    );
+
+                }
+
+
+                const extensao =
+                    (
+                        arquivo.name
+                            .split(".")
+                            .pop() ||
+                        "jpg"
+                    )
+                    .toLowerCase()
+                    .replace(
+                        /[^a-z0-9]/g,
+                        ""
+                    );
+
+
+                const nomeArquivo =
+                    Date.now() +
+                    "-" +
+                    indice +
+                    "-" +
+                    Math.random()
+                        .toString(36)
+                        .substring(2, 10) +
+                    "." +
+                    extensao;
+
+
+                const caminho =
+                    pasta +
+                    "/" +
+                    nomeArquivo;
+
+
+                const resultadoUpload =
+                    await supabaseClient
+                        .storage
+                        .from(
+                            "personalizados"
+                        )
+                        .upload(
+                            caminho,
+                            arquivo,
+                            {
+                                cacheControl:
+                                    "3600",
+
+                                upsert:
+                                    false,
+
+                                contentType:
+                                    arquivo.type
+                            }
+                        );
+
+
+                if (
+                    resultadoUpload.error
+                ) {
+
+                    throw resultadoUpload.error;
+
+                }
+
+
+                const resultadoUrl =
+                    supabaseClient
+                        .storage
+                        .from(
+                            "personalizados"
+                        )
+                        .getPublicUrl(
+                            caminho
+                        );
+
+
+                imagens.push({
+                    nome:
+                        arquivo.name,
+
+                    caminho:
+                        caminho,
+
+                    url:
+                        resultadoUrl
+                            .data
+                            .publicUrl
+                });
+
+            }
+
+
+            return imagens;
+
+        }
+
+
+        /* =====================================================
+           ENVIO DO FORMULÁRIO
+           ===================================================== */
+
+        formulario.addEventListener(
+            "submit",
+            async function (evento) {
+
+                evento.preventDefault();
+
+                limparMensagem();
+
+
+                const nome =
+                    document
+                        .getElementById(
+                            "nome"
+                        )
+                        .value
+                        .trim();
+
+
+                const whatsappOriginal =
+                    document
+                        .getElementById(
+                            "whatsapp"
+                        )
+                        .value
+                        .trim();
+
+
+                const whatsapp =
+                    normalizarWhatsApp(
+                        whatsappOriginal
+                    );
+
+
+                const titulo =
+                    document
+                        .getElementById(
+                            "titulo"
+                        )
+                        .value
+                        .trim();
+
+
+                const descricao =
+                    document
+                        .getElementById(
+                            "descricao"
+                        )
+                        .value
+                        .trim();
+
+
+                const detalhe =
+                    document
+                        .getElementById(
+                            "detalhe"
+                        )
+                        .value
+                        .trim();
+
+
+                const tamanhoSelecionado =
+                    document.querySelector(
+                        'input[name="tamanho"]:checked'
+                    );
+
+
+                const tamanho =
+                    tamanhoSelecionado
+                        ? tamanhoSelecionado.value
+                        : "";
+
+
+                const arquivos =
+                    Array.from(
+                        campoReferencias.files
+                    );
+
+
+                /* =================================================
+                   VALIDAÇÕES
+                   ================================================= */
+
+                if (
+                    !nome ||
+                    !whatsappOriginal ||
+                    !titulo ||
+                    !descricao ||
+                    !tamanho
+                ) {
+
+                    mostrarMensagem(
+                        "Preencha todos os campos obrigatórios antes de enviar.",
+                        "erro"
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    whatsapp.length < 10 ||
+                    whatsapp.length > 13
+                ) {
+
+                    mostrarMensagem(
+                        "Digite um número de WhatsApp válido.",
+                        "erro"
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    arquivos.length > 4
+                ) {
+
+                    mostrarMensagem(
+                        "Você pode enviar no máximo 4 imagens.",
+                        "erro"
+                    );
+
+                    return;
+
+                }
+
+
+                /* =================================================
+                   BLOQUEIA O BOTÃO
+                   ================================================= */
+
+                botaoEnviar.disabled =
+                    true;
+
+                botaoEnviar.textContent =
+                    "ENVIANDO...";
+
+
+                try {
+
+                    /*
+                     * Criamos uma pasta única para
+                     * as imagens desta solicitação.
+                     */
+
+                    const pasta =
+                        "solicitacoes/" +
+                        crypto.randomUUID();
+
+
+                    let imagens =
+                        [];
+
+
+                    /* =============================================
+                       UPLOAD DAS IMAGENS
+                       ============================================= */
+
+                    if (
+                        arquivos.length > 0
+                    ) {
+
+                        imagens =
+                            await enviarImagens(
+                                arquivos,
+                                pasta
+                            );
+
+                    }
+
+
+                    /* =============================================
+                       SALVAR SOLICITAÇÃO
+                       ============================================= */
+
+                    const resultado =
+                        await supabaseClient
+                            .from(
+                                "personalized_requests"
+                            )
+                            .insert({
+
+                                customer_name:
+                                    nome,
+
+                                customer_whatsapp:
+                                    whatsappOriginal,
+
+                                title:
+                                    titulo,
+
+                                description:
+                                    descricao,
+
+                                reference_images:
+                                    imagens,
+
+                                size:
+                                    tamanho,
+
+                                missing_detail:
+                                    detalhe || null,
+
+                                status:
+                                    "novo"
+
+                            })
+                            .select(
+                                "id, request_number"
+                            )
+                            .single();
+
+
+                    if (
+                        resultado.error
+                    ) {
+
+                        throw resultado.error;
+
+                    }
+
+
+                    const pedido =
+                        resultado.data;
+
+
+                    /* =============================================
+                       SUCESSO
+                       ============================================= */
+
+                    mostrarMensagem(
+                        "Sua ideia foi enviada com sucesso! " +
+                        "Recebemos seu pedido personalizado " +
+                        "#" +
+                        String(
+                            pedido.request_number
+                        ).padStart(
+                            3,
+                            "0"
+                        ) +
+                        ". Entraremos em contato pelo WhatsApp para confirmar os detalhes e apresentar o orçamento. AXÉ! ✨",
+                        "sucesso"
+                    );
+
+
+                    formulario.reset();
+
+                    previsualizacoes.innerHTML =
+                        "";
+
+                    contadorImagens.textContent =
+                        "Nenhuma imagem selecionada.";
+
+
+                    /*
+                     * Depois do envio, leva o usuário
+                     * de volta ao início da página.
+                     */
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+
+
+                } catch (erro) {
+
+                    console.error(
+                        "Erro ao enviar personalizado:",
+                        erro
+                    );
+
+
+                    let mensagemErro =
+                        "Não foi possível enviar sua ideia. Tente novamente.";
+
+
+                    if (
+                        erro &&
+                        erro.message
+                    ) {
+
+                        mensagemErro =
+                            "Não foi possível enviar sua ideia: " +
+                            erro.message;
+
+                    }
+
+
+                    mostrarMensagem(
+                        mensagemErro,
+                        "erro"
+                    );
+
+
+                } finally {
+
+                    botaoEnviar.disabled =
+                        false;
+
+                    botaoEnviar.textContent =
+                        "ENVIAR IDEIA";
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

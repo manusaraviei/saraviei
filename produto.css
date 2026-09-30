@@ -1,0 +1,836 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #120f0c;
+    color: #f4ead9;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.cabecalho {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 78px;
+
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6%;
+
+    background: rgba(15, 12, 9, 0.82);
+
+    border-bottom: 1px solid rgba(201, 155, 82, 0.16);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.logo {
+    color: #d8b36a;
+
+    font-size: 1.05rem;
+    font-weight: bold;
+
+    letter-spacing: 0.18em;
+
+    white-space: nowrap;
+}
+
+.menu {
+    display: flex;
+
+    gap: 30px;
+}
+
+.menu a {
+    position: relative;
+
+    color: rgba(244, 234, 217, 0.72);
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 0.72rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.12em;
+
+    transition: color 0.3s ease;
+}
+
+.menu a:hover {
+    color: #d8b36a;
+}
+
+.carrinho {
+    padding: 10px 16px;
+
+    border: 1px solid rgba(201, 155, 82, 0.4);
+
+    background: rgba(201, 155, 82, 0.08);
+
+    color: #dfc384;
+
+    border-radius: 4px;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 0.72rem;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.carrinho:hover {
+    background: rgba(201, 155, 82, 0.18);
+
+    border-color: #c99b52;
+}
+
+
+/* =========================================
+   PÁGINA DO PRODUTO
+========================================= */
+
+.produto-pagina {
+    min-height: 100vh;
+
+    padding: 150px 7% 100px;
+
+    display: grid;
+
+    grid-template-columns: 1.05fr 0.95fr;
+
+    gap: 80px;
+
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at 25% 45%,
+            rgba(115, 82, 48, 0.18),
+            transparent 38%
+        ),
+        #120f0c;
+}
+
+
+/* =========================================
+   IMAGEM
+========================================= */
+
+.produto-imagem-area {
+    width: 100%;
+}
+
+.produto-imagem {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(201, 155, 82, 0.18);
+
+    background:
+        radial-gradient(
+            circle at center,
+            #896b4d 0%,
+            #624831 35%,
+            #36271d 72%,
+            #211811 100%
+        );
+
+    box-shadow:
+        0 35px 80px rgba(0, 0, 0, 0.45);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.produto-imagem::before {
+    content: "";
+
+    position: absolute;
+
+    width: 65%;
+    height: 65%;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(235, 201, 131, 0.15);
+
+    animation: circulo 12s linear infinite;
+}
+
+.produto-imagem::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.05),
+            transparent 35%,
+            rgba(0, 0, 0, 0.22)
+        );
+
+    pointer-events: none;
+}
+
+.produto-luz {
+    position: absolute;
+
+    width: 380px;
+    height: 380px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(229, 191, 117, 0.22),
+            transparent 68%
+        );
+
+    filter: blur(10px);
+
+    animation: respirar 6s ease-in-out infinite;
+}
+
+.produto-placeholder {
+    position: relative;
+
+    z-index: 5;
+
+    width: 210px;
+    height: 210px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(209, 175, 117, 0.25),
+            rgba(53, 39, 28, 0.65)
+        );
+
+    box-shadow:
+        0 30px 45px rgba(0, 0, 0, 0.35);
+
+    animation: flutuar 5s ease-in-out infinite;
+}
+
+.produto-placeholder span {
+    font-size: 7rem;
+
+    filter:
+        drop-shadow(
+            0 20px 15px rgba(0, 0, 0, 0.45)
+        );
+}
+
+@keyframes circulo {
+
+    from {
+        transform: rotate(0deg) scale(1);
+    }
+
+    to {
+        transform: rotate(360deg) scale(1.05);
+    }
+
+}
+
+@keyframes respirar {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(0.9);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+
+}
+
+@keyframes flutuar {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(2deg);
+    }
+
+}
+
+
+/* =========================================
+   MINIATURAS
+========================================= */
+
+.miniaturas {
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 18px;
+}
+
+.miniatura {
+    width: 68px;
+    height: 68px;
+
+    border: 1px solid rgba(201, 155, 82, 0.18);
+
+    background: #1c1712;
+
+    color: #c9a967;
+
+    border-radius: 8px;
+
+    font-size: 1.5rem;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.miniatura:hover,
+.miniatura.ativa {
+    border-color: #c99b52;
+
+    background: rgba(201, 155, 82, 0.12);
+}
+
+
+/* =========================================
+   DETALHES DO PRODUTO
+========================================= */
+
+.produto-detalhes {
+    max-width: 570px;
+}
+
+.voltar {
+    display: inline-block;
+
+    margin-bottom: 38px;
+
+    color: rgba(244, 234, 217, 0.5);
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 0.72rem;
+
+    letter-spacing: 0.08em;
+
+    transition: color 0.3s ease;
+}
+
+.voltar:hover {
+    color: #d8b36a;
+}
+
+.categoria {
+    display: block;
+
+    margin-bottom: 18px;
+
+    color: #c99b52;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 0.68rem;
+
+    font-weight: bold;
+
+    letter-spacing: 0.25em;
+}
+
+.produto-detalhes h1 {
+    margin-bottom: 22px;
+
+    color: #f1dfc1;
+
+    font-size: clamp(2.8rem, 5vw, 5rem);
+
+    font-weight: normal;
+
+    line-height: 1;
+}
+
+.descricao {
+    max-width: 510px;
+
+    color: rgba(244, 234, 217, 0.64);
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 0.95rem;
+
+    line-height: 1.8;
+}
+
+.linha {
+    width: 100%;
+
+    height: 1px;
+
+    margin: 30px 0;
+
+    background:
+        linear-gradient(
+            to right,
+            rgba(201, 155, 82, 0.35),
+            transparent
+        );
+}
+
+.preco {
+    color: #e0c17d;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 2rem;
+
+    font-weight: bold;
+}
+
+.parcelamento {
+    margin-top: 7px;
+
+    color: rgba(244, 234, 217, 0.42);
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 0.72rem;
+}
+
+
+/* =========================================
+   OPÇÕES
+========================================= */
+
+.opcoes {
+    display: flex;
+
+    gap: 45px;
+
+    margin: 30px 0;
+}
+
+.opcao-grupo label {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: rgba(244, 234, 217, 0.7);
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 0.7rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.12em;
+}
+
+
+/* CORES */
+
+.cores {
+    display: flex;
+
+    gap: 10px;
+}
+
+.cor {
+    width: 28px;
+    height: 28px;
+
+    border-radius: 50%;
+
+    border: 2px solid transparent;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.cor:hover,
+.cor.ativo {
+    border-color: #e1c27d;
+
+    transform: scale(1.1);
+}
+
+.cor-marrom {
+    background: #65442c;
+}
+
+.cor-preto {
+    background: #15120f;
+}
+
+.cor-bege {
+    background: #c7b394;
+}
+
+
+/* QUANTIDADE */
+
+.quantidade {
+    display: flex;
+
+    align-items: center;
+
+    height: 34px;
+
+    border: 1px solid rgba(201, 155, 82, 0.25);
+}
+
+.quantidade button {
+    width: 34px;
+    height: 32px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #d7b875;
+
+    font-size: 1.1rem;
+
+    cursor: pointer;
+}
+
+.quantidade span {
+    min-width: 35px;
+
+    text-align: center;
+
+    color: #f1dfc1;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 0.8rem;
+}
+
+
+/* =========================================
+   BOTÃO COMPRAR
+========================================= */
+
+.botao-comprar {
+    width: 100%;
+
+    padding: 17px 25px;
+
+    border: 1px solid #c99b52;
+
+    background: #c99b52;
+
+    color: #17130f;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 0.76rem;
+
+    font-weight: bold;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.botao-comprar:hover {
+    background: #dfbd78;
+
+    border-color: #dfbd78;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 15px 30px rgba(201, 155, 82, 0.15);
+}
+
+.botao-comprar.adicionado {
+    background: #695738;
+
+    color: #f4ead9;
+
+    border-color: #695738;
+}
+
+
+/* =========================================
+   INFORMAÇÕES
+========================================= */
+
+.informacoes {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 28px;
+
+    padding-top: 28px;
+
+    border-top: 1px solid rgba(201, 155, 82, 0.12);
+}
+
+.info {
+    display: flex;
+
+    gap: 10px;
+
+    align-items: flex-start;
+}
+
+.info > span {
+    font-size: 1.1rem;
+}
+
+.info strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #e2cb9d;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 0.68rem;
+}
+
+.info small {
+    display: block;
+
+    color: rgba(244, 234, 217, 0.4);
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 0.58rem;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================
+   DETALHES
+========================================= */
+
+.detalhes-produto {
+    padding: 110px 8%;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(201, 155, 82, 0.07),
+            transparent 55%
+        ),
+        #1a1510;
+
+    text-align: center;
+}
+
+.detalhes-conteudo {
+    max-width: 720px;
+
+    margin: 0 auto;
+}
+
+.detalhes-conteudo > span {
+    display: block;
+
+    margin-bottom: 20px;
+
+    color: #c99b52;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 0.68rem;
+
+    font-weight: bold;
+
+    letter-spacing: 0.25em;
+}
+
+.detalhes-conteudo h2 {
+    margin-bottom: 25px;
+
+    color: #f1dfc1;
+
+    font-size: clamp(2rem, 4vw, 3.5rem);
+
+    font-weight: normal;
+}
+
+.detalhes-conteudo p {
+    color: rgba(244, 234, 217, 0.58);
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 0.92rem;
+
+    line-height: 1.9;
+}
+
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+.rodape {
+    padding: 35px 8%;
+
+    background: #0d0b09;
+
+    border-top: 1px solid rgba(201, 155, 82, 0.12);
+
+    text-align: center;
+}
+
+.rodape p {
+    color: rgba(244, 234, 217, 0.4);
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 0.72rem;
+}
+
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media (max-width: 900px) {
+
+    .cabecalho {
+        padding: 0 4%;
+    }
+
+    .menu {
+        gap: 15px;
+    }
+
+    .menu a {
+        font-size: 0.62rem;
+    }
+
+    .produto-pagina {
+        grid-template-columns: 1fr;
+
+        gap: 55px;
+
+        padding-top: 130px;
+    }
+
+    .produto-detalhes {
+        max-width: 100%;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .cabecalho {
+        height: 70px;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .logo {
+        font-size: 0.85rem;
+    }
+
+    .produto-pagina {
+        padding: 115px 6% 70px;
+    }
+
+    .produto-imagem {
+        border-radius: 12px;
+    }
+
+    .produto-placeholder {
+        width: 160px;
+        height: 160px;
+    }
+
+    .produto-placeholder span {
+        font-size: 5rem;
+    }
+
+    .produto-detalhes h1 {
+        font-size: 3rem;
+    }
+
+    .opcoes {
+        gap: 25px;
+    }
+
+    .informacoes {
+        grid-template-columns: 1fr;
+    }
+
+    .detalhes-produto {
+        padding: 80px 7%;
+    }
+
+}

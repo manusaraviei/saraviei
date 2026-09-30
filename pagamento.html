@@ -1,0 +1,476 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pagamento | Saraviei</title>
+
+  <link rel="stylesheet" href="pagamento.css">
+</head>
+
+<body>
+
+  <header class="cabecalho-pagamento">
+    <a href="index.html" class="logo-pagamento">SARAVIEI</a>
+
+    <a href="carrinho.html" class="voltar-carrinho">
+      ← Voltar ao carrinho
+    </a>
+  </header>
+
+
+  <main class="pagina-pagamento">
+
+    <section class="cabecalho-secao">
+      <span class="eyebrow">FINALIZAÇÃO</span>
+
+      <h1>Finalizar pedido</h1>
+
+      <p>
+        Confira seus dados, escolha a forma de pagamento
+        e finalize sua compra.
+      </p>
+    </section>
+
+
+    <div class="aviso-grandes-quantidades">
+
+      <div class="aviso-icone">✦</div>
+
+      <div class="aviso-conteudo">
+        <span class="eyebrow">GRANDES QUANTIDADES</span>
+
+        <h2>Vai comprar várias peças?</h2>
+
+        <p>
+          Temos condições especiais para pedidos em grandes quantidades.
+          Fale conosco pelo WhatsApp antes de finalizar a compra
+          para consultar as condições.
+        </p>
+
+        <a
+          href="https://wa.me/5521994944543"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="botao-whatsapp"
+        >
+          Falar pelo WhatsApp
+        </a>
+      </div>
+
+    </div>
+
+
+    <div class="layout-pagamento">
+
+      <section class="card-pagamento">
+
+        <div class="titulo-card">
+
+          <span class="numero-etapa">01</span>
+
+          <div>
+            <span class="eyebrow">SEUS DADOS</span>
+
+            <h2>Informações para contato</h2>
+          </div>
+
+        </div>
+
+
+        <form id="form-pagamento" class="formulario-pagamento">
+
+          <div class="campo">
+
+            <label for="nome">
+              Nome completo
+            </label>
+
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              placeholder="Digite seu nome"
+              autocomplete="name"
+              required
+            >
+
+          </div>
+
+
+          <div class="campo">
+
+            <label for="email">
+              E-mail
+            </label>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="seuemail@email.com"
+              autocomplete="email"
+              required
+            >
+
+          </div>
+
+
+          <div class="campo">
+
+            <label for="telefone">
+              WhatsApp
+            </label>
+
+            <input
+              type="tel"
+              id="telefone"
+              name="telefone"
+              placeholder="(21) 99999-9999"
+              autocomplete="tel"
+              required
+            >
+
+          </div>
+
+
+          <div class="divisor-form"></div>
+
+
+          <div class="titulo-endereco">
+
+            <span class="eyebrow">ENTREGA</span>
+
+            <h3>Endereço</h3>
+
+          </div>
+
+
+          <div class="linha-campos">
+
+            <div class="campo campo-menor">
+
+              <label for="cep">
+                CEP
+              </label>
+
+              <input
+                type="text"
+                id="cep"
+                name="cep"
+                placeholder="00000-000"
+                inputmode="numeric"
+                autocomplete="postal-code"
+                maxlength="9"
+                required
+              >
+
+            </div>
+
+
+            <div class="campo campo-maior">
+
+              <label for="cidade">
+                Cidade
+              </label>
+
+              <input
+                type="text"
+                id="cidade"
+                name="cidade"
+                placeholder="Sua cidade"
+                autocomplete="address-level2"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="campo">
+
+            <label for="endereco">
+              Rua e número
+            </label>
+
+            <input
+              type="text"
+              id="endereco"
+              name="endereco"
+              placeholder="Rua, número"
+              autocomplete="street-address"
+              required
+            >
+
+          </div>
+
+
+          <div class="linha-campos">
+
+            <div class="campo campo-maior">
+
+              <label for="bairro">
+                Bairro
+              </label>
+
+              <input
+                type="text"
+                id="bairro"
+                name="bairro"
+                placeholder="Seu bairro"
+                autocomplete="address-line2"
+                required
+              >
+
+            </div>
+
+
+            <div class="campo campo-menor">
+
+              <label for="estado">
+                UF
+              </label>
+
+              <input
+                type="text"
+                id="estado"
+                name="estado"
+                placeholder="RJ"
+                autocomplete="address-level1"
+                maxlength="2"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="campo">
+
+            <label for="complemento">
+              Complemento <span>(opcional)</span>
+            </label>
+
+            <input
+              type="text"
+              id="complemento"
+              name="complemento"
+              placeholder="Apartamento, bloco, referência..."
+              autocomplete="address-line2"
+            >
+
+          </div>
+
+
+          <div class="campo">
+
+            <label for="observacoes">
+              Observações <span>(opcional)</span>
+            </label>
+
+            <textarea
+              id="observacoes"
+              name="observacoes"
+              rows="4"
+              placeholder="Alguma informação importante sobre o pedido?"
+            ></textarea>
+
+          </div>
+
+
+          <div
+            id="mensagem-formulario"
+            class="mensagem-formulario"
+          ></div>
+
+        </form>
+
+      </section>
+
+
+      <aside class="resumo-pedido">
+
+        <div class="titulo-resumo">
+
+          <span class="eyebrow">RESUMO</span>
+
+          <h2>Seu pedido</h2>
+
+        </div>
+
+
+        <div id="lista-resumo" class="lista-resumo"></div>
+
+
+        <div class="linha-total">
+
+          <span>Subtotal</span>
+
+          <strong id="subtotal-pedido">
+            R$ 0,00
+          </strong>
+
+        </div>
+
+
+        <div class="linha-total linha-frete">
+
+          <span>Entrega</span>
+
+          <strong id="frete-pedido">
+            A combinar
+          </strong>
+
+        </div>
+
+
+        <div class="total-final">
+
+          <span>Total</span>
+
+          <strong id="total-pedido">
+            R$ 0,00
+          </strong>
+
+        </div>
+
+
+        <div class="metodo-pagamento">
+
+          <span class="eyebrow">
+            PAGAMENTO
+          </span>
+
+          <h3>
+            Escolha a forma de pagamento
+          </h3>
+
+
+          <label class="opcao-pagamento">
+
+            <input
+              type="radio"
+              name="metodo"
+              value="pix"
+              checked
+            >
+
+            <span class="radio-personalizado"></span>
+
+            <span class="conteudo-opcao">
+
+              <strong>PIX</strong>
+
+              <small>
+                Pagamento à vista
+              </small>
+
+            </span>
+
+          </label>
+
+
+          <label class="opcao-pagamento">
+
+            <input
+              type="radio"
+              name="metodo"
+              value="cartao"
+            >
+
+            <span class="radio-personalizado"></span>
+
+            <span class="conteudo-opcao">
+
+              <strong>CARTÃO</strong>
+
+              <small>
+                Crédito com possibilidade de parcelamento
+              </small>
+
+            </span>
+
+          </label>
+
+
+          <div
+            id="informacao-cartao"
+            class="informacao-cartao"
+          >
+
+            <strong>
+              Parcelamento
+            </strong>
+
+            <p>
+              No cartão, você poderá escolher o número de parcelas.
+              Os juros do parcelamento serão calculados no momento
+              do pagamento.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          id="botao-finalizar"
+          class="botao-finalizar"
+        >
+          Continuar para pagamento
+        </button>
+
+
+        <a
+          href="carrinho.html"
+          class="link-voltar"
+        >
+          ← Voltar e revisar carrinho
+        </a>
+
+
+        <div class="seguranca-pagamento">
+
+          <span>✦</span>
+
+          <p>
+            Seus dados são utilizados apenas para processar
+            seu pedido e entrar em contato com você.
+          </p>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+
+  <footer class="rodape-pagamento">
+
+    <span>SARAVIEI</span>
+
+    <p>
+      Peças feitas para seu espaço de fé.
+    </p>
+
+  </footer>
+
+
+  <!-- Biblioteca do Supabase -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <!-- JavaScript da página -->
+  <script src="pagamento.js"></script>
+
+</body>
+</html>
+```

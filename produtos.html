@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Produtos | Saraviei</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           AJUSTES VISUAIS DA PÁGINA DE PRODUTOS
+           ===================================================== */
+
+        .pagina-produtos {
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at top center,
+                    rgba(112, 75, 28, .10),
+                    transparent 38%
+                ),
+                #0d0907;
+            color: #eadcc8;
+        }
+
+
+        /* =====================================================
+           CABEÇALHO
+           ===================================================== */
+
+        .cabecalho {
+            position: relative;
+            z-index: 20;
+        }
+
+
+        /* =====================================================
+           ÁREA PRINCIPAL
+           ===================================================== */
+
+        .produtos-page {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 70px 55px 100px;
+        }
+
+        .produtos-cabecalho {
+            text-align: center;
+            margin-bottom: 65px;
+        }
+
+        .produtos-cabecalho .eyebrow {
+            display: block;
+            margin-bottom: 13px;
+            color: #b68d4b;
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .produtos-cabecalho h1 {
+            margin: 0;
+            color: #eee0ca;
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+            font-size: clamp(40px, 5vw, 64px);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        .produtos-cabecalho p {
+            max-width: 650px;
+            margin: 18px auto 0;
+            color: #a99780;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           ORNAMENTO
+           ===================================================== */
+
+        .produtos-cabecalho::after {
+            content: "✦";
+            display: block;
+            margin-top: 25px;
+            color: #b68d4b;
+            font-size: 17px;
+        }
+
+
+        /* =====================================================
+           GRADE
+           ===================================================== */
+
+        .produtos-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns:
+                repeat(
+                    3,
+                    minmax(0, 1fr)
+                );
+            gap: 42px 28px;
+        }
+
+
+        /* =====================================================
+           CARD
+           ===================================================== */
+
+        .produto-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            color: inherit;
+            text-decoration: none;
+            background:
+                linear-gradient(
+                    180deg,
+                    #15100d 0%,
+                    #100c0a 100%
+                );
+            border: 1px solid #3d2a19;
+            border-radius: 3px;
+            overflow: hidden;
+            transition:
+                transform .3s ease,
+                border-color .3s ease,
+                box-shadow .3s ease;
+        }
+
+        .produto-card:hover {
+            transform: translateY(-5px);
+            border-color: #806036;
+            box-shadow:
+                0 18px 40px
+                rgba(0, 0, 0, .30);
+        }
+
+
+        /* =====================================================
+           CARD ESGOTADO
+           ===================================================== */
+
+        .produto-card-esgotado {
+            cursor: default;
+            opacity: .78;
+        }
+
+        .produto-card-esgotado:hover {
+            transform: none;
+            border-color: #3d2a19;
+            box-shadow: none;
+        }
+
+
+        /* =====================================================
+           IMAGEM
+           ===================================================== */
+
+        .produto-card-imagem {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background:
+                radial-gradient(
+                    circle,
+                    #211811 0%,
+                    #100c0a 75%
+                );
+            border-bottom: 1px solid #342418;
+        }
+
+        .produto-card-imagem::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(
+                    180deg,
+                    transparent 55%,
+                    rgba(0, 0, 0, .30)
+                );
+        }
+
+        .produto-card-imagem img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition:
+                transform .5s ease;
+        }
+
+        .produto-card:hover
+        .produto-card-imagem img {
+            transform: scale(1.045);
+        }
+
+        .produto-card-esgotado
+        .produto-card-imagem img {
+            filter: grayscale(.55);
+        }
+
+        .produto-card-esgotado:hover
+        .produto-card-imagem img {
+            transform: none;
+        }
+
+        .produto-card-sem-imagem {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b68d4b;
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+            font-size: 42px;
+            opacity: .8;
+        }
+
+
+        /* =====================================================
+           SELO ESGOTADO
+           ===================================================== */
+
+        .produto-selo-esgotado {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 5;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 8px 13px;
+
+            color: #f0e5d3;
+
+            background:
+                rgba(20, 14, 10, .94);
+
+            border:
+                1px solid #806036;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+
+            box-shadow:
+                0 5px 18px
+                rgba(0, 0, 0, .30);
+        }
+
+
+        /* =====================================================
+           INFORMAÇÕES
+           ===================================================== */
+
+        .produto-card-info {
+            padding:
+                24px
+                22px
+                25px;
+        }
+
+        .produto-card-nome {
+            margin:
+                0 0 9px;
+            color: #eee0ca;
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+            font-size: 22px;
+            font-weight: 400;
+            line-height: 1.25;
+        }
+
+        .produto-card-descricao {
+            min-height: 43px;
+            margin:
+                0 0 17px;
+            color: #9e8d77;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .produto-card-preco {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            color: #c49a4c;
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .produto-card-preco-antigo {
+            color: #776653;
+            font-size: 13px;
+            text-decoration: line-through;
+        }
+
+
+        /* =====================================================
+           TEXTO ESGOTADO
+           ===================================================== */
+
+        .produto-card-status-esgotado {
+            margin-top: 12px;
+            color: #b68d4b;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+
+        /* =====================================================
+           ESTADO VAZIO / CARREGAMENTO
+           ===================================================== */
+
+        .estado-produtos {
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            grid-column: 1 / -1;
+            padding: 50px 25px;
+            text-align: center;
+            background: #120e0b;
+            border: 1px solid #3d2a19;
+            border-radius: 4px;
+        }
+
+        .estado-produtos .simbolo {
+            margin-bottom: 12px;
+            color: #b68d4b;
+            font-size: 30px;
+        }
+
+        .estado-produtos h2 {
+            margin: 0;
+            color: #eee0ca;
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+            font-size: 23px;
+            font-weight: 400;
+        }
+
+        .estado-produtos p {
+            max-width: 500px;
+            margin: 10px 0 0;
+            color: #9e8d77;
+            font-size: 14px;
+        }
+
+        .botao-voltar-produtos {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 25px;
+            padding: 11px 22px;
+            color: #c49a4c;
+            border: 1px solid #73552e;
+            background: transparent;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition:
+                background .25s ease,
+                border-color .25s ease;
+        }
+
+        .botao-voltar-produtos:hover {
+            background:
+                rgba(196, 154, 76, .08);
+            border-color:
+                #c49a4c;
+        }
+
+
+        /* =====================================================
+           RODAPÉ
+           ===================================================== */
+
+        .rodape {
+            border-top:
+                1px solid #332317;
+        }
+
+
+        /* =====================================================
+           RESPONSIVO
+           ===================================================== */
+
+        @media (max-width: 950px) {
+
+            .produtos-page {
+                padding:
+                    55px 30px
+                    80px;
+            }
+
+            .produtos-grid {
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0, 1fr)
+                    );
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .produtos-page {
+                padding:
+                    45px 18px
+                    65px;
+            }
+
+            .produtos-cabecalho {
+                margin-bottom: 40px;
+            }
+
+            .produtos-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .produtos-cabecalho h1 {
+                font-size: 40px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="pagina-produtos">
+
+
+    <!-- =====================================================
+         CABEÇALHO
+         ===================================================== -->
+
+    <header class="cabecalho">
+
+        <div class="logo">
+            SARAVIEI
+        </div>
+
+        <nav class="menu">
+
+            <a href="index.html">
+                Início
+            </a>
+
+            <a href="index.html#categorias">
+                Categorias
+            </a>
+
+            <a href="produtos.html">
+                Produtos
+            </a>
+
+            <a href="personalizados.html">
+                Personalizados
+            </a>
+
+        </nav>
+
+        <button
+            class="botao-carrinho"
+            type="button"
+            onclick="window.location.href='carrinho.html'"
+        >
+            🛒 Carrinho
+        </button>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTEÚDO
+         ===================================================== -->
+
+    <main class="produtos-page">
+
+        <section class="produtos-cabecalho">
+
+            <span class="eyebrow">
+                PRODUTOS
+            </span>
+
+            <h1 id="titulo-categoria">
+                Algumas das nossas peças
+            </h1>
+
+            <p id="descricao-categoria">
+                Encontre produtos da Saraviei por categoria.
+            </p>
+
+        </section>
+
+
+        <section
+            class="produtos-grid"
+            id="produtos-container"
+        >
+
+            <div class="estado-produtos">
+
+                <div class="simbolo">
+                    ✦
+                </div>
+
+                <h2>
+                    Carregando produtos...
+                </h2>
+
+                <p>
+                    Aguarde um instante.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         RODAPÉ
+         ===================================================== -->
+
+    <footer class="rodape">
+
+        <div class="logo">
+            SARAVIEI
+        </div>
+
+        <p>
+            Impressões 3D feitas com carinho e respeito.
+        </p>
+
+        <div
+            style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 22px;
+                flex-wrap: wrap;
+                margin-top: 18px;
+            "
+        >
+
+            <a
+                href="admin-login.html"
+                class="voltar"
+            >
+                🔐 Área restrita
+            </a>
+
+            <a
+                href="#"
+                class="voltar"
+                onclick="
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    return false;
+                "
+            >
+                Voltar ao topo ↑
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://gmimzvnuvraletepczrp.supabase.co";
+
+        const SUPABASE_KEY =
+            "sb_publishable_NtJmSYaKmuQuLY2QvfQKLQ_rFA8Ceqx";
+
+
+        const headersSupabase = {
+
+            "apikey":
+                SUPABASE_KEY,
+
+            "Authorization":
+                `Bearer ${SUPABASE_KEY}`
+
+        };
+
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const categoriaParametro =
+            params.get("categoria");
+
+
+        const produtosContainer =
+            document.getElementById(
+                "produtos-container"
+            );
+
+
+        const tituloCategoria =
+            document.getElementById(
+                "titulo-categoria"
+            );
+
+
+        const descricaoCategoria =
+            document.getElementById(
+                "descricao-categoria"
+            );
+
+
+        /* =====================================================
+           FUNÇÕES
+           ===================================================== */
+
+        function normalizarTexto(valor) {
+
+            return String(valor || "")
+                .normalize("NFD")
+                .replace(
+                    /[\u0300-\u036f]/g,
+                    ""
+                )
+                .toLowerCase()
+                .trim();
+
+        }
+
+
+        function gerarSlug(valor) {
+
+            return normalizarTexto(valor)
+                .replace(
+                    /[^a-z0-9]+/g,
+                    "-"
+                )
+                .replace(
+                    /^-+|-+$/g,
+                    ""
+                );
+
+        }
+
+
+        function escaparHTML(valor) {
+
+            return String(valor ?? "")
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        function formatarPreco(valor) {
+
+            const numero =
+                Number(valor);
+
+            if (!Number.isFinite(numero)) {
+
+                return "R$ 0,00";
+
+            }
+
+            return numero.toLocaleString(
+                "pt-BR",
+                {
+                    style: "currency",
+                    currency: "BRL"
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           VERIFICAR ESGOTADO
+           ===================================================== */
+
+        function produtoEstaEsgotado(produto) {
+
+            if (!produto) {
+                return false;
+            }
+
+            const valor =
+                produto.esgotado;
+
+            return (
+                valor === true ||
+                valor === 1 ||
+                valor === "1" ||
+                valor === "true"
+            );
+
+        }
+
+
+        /* =====================================================
+           IMAGEM DO PRODUTO
+           ===================================================== */
+
+        function gerarUrlImagemStorage(caminho) {
+
+            if (!caminho) {
+                return "";
+            }
+
+            caminho =
+                String(caminho).trim();
+
+
+            if (
+                /^https?:\/\//i.test(caminho)
+            ) {
+
+                return caminho;
+
+            }
+
+
+            caminho =
+                caminho.replace(
+                    /^\/+/,
+                    ""
+                );
+
+
+            if (
+                caminho.startsWith(
+                    "storage/v1/object/public/"
+                )
+            ) {
+
+                return `${SUPABASE_URL}/${caminho}`;
+
+            }
+
+
+            const partes =
+                caminho
+                    .split("/")
+                    .filter(
+                        parte =>
+                            parte !== ""
+                    )
+                    .map(
+                        parte =>
+                            encodeURIComponent(
+                                parte
+                            )
+                    );
+
+
+            return (
+                `${SUPABASE_URL}` +
+                `/storage/v1/object/public/produtos/` +
+                `${partes.join("/")}`
+            );
+
+        }
+
+
+        function obterImagem(produto) {
+
+            if (!produto) {
+                return "";
+            }
+
+
+            if (
+                produto.imagem_url
+            ) {
+
+                return String(
+                    produto.imagem_url
+                ).trim();
+
+            }
+
+
+            if (
+                produto.imagem_path
+            ) {
+
+                return gerarUrlImagemStorage(
+                    produto.imagem_path
+                );
+
+            }
+
+
+            const imagemLegada =
+                produto.imagem_path_url ||
+                produto.imagem ||
+                produto.image_url ||
+                produto.foto_url ||
+                produto.image ||
+                produto.foto ||
+                "";
+
+
+            if (!imagemLegada) {
+                return "";
+            }
+
+
+            return String(
+                imagemLegada
+            ).trim();
+
+        }
+
+
+        function obterNome(produto) {
+
+            return (
+                produto.nome ||
+                produto.name ||
+                produto.titulo ||
+                produto.title ||
+                "Produto Saraviei"
+            );
+
+        }
+
+
+        function obterDescricao(produto) {
+
+            return (
+                produto.descricao ||
+                produto.description ||
+                ""
+            );
+
+        }
+
+
+        function produtoEstaAtivo(produto) {
+
+            if (!("ativo" in produto)) {
+                return true;
+            }
+
+
+            const valor =
+                produto.ativo;
+
+
+            if (
+                valor === false ||
+                valor === 0 ||
+                valor === "0" ||
+                valor === "false"
+            ) {
+
+                return false;
+
+            }
+
+
+            return true;
+
+        }
+
+
+        /* =====================================================
+           BUSCAR COLEÇÕES
+           ===================================================== */
+
+        async function buscarColecoes() {
+
+            const resposta =
+                await fetch(
+                    `${SUPABASE_URL}/rest/v1/collections?select=*`,
+                    {
+                        headers:
+                            headersSupabase
+                    }
+                );
+
+
+            if (!resposta.ok) {
+
+                throw new Error(
+                    "Não foi possível carregar as coleções."
+                );
+
+            }
+
+
+            const dados =
+                await resposta.json();
+
+
+            return Array.isArray(dados)
+                ? dados
+                : [];
+
+        }
+
+
+        /* =====================================================
+           BUSCAR PRODUTOS
+           ===================================================== */
+
+        async function buscarProdutos() {
+
+            const resposta =
+                await fetch(
+                    `${SUPABASE_URL}/rest/v1/products?select=*`,
+                    {
+                        headers:
+                            headersSupabase
+                    }
+                );
+
+
+            if (!resposta.ok) {
+
+                const erro =
+                    await resposta.text();
+
+
+                console.error(
+                    "Erro ao carregar produtos:",
+                    erro
+                );
+
+
+                throw new Error(
+                    "Não foi possível carregar os produtos."
+                );
+
+            }
+
+
+            const dados =
+                await resposta.json();
+
+
+            return Array.isArray(dados)
+                ? dados
+                : [];
+
+        }
+
+
+        /* =====================================================
+           BUSCAR RELAÇÕES
+           ===================================================== */
+
+        async function buscarRelacoes() {
+
+            const resposta =
+                await fetch(
+                    `${SUPABASE_URL}/rest/v1/product_collections?select=*`,
+                    {
+                        headers:
+                            headersSupabase
+                    }
+                );
+
+
+            if (!resposta.ok) {
+
+                console.warn(
+                    "Não foi possível carregar product_collections."
+                );
+
+                return [];
+
+            }
+
+
+            const dados =
+                await resposta.json();
+
+
+            return Array.isArray(dados)
+                ? dados
+                : [];
+
+        }
+
+
+        /* =====================================================
+           ENCONTRAR COLEÇÃO
+           ===================================================== */
+
+        function encontrarColecao(
+            colecoes
+        ) {
+
+            if (!categoriaParametro) {
+                return null;
+            }
+
+
+            const parametro =
+                String(
+                    categoriaParametro
+                );
+
+
+            const parametroSlug =
+                gerarSlug(
+                    parametro
+                );
+
+
+            const parametroNormalizado =
+                normalizarTexto(
+                    parametro
+                );
+
+
+            return (
+                colecoes.find(
+                    colecao => {
+
+                        const id =
+                            String(
+                                colecao.id ||
+                                ""
+                            );
+
+
+                        const nome =
+                            colecao.nome ||
+                            colecao.name ||
+                            "";
+
+
+                        const slug =
+                            colecao.slug ||
+                            "";
+
+
+                        return (
+                            id === parametro ||
+
+                            gerarSlug(nome) ===
+                                parametroSlug ||
+
+                            gerarSlug(slug) ===
+                                parametroSlug ||
+
+                            normalizarTexto(nome) ===
+                                parametroNormalizado
+                        );
+
+                    }
+                ) ||
+
+                null
+            );
+
+        }
+
+
+        /* =====================================================
+           VERIFICAR RELAÇÃO DO PRODUTO
+           ===================================================== */
+
+        function produtoPertenceColecao(
+            produto,
+            colecao,
+            relacoes
+        ) {
+
+            if (!colecao) {
+                return true;
+            }
+
+
+            const colecaoId =
+                String(
+                    colecao.id ||
+                    ""
+                );
+
+
+            /* products.collection_id */
+
+            if (
+                produto.collection_id != null &&
+                colecaoId &&
+                String(
+                    produto.collection_id
+                ) === colecaoId
+            ) {
+
+                return true;
+
+            }
+
+
+            /* product_collections */
+
+            const produtoId =
+                String(
+                    produto.id ||
+                    ""
+                );
+
+
+            const possuiRelacao =
+                relacoes.some(
+                    relacao => {
+
+                        const idProduto =
+                            relacao.product_id ??
+                            relacao.produto_id ??
+                            relacao.id_produto;
+
+
+                        const idColecao =
+                            relacao.collection_id ??
+                            relacao.categoria_id ??
+                            relacao.id_colecao;
+
+
+                        return (
+                            idProduto != null &&
+                            idColecao != null &&
+
+                            String(
+                                idProduto
+                            ) === produtoId &&
+
+                            String(
+                                idColecao
+                            ) === colecaoId
+                        );
+
+                    }
+                );
+
+
+            if (possuiRelacao) {
+                return true;
+            }
+
+
+            /* Campos antigos */
+
+            const campos = [
+
+                produto.categoria,
+                produto.colecao,
+                produto.category,
+                produto.collection,
+                produto.category_name,
+                produto.collection_name
+
+            ];
+
+
+            const nomeColecao =
+                colecao.nome ||
+                colecao.name ||
+                colecao.slug ||
+                "";
+
+
+            return campos.some(
+                valor => {
+
+                    if (!valor) {
+                        return false;
+                    }
+
+
+                    if (
+                        typeof valor ===
+                        "object"
+                    ) {
+
+                        const nomeObjeto =
+                            valor.nome ||
+                            valor.name ||
+                            valor.slug ||
+                            "";
+
+
+                        return (
+                            gerarSlug(
+                                nomeObjeto
+                            ) ===
+                            gerarSlug(
+                                nomeColecao
+                            )
+                        );
+
+                    }
+
+
+                    return (
+                        gerarSlug(
+                            valor
+                        ) ===
+                        gerarSlug(
+                            nomeColecao
+                        )
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           ATUALIZAR CABEÇALHO
+           ===================================================== */
+
+        function atualizarCabecalho(
+            colecao
+        ) {
+
+            if (!colecao) {
+
+                tituloCategoria.textContent =
+                    "Algumas das nossas peças";
+
+
+                descricaoCategoria.textContent =
+                    "Encontre produtos da Saraviei por categoria.";
+
+
+                return;
+
+            }
+
+
+            tituloCategoria.textContent =
+                colecao.nome ||
+                colecao.name ||
+                "Produtos";
+
+
+            descricaoCategoria.textContent =
+                "Encontre nossos produtos nesta categoria.";
+
+        }
+
+
+        /* =====================================================
+           ESTADOS
+           ===================================================== */
+
+        function mostrarEstadoVazio() {
+
+            produtosContainer.innerHTML = `
+
+                <div class="estado-produtos">
+
+                    <div class="simbolo">
+                        ✦
+                    </div>
+
+                    <h2>
+                        Nenhum produto encontrado
+                    </h2>
+
+                    <p>
+                        Ainda não há produtos cadastrados nesta categoria.
+                    </p>
+
+                    <a
+                        class="botao-voltar-produtos"
+                        href="produtos.html"
+                    >
+                        Ver todos os produtos
+                    </a>
+
+                </div>
+
+            `;
+
+        }
+
+
+        function mostrarErro() {
+
+            produtosContainer.innerHTML = `
+
+                <div class="estado-produtos">
+
+                    <div class="simbolo">
+                        ✦
+                    </div>
+
+                    <h2>
+                        Não foi possível carregar os produtos
+                    </h2>
+
+                    <p>
+                        Verifique a conexão com o banco de dados e tente novamente.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* =====================================================
+           RENDERIZAR PRODUTOS
+           ===================================================== */
+
+        function renderizarProdutos(
+            produtos
+        ) {
+
+            if (!produtos.length) {
+
+                mostrarEstadoVazio();
+
+                return;
+
+            }
+
+
+            produtosContainer.innerHTML =
+                produtos.map(
+                    produto => {
+
+                        const nome =
+                            obterNome(
+                                produto
+                            );
+
+
+                        const descricao =
+                            obterDescricao(
+                                produto
+                            );
+
+
+                        const imagem =
+                            obterImagem(
+                                produto
+                            );
+
+
+                        const esgotado =
+                            produtoEstaEsgotado(
+                                produto
+                            );
+
+
+                        const preco =
+                            produto.preco ??
+                            produto.price ??
+                            0;
+
+
+                        const precoPromocional =
+                            produto.preco_promocional ??
+                            produto.sale_price ??
+                            null;
+
+
+                        const numeroPreco =
+                            Number(
+                                preco
+                            );
+
+
+                        const numeroPromocional =
+                            Number(
+                                precoPromocional
+                            );
+
+
+                        const existePromocao =
+                            precoPromocional !==
+                                null &&
+
+                            precoPromocional !==
+                                "" &&
+
+                            Number.isFinite(
+                                numeroPromocional
+                            ) &&
+
+                            numeroPromocional > 0 &&
+
+                            numeroPromocional <
+                                numeroPreco;
+
+
+                        const precoFinal =
+                            existePromocao
+                                ? numeroPromocional
+                                : numeroPreco;
+
+
+                        const classeEsgotado =
+                            esgotado
+                                ? "produto-card-esgotado"
+                                : "";
+
+
+                        const seloEsgotado =
+                            esgotado
+                                ? `
+
+                                    <span
+                                        class="produto-selo-esgotado"
+                                    >
+                                        Esgotado
+                                    </span>
+
+                                `
+                                : "";
+
+
+                        const statusEsgotado =
+                            esgotado
+                                ? `
+
+                                    <div
+                                        class="produto-card-status-esgotado"
+                                    >
+                                        Produto temporariamente indisponível
+                                    </div>
+
+                                `
+                                : "";
+
+
+                        const imagemHTML =
+                            imagem
+
+                                ? `
+
+                                    <img
+                                        src="${escaparHTML(imagem)}"
+                                        alt="${escaparHTML(nome)}"
+                                        loading="lazy"
+                                        onerror="
+                                            this.style.display='none';
+
+                                            if (
+                                                !this.parentElement.querySelector(
+                                                    '.produto-card-sem-imagem'
+                                                )
+                                            ) {
+
+                                                this.parentElement.insertAdjacentHTML(
+                                                    'beforeend',
+                                                    '<div class=&quot;produto-card-sem-imagem&quot;>✦</div>'
+                                                );
+
+                                            }
+                                        "
+                                    >
+
+                                `
+
+                                : `
+
+                                    <div
+                                        class="produto-card-sem-imagem"
+                                    >
+                                        ✦
+                                    </div>
+
+                                `;
+
+
+                        /*
+                         * Produto disponível:
+                         * continua sendo um link.
+                         *
+                         * Produto esgotado:
+                         * vira apenas um card visual,
+                         * sem abrir a página de compra.
+                         */
+
+                        if (esgotado) {
+
+                            return `
+
+                                <div
+                                    class="produto-card ${classeEsgotado}"
+                                >
+
+                                    <div
+                                        class="produto-card-imagem"
+                                    >
+
+                                        ${imagemHTML}
+
+                                        ${seloEsgotado}
+
+                                    </div>
+
+
+                                    <div
+                                        class="produto-card-info"
+                                    >
+
+                                        <h2
+                                            class="produto-card-nome"
+                                        >
+                                            ${escaparHTML(
+                                                nome
+                                            )}
+                                        </h2>
+
+
+                                        ${
+                                            descricao
+                                                ? `
+
+                                                    <p
+                                                        class="produto-card-descricao"
+                                                    >
+                                                        ${escaparHTML(
+                                                            descricao
+                                                        )}
+                                                    </p>
+
+                                                `
+                                                : ""
+                                        }
+
+
+                                        <div
+                                            class="produto-card-preco"
+                                        >
+
+                                            ${
+                                                existePromocao
+                                                    ? `
+
+                                                        <span
+                                                            class="produto-card-preco-antigo"
+                                                        >
+                                                            ${formatarPreco(
+                                                                numeroPreco
+                                                            )}
+                                                        </span>
+
+                                                    `
+                                                    : ""
+                                            }
+
+
+                                            ${formatarPreco(
+                                                precoFinal
+                                            )}
+
+                                        </div>
+
+
+                                        ${statusEsgotado}
+
+                                    </div>
+
+                                </div>
+
+                            `;
+
+                        }
+
+
+                        return `
+
+                            <a
+                                class="produto-card"
+                                href="produto.html?id=${encodeURIComponent(produto.id)}"
+                            >
+
+                                <div
+                                    class="produto-card-imagem"
+                                >
+
+                                    ${imagemHTML}
+
+                                </div>
+
+
+                                <div
+                                    class="produto-card-info"
+                                >
+
+                                    <h2
+                                        class="produto-card-nome"
+                                    >
+                                        ${escaparHTML(
+                                            nome
+                                        )}
+                                    </h2>
+
+
+                                    ${
+                                        descricao
+                                            ? `
+
+                                                <p
+                                                    class="produto-card-descricao"
+                                                >
+                                                    ${escaparHTML(
+                                                        descricao
+                                                    )}
+                                                </p>
+
+                                            `
+                                            : ""
+                                    }
+
+
+                                    <div
+                                        class="produto-card-preco"
+                                    >
+
+                                        ${
+                                            existePromocao
+                                                ? `
+
+                                                    <span
+                                                        class="produto-card-preco-antigo"
+                                                    >
+                                                        ${formatarPreco(
+                                                            numeroPreco
+                                                        )}
+                                                    </span>
+
+                                                `
+                                                : ""
+                                        }
+
+
+                                        ${formatarPreco(
+                                            precoFinal
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+                            </a>
+
+                        `;
+
+                    }
+                ).join("");
+
+        }
+
+
+        /* =====================================================
+           INICIAR
+           ===================================================== */
+
+        async function iniciarPagina() {
+
+            try {
+
+                const [
+
+                    produtos,
+                    colecoes,
+                    relacoes
+
+                ] = await Promise.all([
+
+                    buscarProdutos(),
+
+                    buscarColecoes(),
+
+                    buscarRelacoes()
+
+                ]);
+
+
+                const colecao =
+                    encontrarColecao(
+                        colecoes
+                    );
+
+
+                atualizarCabecalho(
+                    colecao
+                );
+
+
+                /*
+                 * Produtos ativos.
+                 *
+                 * Se ativo estiver null,
+                 * o produto continua aparecendo.
+                 */
+
+                let produtosVisiveis =
+                    produtos.filter(
+                        produto =>
+                            produtoEstaAtivo(
+                                produto
+                            )
+                    );
+
+
+                /*
+                 * FILTRO DA COLEÇÃO
+                 */
+
+                if (colecao) {
+
+                    produtosVisiveis =
+                        produtosVisiveis.filter(
+                            produto =>
+                                produtoPertenceColecao(
+                                    produto,
+                                    colecao,
+                                    relacoes
+                                )
+                        );
+
+                }
+
+
+                console.log(
+                    "SARAVIEI - Coleção:",
+                    colecao
+                );
+
+
+                console.log(
+                    "SARAVIEI - Produtos:",
+                    produtosVisiveis
+                );
+
+
+                /*
+                 * Mostra no console as imagens
+                 * encontradas.
+                 */
+
+                console.table(
+
+                    produtosVisiveis.map(
+                        produto => ({
+
+                            id:
+                                produto.id,
+
+                            nome:
+                                obterNome(
+                                    produto
+                                ),
+
+                            imagem_url:
+                                produto.imagem_url,
+
+                            imagem_path:
+                                produto.imagem_path,
+
+                            imagem_final:
+                                obterImagem(
+                                    produto
+                                ),
+
+                            esgotado:
+                                produtoEstaEsgotado(
+                                    produto
+                                )
+
+                        })
+                    )
+
+                );
+
+
+                renderizarProdutos(
+                    produtosVisiveis
+                );
+
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao carregar página:",
+                    erro
+                );
+
+
+                mostrarErro();
+
+            }
+
+        }
+
+
+        iniciarPagina();
+
+    </script>
+
+</body>
+
+</html>

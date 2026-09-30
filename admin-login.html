@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Login Administrativo | Ateliê do Axé
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="admin-login.css"
+    >
+
+</head>
+
+<body>
+
+    <main class="pagina-login">
+
+        <section class="login-card">
+
+            <div class="logo">
+                ATELIÊ DO AXÉ
+            </div>
+
+            <span class="linha-dourada"></span>
+
+            <p class="etiqueta">
+                ÁREA RESTRITA
+            </p>
+
+            <h1>
+                Bem-vinda de volta.
+            </h1>
+
+            <p class="descricao">
+                Entre para acessar o painel administrativo
+                do Ateliê do Axé.
+            </p>
+
+
+            <form id="form-login">
+
+                <div class="campo">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="seu@email.com"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha"
+                        placeholder="Digite sua senha"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="botao-entrar"
+                    id="botao-entrar"
+                >
+                    Entrar no painel
+                </button>
+
+
+                <button
+                    type="button"
+                    id="esqueci-senha"
+                    class="esqueci-senha"
+                >
+                    Esqueci minha senha
+                </button>
+
+
+                <p
+                    class="mensagem"
+                    id="mensagem"
+                ></p>
+
+            </form>
+
+
+            <a
+                href="index.html"
+                class="voltar"
+            >
+                ← Voltar para a loja
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="admin-login.js"></script>
+
+</body>
+
+</html>

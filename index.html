@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Saraviei | Impressões 3D</title>
+
+    <link rel="stylesheet" href="style.css">
+
+<style>
+    .cabecalho {
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100%;
+    }
+
+    .logo {
+        position: absolute !important;
+        left: 28px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .menu {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto !important;
+    }
+
+    .acoes-cliente {
+        position: absolute !important;
+        right: 28px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        margin: 0 !important;
+        white-space: nowrap;
+    }
+
+    .acoes-cliente .botao-carrinho {
+        position: static !important;
+        margin: 0 !important;
+        flex-shrink: 0;
+    }
+
+    .acoes-cliente .botao-conta,
+    .acoes-cliente .botao-notificacoes {
+        flex-shrink: 0;
+    }
+
+    .botao-conta,
+    .botao-notificacoes {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        border: 1px solid rgba(202, 163, 90, 0.55);
+        background: rgba(13, 8, 5, 0.72);
+        color: #eadfce;
+        text-decoration: none;
+        cursor: pointer;
+        transition: 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .botao-conta {
+        padding: 0 16px;
+        border-radius: 999px;
+        font-size: 13px;
+        letter-spacing: 0.4px;
+    }
+
+    .botao-notificacoes {
+        width: 42px;
+        padding: 0;
+        border-radius: 50%;
+        font-size: 19px;
+        position: relative;
+    }
+
+    .botao-conta:hover,
+    .botao-notificacoes:hover {
+        color: #f0cc7b;
+        border-color: #caa35a;
+        background: rgba(118, 80, 43, 0.28);
+        transform: translateY(-1px);
+    }
+
+    @media (max-width: 900px) {
+        .logo {
+            position: static !important;
+            transform: none !important;
+        }
+
+        .acoes-cliente {
+            position: static !important;
+            transform: none !important;
+            margin-left: 0 !important;
+            gap: 8px;
+        }
+
+        .acoes-cliente .botao-carrinho {
+            flex-shrink: 0;
+        }
+
+        .botao-conta {
+            padding: 0 12px;
+            font-size: 12px;
+        }
+
+        .botao-notificacoes {
+            width: 40px;
+            min-height: 40px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .acoes-cliente {
+            gap: 6px;
+        }
+
+        .botao-conta {
+            min-height: 38px;
+            padding: 0 10px;
+            font-size: 11px;
+        }
+
+        .botao-notificacoes {
+            width: 38px;
+            min-height: 38px;
+            font-size: 17px;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header class="cabecalho">
+
+        <div class="logo">
+            SARAVIEI
+        </div>
+
+        <nav class="menu">
+            <a href="index.html">Início</a>
+            <a href="#categorias">Categorias</a>
+            <a href="produtos.html">Produtos</a>
+            <a href="#personalizados">Personalizados</a>
+        </nav>
+
+        <div class="acoes-cliente">
+            <a
+                href="cliente-login.html"
+                class="botao-conta"
+                aria-label="Entrar ou acessar minha conta"
+            >
+                Entrar
+            </a>
+
+            <a
+                href="meus-pedidos.html"
+                class="botao-notificacoes"
+                aria-label="Acompanhar pedidos e notificações"
+                title="Acompanhar pedidos"
+            >
+                🔔
+            </a>
+
+            <button
+                class="botao-carrinho"
+                type="button"
+                onclick="window.location.href='carrinho.html'"
+            >
+                🛒 Carrinho
+            </button>
+        </div>
+
+    </header>
+
+
+    <!-- CONTEÚDO -->
+    <main>
+
+        <!-- HERO -->
+        <section class="hero-preto">
+
+            <div class="hero-imagem"></div>
+
+            <div class="hero-sombra"></div>
+
+            <div class="brilho brilho-1"></div>
+            <div class="brilho brilho-2"></div>
+            <div class="brilho brilho-3"></div>
+
+            <div class="folha-flutuante folha-1"></div>
+            <div class="folha-flutuante folha-2"></div>
+            <div class="folha-flutuante folha-3"></div>
+            <div class="folha-flutuante folha-4"></div>
+
+            <div class="fumaca fumaca-1"></div>
+            <div class="fumaca fumaca-2"></div>
+
+            <div class="hero-conteudo">
+
+                <span class="hero-label">
+                    IMPRESSÃO 3D • FÉ • ARTE
+                </span>
+
+                <h1>
+                    Peças feitas para
+                    <span>seu espaço de fé</span>
+                </h1>
+
+                <p>
+                    Peças decorativas produzidas em impressão 3D,
+                    inspiradas na cultura e na espiritualidade,
+                    feitas para deixar seu espaço ainda mais especial.
+                </p>
+
+                <a
+                    href="#categorias"
+                    class="botao-principal"
+                >
+                    Conheça nossas peças
+                </a>
+
+                <div class="linha-decorativa"></div>
+
+            </div>
+
+            <div class="indicador-scroll">
+                <span></span>
+                ROLE PARA EXPLORAR
+            </div>
+
+        </section>
+
+
+        <!-- INTRODUÇÃO -->
+        <section class="introducao">
+
+            <div class="ornamento">
+                ✦
+            </div>
+
+            <span class="pequeno-titulo">
+                SARAVIEI
+            </span>
+
+            <h2>
+                Impressões que carregam
+                <span>identidade e axé.</span>
+            </h2>
+
+            <p>
+                Cada peça é produzida em impressão 3D,
+                unindo tecnologia, arte e referências
+                da espiritualidade brasileira.
+            </p>
+
+            <div class="linha-ornamental">
+                <span></span>
+                ✦
+                <span></span>
+            </div>
+
+        </section>
+
+
+        <!-- CATEGORIAS / COLEÇÕES -->
+        <section
+            class="categorias"
+            id="categorias"
+        >
+
+            <div class="titulo-secao">
+
+                <span>
+                    EXPLORE
+                </span>
+
+                <h2>
+                    Encontre sua categoria
+                </h2>
+
+                <p>
+                    Escolha uma categoria e encontre os produtos que fazem parte dela.
+                </p>
+
+            </div>
+
+
+            <div
+                class="grade-categorias"
+                id="gradeColecoes"
+            >
+
+                <div
+                    style="
+                        grid-column: 1 / -1;
+                        text-align: center;
+                        padding: 50px 20px;
+                        color: #bcae9a;
+                    "
+                >
+                    Carregando coleções...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRODUTOS EM DESTAQUE -->
+        <section
+            class="pecas"
+            id="produtos"
+        >
+
+            <div class="titulo-secao">
+
+                <span>
+                    DESTAQUES
+                </span>
+
+                <h2>
+                    Algumas das nossas peças
+                </h2>
+
+                <p>
+                    Modelos produzidos em impressão 3D.
+                </p>
+
+            </div>
+
+
+            <div
+                class="grade-produtos"
+                id="gradeProdutos"
+            >
+
+                <article class="produto">
+
+                    <div class="produto-imagem imagem-madeira">
+
+                        <div style="font-size: 70px;">
+                            ✨
+                        </div>
+
+                    </div>
+
+                    <div class="produto-info">
+
+                        <span class="produto-categoria">
+                            CARREGANDO
+                        </span>
+
+                        <h3>
+                            Carregando produtos...
+                        </h3>
+
+                        <p>
+                            Aguarde enquanto buscamos as peças disponíveis.
+                        </p>
+
+                        <div class="produto-final">
+
+                            <strong>
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- PERSONALIZADOS -->
+        <section
+            class="personalizados"
+            id="personalizados"
+        >
+
+            <div class="personalizados-conteudo">
+
+                <div class="ornamento-dourado">
+                    ✦
+                </div>
+
+                <span>
+                    DO SEU JEITO
+                </span>
+
+                <h2>
+                    Tem uma ideia?
+                </h2>
+
+                <p>
+                    Conte para nós o que você imaginou.
+                    Podemos transformar sua ideia em uma peça
+                    impressa em 3D.
+                </p>
+
+                <button
+                    class="botao-principal"
+                    type="button"
+                    onclick="window.location.href='personalizados.html'"
+                >
+                    Quero personalizar
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+
+        <div class="logo">
+            SARAVIEI
+        </div>
+
+        <p>
+            Impressões 3D feitas com carinho e respeito.
+        </p>
+
+        <div
+            style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 22px;
+                flex-wrap: wrap;
+                margin-top: 18px;
+            "
+        >
+
+            <a
+                href="admin-login.html"
+                class="voltar"
+            >
+                🔐 Área restrita
+            </a>
+
+            <a
+                href="#"
+                class="voltar"
+                onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;"
+            >
+                Voltar ao topo ↑
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://gmimzvnuvraletepczrp.supabase.co";
+
+        const SUPABASE_ANON_KEY =
+            "sb_publishable_NtJmSYaKmuQuLY2QvfQKLQ_rFA8Ceqx";
+
+
+        const gradeProdutos =
+            document.getElementById("gradeProdutos");
+
+        const gradeColecoes =
+            document.getElementById("gradeColecoes");
+
+
+        function escaparHTML(valor) {
+
+            if (
+                valor === null ||
+                valor === undefined
+            ) {
+                return "";
+            }
+
+            return String(valor)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+        }
+
+
+        function formatarPreco(valor) {
+
+            const numero =
+                Number(valor);
+
+            if (!Number.isFinite(numero)) {
+                return "R$ 0,00";
+            }
+
+            return numero.toLocaleString(
+                "pt-BR",
+                {
+                    style: "currency",
+                    currency: "BRL"
+                }
+            );
+        }
+
+
+        function escolherImagemProduto(produto) {
+
+            return (
+                produto.imagem_url ||
+                produto.imagem ||
+                produto.image_url ||
+                produto.foto_url ||
+                ""
+            );
+        }
+
+
+        function escolherDescricao(produto) {
+
+            return (
+                produto.descricao ||
+                produto.description ||
+                "Peça produzida em impressão 3D."
+            );
+        }
+
+
+        function escolherPreco(produto) {
+
+            const promocional =
+                Number(
+                    produto.preco_promocional
+                );
+
+            const preco =
+                Number(
+                    produto.preco
+                );
+
+            if (
+                Number.isFinite(promocional) &&
+                promocional > 0
+            ) {
+                return promocional;
+            }
+
+            if (
+                Number.isFinite(preco)
+            ) {
+                return preco;
+            }
+
+            return 0;
+        }
+
+
+        function escolherNomeProduto(produto) {
+
+            return (
+                produto.nome ||
+                produto.name ||
+                produto.titulo ||
+                produto.title ||
+                "Produto Saraviei"
+            );
+        }
+
+
+        function classeImagem(indice) {
+
+            const classes = [
+                "imagem-ervas",
+                "imagem-madeira",
+                "imagem-placa"
+            ];
+
+            return classes[
+                indice % classes.length
+            ];
+        }
+
+
+        function simboloProduto(indice) {
+
+            const simbolos = [
+                "🕯️",
+                "🌿",
+                "✨"
+            ];
+
+            return simbolos[
+                indice % simbolos.length
+            ];
+        }
+
+
+        function criarCardProduto(
+            produto,
+            indice
+        ) {
+
+            const nome =
+                escolherNomeProduto(
+                    produto
+                );
+
+            const descricao =
+                escolherDescricao(
+                    produto
+                );
+
+            const preco =
+                escolherPreco(
+                    produto
+                );
+
+            const imagem =
+                escolherImagemProduto(
+                    produto
+                );
+
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+            card.className =
+                "produto";
+
+            card.setAttribute(
+                "role",
+                "button"
+            );
+
+            card.setAttribute(
+                "tabindex",
+                "0"
+            );
+
+
+            let imagemHTML;
+
+
+            if (imagem) {
+
+                const imagemSegura =
+                    String(imagem)
+                        .replaceAll(
+                            "'",
+                            "\\'"
+                        );
+
+                imagemHTML = `
+                    <div
+                        class="produto-imagem"
+                        style="
+                            background-image:
+                                url('${imagemSegura}');
+                            background-size: cover;
+                            background-position: center;
+                        "
+                    ></div>
+                `;
+
+            } else {
+
+                imagemHTML = `
+                    <div
+                        class="produto-imagem ${classeImagem(indice)}"
+                    >
+                        <div style="font-size: 70px;">
+                            ${simboloProduto(indice)}
+                        </div>
+                    </div>
+                `;
+            }
+
+
+            card.innerHTML = `
+
+                ${imagemHTML}
+
+                <div class="produto-info">
+
+                    <span class="produto-categoria">
+                        SARAVIEI
+                    </span>
+
+                    <h3>
+                        ${escaparHTML(
+                            nome
+                        )}
+                    </h3>
+
+                    <p>
+                        ${escaparHTML(
+                            descricao
+                        )}
+                    </p>
+
+                    <div class="produto-final">
+
+                        <strong>
+                            ${formatarPreco(
+                                preco
+                            )}
+                        </strong>
+
+                        <button
+                            type="button"
+                            class="botao-ver-produto"
+                        >
+                            Ver produto
+                        </button>
+
+                    </div>
+
+                </div>
+            `;
+
+
+            function abrirProduto() {
+
+                if (!produto.id) {
+                    return;
+                }
+
+                window.location.href =
+                    "produto.html?id=" +
+                    encodeURIComponent(
+                        produto.id
+                    );
+            }
+
+
+            card.addEventListener(
+                "click",
+                abrirProduto
+            );
+
+
+            card.addEventListener(
+                "keydown",
+                function(evento) {
+
+                    if (
+                        evento.key === "Enter" ||
+                        evento.key === " "
+                    ) {
+
+                        evento.preventDefault();
+
+                        abrirProduto();
+                    }
+                }
+            );
+
+
+            return card;
+        }
+
+
+        function criarCardColecao(
+            colecao,
+            indice
+        ) {
+
+            const id =
+                colecao.id;
+
+            const nome =
+                colecao.nome ||
+                colecao.name ||
+                "Coleção";
+
+
+            const icones = [
+                "🖨️",
+                "🕯️",
+                "🌿",
+                "📿",
+                "✨",
+                "🎨",
+                "🎁",
+                "🕊️",
+                "🔮",
+                "🌙",
+                "⭐",
+                "🪬"
+            ];
+
+
+            const etiquetas = [
+                "CRIATIVIDADE",
+                "LUZ",
+                "AROMA",
+                "FÉ",
+                "AMBIENTE",
+                "EXCLUSIVO",
+                "COMBINAÇÕES",
+                "TRADIÇÃO",
+                "ESSÊNCIA",
+                "ENERGIA",
+                "ESPECIAL",
+                "SARAVIEI"
+            ];
+
+
+            const classes = [
+                "categoria-impressao",
+                "categoria-velas",
+                "categoria-defumacao",
+                "categoria-acessorios",
+                "categoria-decoracao",
+                "categoria-personalizados",
+                "categoria-kits",
+                "categoria-artigos"
+            ];
+
+
+            const card =
+                document.createElement("a");
+
+
+            card.href =
+                "produtos.html?colecao=" +
+                encodeURIComponent(
+                    String(id)
+                );
+
+
+            card.className =
+                "categoria " +
+                classes[
+                    indice % classes.length
+                ];
+
+
+            card.innerHTML = `
+
+                <div class="categoria-icone">
+                    ${icones[indice % icones.length]}
+                </div>
+
+                <div class="categoria-texto">
+
+                    <span>
+                        ${etiquetas[indice % etiquetas.length]}
+                    </span>
+
+                    <h3>
+                        ${escaparHTML(nome)}
+                    </h3>
+
+                    <p>
+                        Encontre os produtos desta coleção.
+                    </p>
+
+                </div>
+
+                <div class="seta">
+                    →
+                </div>
+            `;
+
+
+            return card;
+        }
+
+
+        async function carregarColecoes() {
+
+            gradeColecoes.innerHTML = `
+
+                <div
+                    style="
+                        grid-column: 1 / -1;
+                        text-align: center;
+                        padding: 50px 20px;
+                        color: #bcae9a;
+                    "
+                >
+                    Carregando coleções...
+                </div>
+            `;
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        SUPABASE_URL +
+                        "/rest/v1/collections" +
+                        "?select=*" +
+                        "&order=created_at.asc",
+                        {
+                            method: "GET",
+
+                            headers: {
+                                "apikey":
+                                    SUPABASE_ANON_KEY,
+
+                                "Authorization":
+                                    "Bearer " +
+                                    SUPABASE_ANON_KEY,
+
+                                "Content-Type":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                if (!resposta.ok) {
+
+                    const texto =
+                        await resposta.text();
+
+                    throw new Error(
+                        texto ||
+                        "Não foi possível carregar as coleções."
+                    );
+                }
+
+
+                const colecoes =
+                    await resposta.json();
+
+
+                if (
+                    !Array.isArray(colecoes) ||
+                    colecoes.length === 0
+                ) {
+
+                    gradeColecoes.innerHTML = `
+
+                        <div
+                            style="
+                                grid-column: 1 / -1;
+                                text-align: center;
+                                padding: 50px 20px;
+                                color: #bcae9a;
+                            "
+                        >
+
+                            <span
+                                style="
+                                    display: block;
+                                    color: #b68d4b;
+                                    letter-spacing: 3px;
+                                    font-size: 11px;
+                                    margin-bottom: 15px;
+                                "
+                            >
+                                SARAVIEI
+                            </span>
+
+                            <h3
+                                style="
+                                    color: #eee0ca;
+                                    font-size: 24px;
+                                    font-weight: normal;
+                                    margin-bottom: 10px;
+                                "
+                            >
+                                Nenhuma coleção disponível
+                            </h3>
+
+                            <p>
+                                As coleções cadastradas no painel aparecerão aqui.
+                            </p>
+
+                        </div>
+                    `;
+
+                    return;
+                }
+
+
+                gradeColecoes.innerHTML = "";
+
+
+                colecoes.forEach(
+                    function(
+                        colecao,
+                        indice
+                    ) {
+
+                        gradeColecoes.appendChild(
+                            criarCardColecao(
+                                colecao,
+                                indice
+                            )
+                        );
+
+                    }
+                );
+
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao carregar coleções:",
+                    erro
+                );
+
+
+                gradeColecoes.innerHTML = `
+
+                    <div
+                        style="
+                            grid-column: 1 / -1;
+                            text-align: center;
+                            padding: 50px 20px;
+                            color: #bcae9a;
+                        "
+                    >
+
+                        <span
+                            style="
+                                display: block;
+                                color: #b68d4b;
+                                letter-spacing: 3px;
+                                font-size: 11px;
+                                margin-bottom: 15px;
+                            "
+                        >
+                            ATENÇÃO
+                        </span>
+
+                        <h3
+                            style="
+                                color: #eee0ca;
+                                font-size: 24px;
+                                font-weight: normal;
+                                margin-bottom: 10px;
+                            "
+                        >
+                            Não foi possível carregar as coleções
+                        </h3>
+
+                        <p>
+                            Verifique a conexão com o Supabase e tente novamente.
+                        </p>
+
+                    </div>
+                `;
+            }
+        }
+
+
+        async function carregarProdutosHome() {
+
+            gradeProdutos.innerHTML = `
+
+                <article class="produto">
+
+                    <div class="produto-imagem imagem-madeira">
+
+                        <div style="font-size: 70px;">
+                            ✨
+                        </div>
+
+                    </div>
+
+                    <div class="produto-info">
+
+                        <span class="produto-categoria">
+                            SARAVIEI
+                        </span>
+
+                        <h3>
+                            Carregando produtos...
+                        </h3>
+
+                        <p>
+                            Buscando os produtos disponíveis.
+                        </p>
+
+                    </div>
+
+                </article>
+            `;
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        SUPABASE_URL +
+                        "/rest/v1/products" +
+                        "?select=*" +
+                        "&mostrar_na_home=eq.true",
+                        {
+                            method: "GET",
+
+                            headers: {
+                                "apikey":
+                                    SUPABASE_ANON_KEY,
+
+                                "Authorization":
+                                    "Bearer " +
+                                    SUPABASE_ANON_KEY,
+
+                                "Content-Type":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                if (!resposta.ok) {
+
+                    const erroTexto =
+                        await resposta.text();
+
+                    throw new Error(
+                        erroTexto ||
+                        "Erro ao consultar produtos."
+                    );
+                }
+
+
+                let produtos =
+                    await resposta.json();
+
+
+                if (!Array.isArray(produtos)) {
+                    produtos = [];
+                }
+
+
+                produtos =
+                    produtos.filter(
+                        function(produto) {
+
+                            return (
+                                produto.ativo !== false &&
+                                produto.active !== false
+                            );
+
+                        }
+                    );
+
+
+                if (produtos.length === 0) {
+
+                    gradeProdutos.innerHTML = `
+
+                        <div
+                            style="
+                                grid-column: 1 / -1;
+                                text-align: center;
+                                padding: 50px 20px;
+                                color: #bcae9a;
+                            "
+                        >
+
+                            <span
+                                style="
+                                    display: block;
+                                    color: #b68d4b;
+                                    letter-spacing: 3px;
+                                    font-size: 11px;
+                                    margin-bottom: 15px;
+                                "
+                            >
+                                DESTAQUES
+                            </span>
+
+                            <h3
+                                style="
+                                    color: #eee0ca;
+                                    font-size: 24px;
+                                    font-weight: normal;
+                                    margin-bottom: 10px;
+                                "
+                            >
+                                Nenhum produto selecionado ainda
+                            </h3>
+
+                            <p>
+                                Escolha no painel administrativo quais peças devem aparecer aqui.
+                            </p>
+
+                        </div>
+                    `;
+
+                    return;
+                }
+
+
+                gradeProdutos.innerHTML = "";
+
+
+                produtos.forEach(
+                    function(
+                        produto,
+                        indice
+                    ) {
+
+                        gradeProdutos.appendChild(
+                            criarCardProduto(
+                                produto,
+                                indice
+                            )
+                        );
+
+                    }
+                );
+
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao carregar produtos:",
+                    erro
+                );
+
+
+                gradeProdutos.innerHTML = `
+
+                    <div
+                        style="
+                            grid-column: 1 / -1;
+                            text-align: center;
+                            padding: 50px 20px;
+                            color: #bcae9a;
+                        "
+                    >
+
+                        <span
+                            style="
+                                display: block;
+                                color: #b68d4b;
+                                letter-spacing: 3px;
+                                font-size: 11px;
+                                margin-bottom: 15px;
+                            "
+                        >
+                            ATENÇÃO
+                        </span>
+
+                        <h3
+                            style="
+                                color: #eee0ca;
+                                font-size: 24px;
+                                font-weight: normal;
+                                margin-bottom: 10px;
+                            "
+                        >
+                            Não foi possível carregar os produtos
+                        </h3>
+
+                        <p>
+                            Verifique a conexão com o Supabase e tente novamente.
+                        </p>
+
+                    </div>
+                `;
+            }
+        }
+
+
+        carregarColecoes();
+        carregarProdutosHome();
+
+    </script>
+
+</body>
+
+</html>

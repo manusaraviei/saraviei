@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Minha conta | Saraviei</title>
+
+    <link
+        rel="stylesheet"
+        href="cliente-login.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="pagina-conta">
+
+        <section class="conta-card">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+                SARAVIEI
+            </a>
+
+
+            <span class="linha-dourada"></span>
+
+
+            <div
+                class="abas-conta"
+                role="tablist"
+            >
+
+                <button
+                    type="button"
+                    class="aba-conta ativa"
+                    id="aba-entrar"
+                    data-aba="entrar"
+                >
+                    Entrar
+                </button>
+
+
+                <button
+                    type="button"
+                    class="aba-conta"
+                    id="aba-criar"
+                    data-aba="criar"
+                >
+                    Criar conta
+                </button>
+
+            </div>
+
+
+            <!-- =====================================================
+                 ENTRAR
+                 ===================================================== -->
+
+            <section
+                class="painel-conta ativo"
+                id="painel-entrar"
+            >
+
+                <span class="etiqueta">
+                    MINHA CONTA
+                </span>
+
+
+                <h1>
+                    Bem-vinda de volta.
+                </h1>
+
+
+                <p class="descricao">
+                    Entre na sua conta para acompanhar seus pedidos
+                    e continuar suas compras na Saraviei.
+                </p>
+
+
+                <form id="form-entrar">
+
+                    <div class="campo">
+
+                        <label for="email-entrar">
+                            E-mail
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email-entrar"
+                            placeholder="seu@email.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="senha-entrar">
+                            Senha
+                        </label>
+
+                        <input
+                            type="password"
+                            id="senha-entrar"
+                            placeholder="Digite sua senha"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="botao-conta"
+                        id="botao-entrar"
+                    >
+                        Entrar
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="botao-link"
+                        id="botao-esqueci"
+                    >
+                        Esqueci minha senha
+                    </button>
+
+
+                    <p
+                        class="mensagem"
+                        id="mensagem-entrar"
+                    ></p>
+
+                </form>
+
+            </section>
+
+
+            <!-- =====================================================
+                 CRIAR CONTA
+                 ===================================================== -->
+
+            <section
+                class="painel-conta"
+                id="painel-criar"
+            >
+
+                <span class="etiqueta">
+                    NOVA CONTA
+                </span>
+
+
+                <h1>
+                    Crie sua conta.
+                </h1>
+
+
+                <p class="descricao">
+                    Sua conta permite comprar na Saraviei e acompanhar
+                    seus pedidos diretamente pelo site.
+                </p>
+
+
+                <form id="form-criar">
+
+                    <div class="campo">
+
+                        <label for="nome-criar">
+                            Nome
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nome-criar"
+                            placeholder="Seu nome"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="email-criar">
+                            E-mail
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email-criar"
+                            placeholder="seu@email.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="senha-criar">
+                            Senha
+                        </label>
+
+                        <input
+                            type="password"
+                            id="senha-criar"
+                            placeholder="Crie uma senha"
+                            autocomplete="new-password"
+                            minlength="6"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="senha-confirmar">
+                            Confirmar senha
+                        </label>
+
+                        <input
+                            type="password"
+                            id="senha-confirmar"
+                            placeholder="Digite a senha novamente"
+                            autocomplete="new-password"
+                            minlength="6"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="botao-conta"
+                        id="botao-criar"
+                    >
+                        Criar minha conta
+                    </button>
+
+
+                    <p
+                        class="mensagem"
+                        id="mensagem-criar"
+                    ></p>
+
+                </form>
+
+            </section>
+
+
+            <!-- =====================================================
+                 CONTA LOGADA
+                 ===================================================== -->
+
+            <section
+                class="painel-conta"
+                id="painel-logado"
+            >
+
+                <span class="etiqueta">
+                    MINHA CONTA
+                </span>
+
+
+                <h1>
+                    Olá, <span id="nome-logado">cliente</span>.
+                </h1>
+
+
+                <p class="descricao">
+                    Você está conectada à sua conta Saraviei.
+                </p>
+
+
+                <div class="conta-resumo">
+
+                    <div class="resumo-item">
+
+                        <span>
+                            E-MAIL
+                        </span>
+
+                        <strong id="email-logado">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="resumo-item">
+
+                        <span>
+                            PEDIDOS
+                        </span>
+
+                        <strong>
+                            Acompanhe pelo site
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="botao-conta"
+                    id="botao-meus-pedidos"
+                >
+                    Meus pedidos
+                </button>
+
+
+                <button
+                    type="button"
+                    class="botao-link"
+                    id="botao-sair"
+                >
+                    Sair da conta
+                </button>
+
+
+                <p
+                    class="mensagem"
+                    id="mensagem-logado"
+                ></p>
+
+            </section>
+
+
+            <a
+                href="index.html"
+                class="voltar"
+            >
+                ← Voltar para a loja
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="cliente-login.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,505 @@
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(164, 123, 61, 0.10),
+            transparent 35%
+        ),
+        #120d09;
+
+    color: #eadfce;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+}
+
+
+/* =========================
+   PÁGINA
+========================= */
+
+.pagina-login {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+}
+
+
+/* =========================
+   CAIXA
+========================= */
+
+.caixa-login {
+    width: 100%;
+    max-width: 450px;
+
+    padding: 42px 42px 38px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #21150e,
+            #160e0a
+        );
+
+    border: 1px solid rgba(164, 123, 61, 0.55);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+    text-align: center;
+
+    animation:
+        aparecerLogin 0.7s ease both;
+}
+
+
+@keyframes aparecerLogin {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+    display: inline-block;
+
+    margin-bottom: 22px;
+
+    color: #d1a957;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    text-decoration: none;
+
+    transition:
+        color 0.25s,
+        transform 0.25s;
+}
+
+
+.logo:hover {
+    color: #ead08a;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   SUBTÍTULO
+========================= */
+
+.subtitulo {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #a47b3d;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 2.5px;
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
+h1 {
+    margin: 0 0 12px;
+
+    color: #eadfce;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 30px;
+
+    font-weight: normal;
+}
+
+
+.descricao {
+    margin: 0 auto 30px;
+
+    max-width: 340px;
+
+    color: #a99b8a;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+#form-login {
+    text-align: left;
+}
+
+
+.campo {
+    margin-bottom: 20px;
+}
+
+
+.campo label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #d8c7ad;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+.campo input {
+    width: 100%;
+
+    height: 48px;
+
+    padding: 0 15px;
+
+    color: #eadfce;
+
+    background: #0e0906;
+
+    border: 1px solid #493522;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.25s,
+        box-shadow 0.25s,
+        background 0.25s;
+}
+
+
+.campo input::placeholder {
+    color: #6f6254;
+}
+
+
+.campo input:focus {
+    background: #130c08;
+
+    border-color: #a47b3d;
+
+    box-shadow:
+        0 0 0 3px rgba(164, 123, 61, 0.10);
+}
+
+
+/* =========================
+   BOTÃO ENTRAR
+========================= */
+
+.botao-entrar {
+    width: 100%;
+
+    height: 50px;
+
+    margin-top: 5px;
+
+    color: #1a1009;
+
+    background:
+        linear-gradient(
+            180deg,
+            #d8b66a 0%,
+            #a47b3d 100%
+        );
+
+    border: 1px solid #e1c47c;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    box-shadow:
+        0 4px 0 #5d401d,
+        0 10px 20px rgba(0, 0, 0, 0.25);
+
+    position: relative;
+    top: 0;
+
+    transition:
+        top 0.12s,
+        box-shadow 0.12s,
+        background 0.25s;
+}
+
+
+.botao-entrar:hover {
+    background:
+        linear-gradient(
+            180deg,
+            #e4c57a 0%,
+            #b58b49 100%
+        );
+
+    box-shadow:
+        0 4px 0 #5d401d,
+        0 12px 25px rgba(164, 123, 61, 0.20);
+}
+
+
+.botao-entrar:active {
+    top: 4px;
+
+    box-shadow:
+        0 0 0 #5d401d,
+        0 4px 8px rgba(0, 0, 0, 0.30);
+}
+
+
+.botao-entrar:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   MENSAGEM
+========================= */
+
+.mensagem {
+    min-height: 20px;
+
+    margin: 14px 0 0;
+
+    color: #d8a6a6;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+
+/* =========================
+   DIVISOR
+========================= */
+
+.divisor {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    margin: 25px 0;
+}
+
+
+.divisor::before,
+.divisor::after {
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background: #39281c;
+}
+
+
+.divisor span {
+    color: #766757;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   BOTÃO CADASTRO
+========================= */
+
+.botao-cadastro {
+    width: 100%;
+
+    height: 48px;
+
+    color: #d8c7ad;
+
+    background: transparent;
+
+    border: 1px solid #6e5330;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    transition:
+        background 0.25s,
+        border-color 0.25s,
+        color 0.25s;
+}
+
+
+.botao-cadastro:hover {
+    color: #f0dfbd;
+
+    background: rgba(164, 123, 61, 0.08);
+
+    border-color: #a47b3d;
+}
+
+
+/* =========================
+   VOLTAR
+========================= */
+
+.voltar {
+    display: inline-block;
+
+    margin-top: 26px;
+
+    color: #92754a;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+
+    text-decoration: none;
+
+    transition:
+        color 0.25s;
+}
+
+
+.voltar:hover {
+    color: #d1a957;
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 520px) {
+
+    .pagina-login {
+        padding: 25px 15px;
+    }
+
+
+    .caixa-login {
+        padding: 35px 25px 30px;
+
+        border-radius: 15px;
+    }
+
+
+    .logo {
+        font-size: 26px;
+
+        letter-spacing: 3px;
+    }
+
+
+    h1 {
+        font-size: 26px;
+    }
+
+}

@@ -1,0 +1,863 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(132, 93, 42, 0.10),
+            transparent 35%
+        ),
+        #120c08;
+
+    color: #eee0ca;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 250px;
+
+    padding: 35px 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #1d120b,
+            #120b07
+        );
+
+    border-right:
+        1px solid
+        rgba(190, 151, 77, 0.18);
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 10;
+}
+
+
+.logo {
+    color: #d4ad62;
+
+    font-size: 24px;
+
+    letter-spacing: 4px;
+
+    font-weight: bold;
+
+    text-align: center;
+}
+
+
+.logo-subtitulo {
+    margin-top: 8px;
+
+    color: #806b52;
+
+    text-align: center;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================
+   MENU
+========================================= */
+
+.menu-sidebar {
+    margin-top: 55px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.menu-sidebar a {
+    display: block;
+
+    padding: 14px 15px;
+
+    color: #a99a86;
+
+    text-decoration: none;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+
+    border:
+        1px solid
+        transparent;
+
+    transition:
+        background 0.25s,
+        color 0.25s,
+        border-color 0.25s;
+}
+
+
+.menu-sidebar a:hover {
+    color: #dfbd77;
+
+    background:
+        rgba(181, 139, 69, 0.07);
+
+    border-color:
+        rgba(181, 139, 69, 0.15);
+}
+
+
+.menu-sidebar a.ativo {
+    color: #e0bd72;
+
+    background:
+        rgba(181, 139, 69, 0.10);
+
+    border-color:
+        rgba(181, 139, 69, 0.30);
+}
+
+
+/* =========================================
+   PERFIL
+========================================= */
+
+.perfil-sidebar {
+    margin-top: auto;
+
+    padding-top: 22px;
+
+    border-top:
+        1px solid
+        rgba(190, 151, 77, 0.15);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.perfil-avatar {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a87936,
+            #5b3b1d
+        );
+
+    color: #fff1d5;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-weight: bold;
+}
+
+
+.perfil-sidebar strong {
+    display: block;
+
+    color: #dfcfb8;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 12px;
+}
+
+
+.perfil-sidebar span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #756452;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 10px;
+}
+
+
+/* =========================================
+   CONTEÚDO
+========================================= */
+
+.conteudo {
+    margin-left: 250px;
+
+    min-height: 100vh;
+
+    padding: 55px 7%;
+}
+
+
+.topo {
+    max-width: 1100px;
+
+    margin: 0 auto 35px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 30px;
+}
+
+
+.eyebrow {
+    color: #b68d4b;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+}
+
+
+.topo h1 {
+    margin: 10px 0 12px;
+
+    color: #f0e2cd;
+
+    font-size:
+        clamp(32px, 4vw, 48px);
+
+    font-weight: normal;
+}
+
+
+.topo p {
+    margin: 0;
+
+    color: #9f907c;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   BOTÃO VOLTAR
+========================================= */
+
+.botao-voltar {
+    padding: 11px 18px;
+
+    color: #c9a45d;
+
+    background: transparent;
+
+    border:
+        1px solid
+        rgba(190, 151, 77, 0.30);
+
+    cursor: pointer;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 12px;
+
+    transition: 0.25s;
+
+    white-space: nowrap;
+}
+
+
+.botao-voltar:hover {
+    background: #b58b45;
+
+    color: #170d07;
+}
+
+
+/* =========================================
+   AVISO
+========================================= */
+
+.aviso {
+    max-width: 1100px;
+
+    margin: 0 auto 30px;
+
+    padding: 22px 25px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 18px;
+
+    background:
+        rgba(75, 49, 26, 0.35);
+
+    border:
+        1px solid
+        rgba(190, 151, 77, 0.18);
+}
+
+
+.aviso-icone {
+    color: #d0a75a;
+
+    font-size: 20px;
+}
+
+
+.aviso strong {
+    color: #dfbd77;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+}
+
+
+.aviso p {
+    margin: 7px 0 0;
+
+    color: #a99a86;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   PAINEL
+========================================= */
+
+.painel {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #21150e,
+            #17100b
+        );
+
+    border:
+        1px solid
+        rgba(190, 151, 77, 0.18);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.30);
+}
+
+
+.painel-topo {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding-bottom: 25px;
+
+    border-bottom:
+        1px solid
+        rgba(190, 151, 77, 0.14);
+}
+
+
+.painel-topo span {
+    color: #96784c;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+}
+
+
+.painel-topo h2 {
+    margin: 8px 0 0;
+
+    color: #eadcc6;
+
+    font-size: 25px;
+
+    font-weight: normal;
+}
+
+
+/* =========================================
+   SALVAR
+========================================= */
+
+.botao-salvar {
+    padding: 13px 22px;
+
+    color: #1b1008;
+
+    background: #d0a75a;
+
+    border: none;
+
+    cursor: pointer;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    transition: 0.25s;
+}
+
+
+.botao-salvar:hover {
+    background: #e2c17e;
+
+    transform: translateY(-2px);
+}
+
+
+.botao-salvar:disabled {
+    opacity: 0.5;
+
+    cursor: wait;
+
+    transform: none;
+}
+
+
+/* =========================================
+   MENSAGEM
+========================================= */
+
+.mensagem {
+    min-height: 0;
+
+    margin-top: 0;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 12px;
+}
+
+
+.mensagem.sucesso {
+    margin: 18px 0;
+
+    padding: 12px 15px;
+
+    color: #c9dfb0;
+
+    background:
+        rgba(77, 110, 52, 0.16);
+
+    border:
+        1px solid
+        rgba(113, 153, 77, 0.25);
+}
+
+
+.mensagem.erro {
+    margin: 18px 0;
+
+    padding: 12px 15px;
+
+    color: #e0a49b;
+
+    background:
+        rgba(120, 48, 40, 0.15);
+
+    border:
+        1px solid
+        rgba(150, 66, 55, 0.25);
+}
+
+
+/* =========================================
+   LISTA
+========================================= */
+
+.lista-produtos {
+    margin-top: 22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.produto-admin {
+    display: grid;
+
+    grid-template-columns:
+        55px
+        minmax(250px, 1fr)
+        150px
+        120px;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 16px;
+
+    background:
+        rgba(42, 28, 19, 0.75);
+
+    border:
+        1px solid
+        rgba(190, 151, 77, 0.10);
+
+    transition:
+        border-color 0.25s,
+        background 0.25s;
+}
+
+
+.produto-admin:hover {
+    background:
+        rgba(53, 35, 22, 0.85);
+
+    border-color:
+        rgba(190, 151, 77, 0.25);
+}
+
+
+/* =========================================
+   IMAGEM
+========================================= */
+
+.produto-thumb {
+    width: 55px;
+    height: 55px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle,
+            #76502b,
+            #21140b
+        );
+
+    border:
+        1px solid
+        rgba(190, 151, 77, 0.18);
+}
+
+
+.produto-thumb img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.produto-thumb-sem-imagem {
+    color: #c69d53;
+
+    font-size: 22px;
+}
+
+
+/* =========================================
+   INFORMAÇÕES
+========================================= */
+
+.produto-nome {
+    color: #e9dac3;
+
+    font-size: 17px;
+}
+
+
+.produto-colecao {
+    margin-top: 5px;
+
+    color: #8e7961;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+
+.produto-preco {
+    color: #d4ae67;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   HOME
+========================================= */
+
+.home-controle {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.home-controle label {
+    color: #a99a86;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 11px;
+}
+
+
+/* CHECKBOX */
+
+.home-checkbox {
+    width: 18px;
+    height: 18px;
+
+    accent-color: #c49a51;
+
+    cursor: pointer;
+}
+
+
+/* ORDEM */
+
+.ordem-home {
+    width: 65px;
+
+    padding: 9px 8px;
+
+    color: #e8d8bf;
+
+    background: #120b07;
+
+    border:
+        1px solid
+        rgba(190, 151, 77, 0.25);
+
+    outline: none;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 12px;
+
+    text-align: center;
+}
+
+
+.ordem-home:focus {
+    border-color: #b58b45;
+}
+
+
+.ordem-home:disabled {
+    opacity: 0.35;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   ESTADO VAZIO
+========================================= */
+
+.carregando,
+.vazio {
+    padding: 60px 20px;
+
+    text-align: center;
+
+    color: #85745f;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+
+        height: auto;
+
+        padding: 22px;
+    }
+
+
+    .menu-sidebar {
+        margin-top: 25px;
+
+        flex-direction: row;
+
+        flex-wrap: wrap;
+    }
+
+
+    .perfil-sidebar {
+        margin-top: 20px;
+    }
+
+
+    .conteudo {
+        margin-left: 0;
+
+        padding: 35px 5%;
+    }
+
+
+    .topo {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .produto-admin {
+        grid-template-columns:
+            55px
+            1fr;
+
+        gap: 12px;
+    }
+
+
+    .produto-preco,
+    .home-controle {
+        grid-column: 2;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .painel {
+        padding: 20px 15px;
+    }
+
+
+    .painel-topo {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .botao-salvar {
+        width: 100%;
+    }
+
+}

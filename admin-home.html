@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Destaques da Home | Saraviei</title>
+
+    <link
+        rel="stylesheet"
+        href="admin-home.css"
+    >
+
+</head>
+
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            SARAVIEI
+        </div>
+
+        <div class="logo-subtitulo">
+            PAINEL ADMINISTRATIVO
+        </div>
+
+
+        <nav class="menu-sidebar">
+
+            <a href="admin.html">
+                ← Voltar ao painel
+            </a>
+
+            <a
+                href="admin-home.html"
+                class="ativo"
+            >
+                ✦ Página inicial
+            </a>
+
+        </nav>
+
+
+        <div class="perfil-sidebar">
+
+            <div class="perfil-avatar">
+                S
+            </div>
+
+            <div>
+
+                <strong>
+                    Administrador
+                </strong>
+
+                <span>
+                    Saraviei
+                </span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <main class="conteudo">
+
+        <header class="topo">
+
+            <div>
+
+                <span class="eyebrow">
+                    SARAVIEI
+                </span>
+
+                <h1>
+                    Destaques da página inicial
+                </h1>
+
+                <p>
+                    Escolha quais produtos aparecem na home
+                    e defina a ordem deles.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                class="botao-voltar"
+                id="botaoVoltar"
+            >
+                Voltar ao painel
+            </button>
+
+        </header>
+
+
+        <section class="aviso">
+
+            <div class="aviso-icone">
+                ✦
+            </div>
+
+            <div>
+
+                <strong>
+                    Como funciona
+                </strong>
+
+                <p>
+                    Marque os produtos que deseja destacar.
+                    Depois defina a ordem: 1 aparece primeiro,
+                    2 aparece segundo, e assim por diante.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="painel">
+
+            <div class="painel-topo">
+
+                <div>
+
+                    <span>
+                        PRODUTOS
+                    </span>
+
+                    <h2>
+                        Seleção da página inicial
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="botao-salvar"
+                    id="botaoSalvar"
+                >
+                    Salvar destaques
+                </button>
+
+            </div>
+
+
+            <div
+                id="mensagem"
+                class="mensagem"
+            ></div>
+
+
+            <div
+                id="listaProdutos"
+                class="lista-produtos"
+            >
+
+                <div class="carregando">
+                    Carregando produtos...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="admin-home.js"></script>
+
+</body>
+
+</html>

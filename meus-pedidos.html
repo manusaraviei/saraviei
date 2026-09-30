@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meus pedidos | Saraviei</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --fundo: #0c0907;
+            --fundo-card: #15100d;
+            --fundo-card-2: #1b1410;
+            --borda: #3f2b1b;
+            --borda-clara: #5a3d23;
+            --dourado: #c08b3d;
+            --dourado-claro: #d4a04b;
+            --texto: #eee3d2;
+            --texto-suave: #b9a78f;
+            --texto-fraco: #806f5c;
+            --verde: #78966d;
+            --vermelho: #9d6256;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at top center,
+                    rgba(192, 139, 61, 0.07),
+                    transparent 38%
+                ),
+                var(--fundo);
+            color: var(--texto);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        button,
+        a {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .pagina {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .cabecalho {
+            width: 100%;
+            border-bottom: 1px solid var(--borda);
+            background: rgba(12, 9, 7, 0.96);
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+
+        .cabecalho-interno {
+            width: min(1180px, calc(100% - 40px));
+            min-height: 78px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .marca {
+            color: var(--dourado-claro);
+            text-decoration: none;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 27px;
+            letter-spacing: 1px;
+        }
+
+        .navegacao {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .link-nav {
+            color: var(--texto-suave);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s ease;
+        }
+
+        .link-nav:hover {
+            color: var(--dourado-claro);
+        }
+
+        .botao-sair {
+            border: 1px solid var(--borda-clara);
+            background: transparent;
+            color: var(--texto-suave);
+            padding: 9px 15px;
+            border-radius: 6px;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .botao-sair:hover {
+            border-color: var(--dourado);
+            color: var(--dourado-claro);
+        }
+
+        .conteudo {
+            width: min(1050px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 55px 0 80px;
+        }
+
+        .cabecalho-pagina {
+            margin-bottom: 35px;
+        }
+
+        .eyebrow {
+            color: var(--dourado);
+            font-size: 11px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .titulo {
+            color: var(--texto);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 38px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .subtitulo {
+            color: var(--texto-suave);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .mensagem {
+            display: none;
+            padding: 14px 16px;
+            border: 1px solid var(--borda);
+            background: var(--fundo-card);
+            border-radius: 8px;
+            color: var(--texto-suave);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .mensagem.erro {
+            border-color: rgba(157, 98, 86, 0.55);
+            color: #d8aaa0;
+        }
+
+        .mensagem.sucesso {
+            border-color: rgba(120, 150, 109, 0.5);
+            color: #afc5a6;
+        }
+
+        .estado {
+            border: 1px solid var(--borda);
+            background: var(--fundo-card);
+            border-radius: 10px;
+            padding: 55px 30px;
+            text-align: center;
+        }
+
+        .estado-icone {
+            width: 54px;
+            height: 54px;
+            margin: 0 auto 20px;
+            border: 1px solid var(--borda-clara);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dourado);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 24px;
+        }
+
+        .estado-titulo {
+            color: var(--texto);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .estado-texto {
+            max-width: 500px;
+            margin: 0 auto;
+            color: var(--texto-suave);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .botao-principal {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            margin-top: 24px;
+            padding: 0 22px;
+            border: 1px solid var(--dourado);
+            border-radius: 6px;
+            background: var(--dourado);
+            color: #170f08;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            transition: all 0.2s ease;
+        }
+
+        .botao-principal:hover {
+            background: var(--dourado-claro);
+            border-color: var(--dourado-claro);
+        }
+
+        .lista-pedidos {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .pedido-card {
+            width: 100%;
+            border: 1px solid var(--borda);
+            border-radius: 9px;
+            background: var(--fundo-card);
+            overflow: hidden;
+            transition:
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .pedido-card:hover {
+            border-color: var(--borda-clara);
+            background: var(--fundo-card-2);
+        }
+
+        .pedido-resumo {
+            width: 100%;
+            min-height: 104px;
+            padding: 18px 20px;
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            align-items: center;
+            gap: 25px;
+            cursor: pointer;
+        }
+
+        .pedido-principal {
+            min-width: 0;
+        }
+
+        .pedido-numero {
+            color: var(--dourado-claro);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 19px;
+            margin-bottom: 7px;
+        }
+
+        .pedido-data {
+            color: var(--texto-fraco);
+            font-size: 11px;
+        }
+
+        .pedido-itens-resumo {
+            color: var(--texto-suave);
+            font-size: 12px;
+            line-height: 1.5;
+            text-align: right;
+        }
+
+        .pedido-total {
+            color: var(--texto);
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            text-align: right;
+        }
+
+        .pedido-status {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 145px;
+            padding: 7px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--borda-clara);
+            color: var(--dourado-claro);
+            font-size: 10px;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .status-pagamento_confirmado,
+        .status-entregue,
+        .status-finalizado {
+            color: #aeca9f;
+            border-color: rgba(120, 150, 109, 0.5);
+        }
+
+        .status-cancelado {
+            color: #d2a198;
+            border-color: rgba(157, 98, 86, 0.5);
+        }
+
+        .pedido-seta {
+            color: var(--dourado);
+            font-size: 17px;
+            transition: transform 0.2s ease;
+        }
+
+        .pedido-card.aberto .pedido-seta {
+            transform: rotate(180deg);
+        }
+
+        .pedido-detalhes {
+            display: none;
+            border-top: 1px solid var(--borda);
+            padding: 25px 20px 28px;
+        }
+
+        .pedido-card.aberto .pedido-detalhes {
+            display: block;
+        }
+
+        .detalhes-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .info-box {
+            border: 1px solid var(--borda);
+            border-radius: 7px;
+            background: #110c09;
+            padding: 15px;
+        }
+
+        .info-label {
+            color: var(--dourado);
+            font-size: 9px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+
+        .info-valor {
+            color: var(--texto);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .secao-detalhes {
+            margin-top: 24px;
+        }
+
+        .secao-detalhes-titulo {
+            color: var(--texto);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 18px;
+            font-weight: 400;
+            padding-bottom: 11px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--borda);
+        }
+
+        .item-pedido {
+            display: grid;
+            grid-template-columns: 64px 1fr auto;
+            align-items: center;
+            gap: 14px;
+            padding: 13px 0;
+            border-bottom: 1px solid rgba(63, 43, 27, 0.65);
+        }
+
+        .item-pedido:last-child {
+            border-bottom: none;
+        }
+
+        .item-imagem {
+            width: 64px;
+            height: 64px;
+            border-radius: 6px;
+            border: 1px solid var(--borda);
+            background: #0d0907;
+            object-fit: cover;
+        }
+
+        .item-sem-imagem {
+            width: 64px;
+            height: 64px;
+            border-radius: 6px;
+            border: 1px solid var(--borda);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--texto-fraco);
+            font-size: 10px;
+            text-align: center;
+        }
+
+        .item-nome {
+            color: var(--texto);
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .item-informacoes {
+            color: var(--texto-suave);
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .item-valor {
+            color: var(--texto);
+            font-size: 13px;
+            font-weight: 600;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .financeiro {
+            margin-top: 18px;
+            margin-left: auto;
+            max-width: 340px;
+        }
+
+        .financeiro-linha {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 7px 0;
+            color: var(--texto-suave);
+            font-size: 12px;
+        }
+
+        .financeiro-linha.total {
+            margin-top: 7px;
+            padding-top: 14px;
+            border-top: 1px solid var(--borda-clara);
+            color: var(--texto);
+            font-size: 15px;
+        }
+
+        .financeiro-linha.total strong {
+            color: var(--dourado-claro);
+            font-size: 17px;
+        }
+
+        .rastreio {
+            margin-top: 20px;
+            border: 1px solid var(--borda);
+            border-radius: 7px;
+            background: #110c09;
+            padding: 15px;
+        }
+
+        .rastreio-label {
+            color: var(--dourado);
+            font-size: 9px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+
+        .rastreio-valor {
+            color: var(--texto);
+            font-size: 13px;
+            word-break: break-word;
+        }
+
+        .rodape {
+            width: 100%;
+            border-top: 1px solid var(--borda);
+            padding: 28px 20px;
+            text-align: center;
+            color: var(--texto-fraco);
+            font-size: 11px;
+        }
+
+        .carregando {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 220px;
+            color: var(--texto-suave);
+            font-size: 13px;
+        }
+
+        .ponto-carregando {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            margin-right: 8px;
+            border-radius: 50%;
+            background: var(--dourado);
+            animation: pulsar 1s infinite ease-in-out;
+        }
+
+        @keyframes pulsar {
+            0%,
+            100% {
+                opacity: 0.35;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .cabecalho-interno {
+                min-height: 70px;
+            }
+
+            .marca {
+                font-size: 23px;
+            }
+
+            .link-nav {
+                display: none;
+            }
+
+            .conteudo {
+                width: min(100% - 28px, 1050px);
+                padding-top: 35px;
+            }
+
+            .titulo {
+                font-size: 31px;
+            }
+
+            .pedido-resumo {
+                grid-template-columns: 1fr auto;
+                gap: 12px;
+            }
+
+            .pedido-itens-resumo {
+                display: none;
+            }
+
+            .pedido-total {
+                grid-column: 1;
+                text-align: left;
+            }
+
+            .pedido-status {
+                grid-column: 2;
+                grid-row: 1 / span 2;
+                min-width: 120px;
+            }
+
+            .pedido-seta {
+                display: none;
+            }
+
+            .detalhes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .cabecalho-interno {
+                width: calc(100% - 28px);
+            }
+
+            .botao-sair {
+                padding: 8px 11px;
+            }
+
+            .pedido-resumo {
+                padding: 16px;
+            }
+
+            .pedido-detalhes {
+                padding: 20px 16px 24px;
+            }
+
+            .pedido-status {
+                min-width: 105px;
+                font-size: 9px;
+            }
+
+            .item-pedido {
+                grid-template-columns: 52px 1fr;
+            }
+
+            .item-imagem,
+            .item-sem-imagem {
+                width: 52px;
+                height: 52px;
+            }
+
+            .item-valor {
+                grid-column: 2;
+                text-align: left;
+            }
+
+            .financeiro {
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="pagina">
+
+    <header class="cabecalho">
+        <div class="cabecalho-interno">
+
+            <a href="index.html" class="marca">
+                Saraviei
+            </a>
+
+            <nav class="navegacao">
+                <a href="index.html" class="link-nav">
+                    Voltar para a loja
+                </a>
+
+                <button
+                    type="button"
+                    class="botao-sair"
+                    id="botao-sair"
+                >
+                    Sair da conta
+                </button>
+            </nav>
+
+        </div>
+    </header>
+
+    <main class="conteudo">
+
+        <section class="cabecalho-pagina">
+            <div class="eyebrow">
+                Minha conta
+            </div>
+
+            <h1 class="titulo">
+                Meus pedidos
+            </h1>
+
+            <p class="subtitulo" id="subtitulo-cliente">
+                Carregando suas informações...
+            </p>
+        </section>
+
+        <div
+            class="mensagem"
+            id="mensagem"
+        ></div>
+
+        <section id="area-pedidos">
+
+            <div class="carregando">
+                <span class="ponto-carregando"></span>
+                Carregando seus pedidos...
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="rodape">
+        Saraviei · Axé ✨
+    </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async function () {
+
+        const SUPABASE_URL = "https://gmimzvnuvraletepczrp.supabase.co";
+
+        const SUPABASE_ANON_KEY = "sb_publishable_NtJmSYaKmuQuLY2QvfQKLQ_rFA8Ceqx";
+
+        const supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+        );
+
+        const areaPedidos = document.getElementById("area-pedidos");
+        const subtituloCliente = document.getElementById("subtitulo-cliente");
+        const mensagem = document.getElementById("mensagem");
+        const botaoSair = document.getElementById("botao-sair");
+
+        function mostrarMensagem(texto, tipo = "") {
+            mensagem.textContent = texto;
+            mensagem.className = "mensagem";
+
+            if (tipo) {
+                mensagem.classList.add(tipo);
+            }
+
+            mensagem.style.display = "block";
+        }
+
+        function esconderMensagem() {
+            mensagem.style.display = "none";
+        }
+
+        function escaparHTML(valor) {
+            if (valor === null || valor === undefined) {
+                return "";
+            }
+
+            return String(valor)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function obterValor(objeto, campos, valorPadrao = null) {
+            if (!objeto || typeof objeto !== "object") {
+                return valorPadrao;
+            }
+
+            for (const campo of campos) {
+                if (
+                    Object.prototype.hasOwnProperty.call(objeto, campo) &&
+                    objeto[campo] !== null &&
+                    objeto[campo] !== undefined &&
+                    objeto[campo] !== ""
+                ) {
+                    return objeto[campo];
+                }
+            }
+
+            return valorPadrao;
+        }
+
+        function formatarMoeda(valor) {
+            const numero = Number(valor);
+
+            if (!Number.isFinite(numero)) {
+                return "R$ 0,00";
+            }
+
+            return numero.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            });
+        }
+
+        function formatarData(valor) {
+            if (!valor) {
+                return "Data não informada";
+            }
+
+            const data = new Date(valor);
+
+            if (Number.isNaN(data.getTime())) {
+                return String(valor);
+            }
+
+            return data.toLocaleDateString("pt-BR", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            });
+        }
+
+        function formatarStatus(status) {
+
+            const valor = String(status || "")
+                .trim()
+                .toLowerCase();
+
+            const nomes = {
+                novo: "Novo",
+                pagamento_confirmado: "Pagamento confirmado",
+                em_preparacao: "Em preparação",
+                enviado: "Enviado",
+                entregue: "Entregue",
+                cancelado: "Cancelado",
+                finalizado: "Finalizado",
+                aguardando_pagamento: "Aguardando pagamento",
+                pago: "Pagamento confirmado"
+            };
+
+            return nomes[valor] || String(status || "Em processamento");
+        }
+
+        function classeStatus(status) {
+
+            const valor = String(status || "")
+                .trim()
+                .toLowerCase()
+                .replace(/\s+/g, "_");
+
+            return "status-" + valor;
+        }
+
+        function formatarNumeroPedido(pedido) {
+
+            const numero = obterValor(
+                pedido,
+                [
+                    "order_number",
+                    "numero_pedido",
+                    "pedido_numero",
+                    "number",
+                    "numero"
+                ]
+            );
+
+            if (numero !== null) {
+                const texto = String(numero);
+
+                if (/^\d+$/.test(texto)) {
+                    return "#" + texto.padStart(3, "0");
+                }
+
+                return "#" + texto;
+            }
+
+            const id = obterValor(pedido, ["id"]);
+
+            if (id) {
+                return "#" + String(id).slice(0, 8).toUpperCase();
+            }
+
+            return "#---";
+        }
+
+        function obterIdProduto(item) {
+            return obterValor(
+                item,
+                [
+                    "product_id",
+                    "produto_id",
+                    "id_produto"
+                ]
+            );
+        }
+
+        function obterQuantidade(item) {
+            return Number(
+                obterValor(
+                    item,
+                    [
+                        "quantity",
+                        "quantidade",
+                        "qty"
+                    ],
+                    1
+                )
+            ) || 1;
+        }
+
+        function obterPrecoUnitario(item) {
+            return Number(
+                obterValor(
+                    item,
+                    [
+                        "unit_price",
+                        "preco_unitario",
+                        "price",
+                        "preco",
+                        "valor_unitario"
+                    ],
+                    0
+                )
+            ) || 0;
+        }
+
+        function obterSubtotalItem(item) {
+
+            const subtotal = obterValor(
+                item,
+                [
+                    "subtotal",
+                    "sub_total",
+                    "valor_total",
+                    "total"
+                ]
+            );
+
+            if (subtotal !== null) {
+                return Number(subtotal) || 0;
+            }
+
+            return obterQuantidade(item) * obterPrecoUnitario(item);
+        }
+
+        function obterImagemProduto(produto) {
+
+            if (!produto) {
+                return null;
+            }
+
+            return obterValor(
+                produto,
+                [
+                    "imagem",
+                    "image",
+                    "image_url",
+                    "imagem_url",
+                    "foto",
+                    "foto_url",
+                    "url_imagem",
+                    "principal_image"
+                ]
+            );
+        }
+
+        function obterNomeProduto(produto, item) {
+
+            return obterValor(
+                produto,
+                [
+                    "nome",
+                    "name",
+                    "titulo",
+                    "title"
+                ],
+                obterValor(
+                    item,
+                    [
+                        "product_name",
+                        "produto_nome",
+                        "nome_produto",
+                        "name",
+                        "nome"
+                    ],
+                    "Produto"
+                )
+            );
+        }
+
+        function obterDadosCliente(user) {
+
+            const metadata = user.user_metadata || {};
+
+            return {
+                nome:
+                    metadata.nome ||
+                    metadata.name ||
+                    metadata.full_name ||
+                    user.email ||
+                    "Cliente",
+
+                email: user.email || ""
+            };
+        }
+
+        function clientePertenceAoPedido(pedido, userId) {
+
+            if (!pedido || !userId) {
+                return false;
+            }
+
+            const campos = [
+                "user_id",
+                "customer_id",
+                "cliente_id",
+                "customer_user_id",
+                "user_uuid",
+                "auth_user_id",
+                "usuario_id"
+            ];
+
+            for (const campo of campos) {
+
+                if (
+                    pedido[campo] !== null &&
+                    pedido[campo] !== undefined &&
+                    String(pedido[campo]) === String(userId)
+                ) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        async function buscarPedidos(userId) {
+
+            const resultado = await supabaseClient
+                .from("orders")
+                .select("*")
+                .order("created_at", {
+                    ascending: false
+                });
+
+            if (resultado.error) {
+                throw resultado.error;
+            }
+
+            const pedidos = Array.isArray(resultado.data)
+                ? resultado.data
+                : [];
+
+            const pedidosDoCliente = pedidos.filter(function (pedido) {
+                return clientePertenceAoPedido(pedido, userId);
+            });
+
+            return pedidosDoCliente;
+        }
+
+        async function buscarItensPedido(orderId) {
+
+            if (!orderId) {
+                return [];
+            }
+
+            const resultado = await supabaseClient
+                .from("order_items")
+                .select("*")
+                .or(
+                    "order_id.eq." +
+                    orderId +
+                    ",pedido_id.eq." +
+                    orderId
+                );
+
+            if (!resultado.error) {
+                return Array.isArray(resultado.data)
+                    ? resultado.data
+                    : [];
+            }
+
+            const segundaTentativa = await supabaseClient
+                .from("order_items")
+                .select("*")
+                .eq("order_id", orderId);
+
+            if (segundaTentativa.error) {
+                return [];
+            }
+
+            return Array.isArray(segundaTentativa.data)
+                ? segundaTentativa.data
+                : [];
+        }
+
+        async function buscarProdutos(itens) {
+
+            const ids = itens
+                .map(obterIdProduto)
+                .filter(Boolean)
+                .map(String);
+
+            const idsUnicos = [...new Set(ids)];
+
+            if (!idsUnicos.length) {
+                return {};
+            }
+
+            const resultado = await supabaseClient
+                .from("products")
+                .select("*")
+                .in("id", idsUnicos);
+
+            if (resultado.error) {
+                return {};
+            }
+
+            const mapa = {};
+
+            (resultado.data || []).forEach(function (produto) {
+
+                if (produto.id !== undefined && produto.id !== null) {
+                    mapa[String(produto.id)] = produto;
+                }
+
+            });
+
+            return mapa;
+        }
+
+        function calcularTotalPedido(pedido, itens) {
+
+            const totalDireto = obterValor(
+                pedido,
+                [
+                    "total",
+                    "total_amount",
+                    "valor_total",
+                    "total_pedido"
+                ]
+            );
+
+            if (totalDireto !== null) {
+                const numero = Number(totalDireto);
+
+                if (Number.isFinite(numero)) {
+                    return numero;
+                }
+            }
+
+            return itens.reduce(function (total, item) {
+                return total + obterSubtotalItem(item);
+            }, 0);
+        }
+
+        function calcularProdutosPedido(pedido, itens) {
+
+            const subtotalDireto = obterValor(
+                pedido,
+                [
+                    "subtotal",
+                    "products_total",
+                    "produtos_total",
+                    "valor_produtos"
+                ]
+            );
+
+            if (subtotalDireto !== null) {
+                const numero = Number(subtotalDireto);
+
+                if (Number.isFinite(numero)) {
+                    return numero;
+                }
+            }
+
+            return itens.reduce(function (total, item) {
+                return total + obterSubtotalItem(item);
+            }, 0);
+        }
+
+        function obterFrete(pedido) {
+
+            const valor = obterValor(
+                pedido,
+                [
+                    "shipping",
+                    "shipping_cost",
+                    "frete",
+                    "valor_frete"
+                ],
+                0
+            );
+
+            return Number(valor) || 0;
+        }
+
+        function obterDesconto(pedido) {
+
+            const valor = obterValor(
+                pedido,
+                [
+                    "discount",
+                    "discount_amount",
+                    "desconto",
+                    "valor_desconto"
+                ],
+                0
+            );
+
+            return Number(valor) || 0;
+        }
+
+        function montarEndereco(pedido) {
+
+            const endereco = pedido.shipping_address ||
+                pedido.delivery_address ||
+                pedido.endereco_entrega ||
+                pedido.endereco ||
+                null;
+
+            if (endereco && typeof endereco === "object") {
+
+                const partes = [
+                    endereco.logradouro || endereco.street,
+                    endereco.numero || endereco.number,
+                    endereco.complemento || endereco.complement,
+                    endereco.bairro || endereco.neighborhood,
+                    endereco.cidade || endereco.city,
+                    endereco.estado || endereco.state,
+                    endereco.cep || endereco.zipcode || endereco.zip
+                ].filter(Boolean);
+
+                return partes.join(", ");
+            }
+
+            const partes = [
+                obterValor(pedido, ["street", "logradouro"]),
+                obterValor(pedido, ["number", "numero"]),
+                obterValor(pedido, ["complement", "complemento"]),
+                obterValor(pedido, ["neighborhood", "bairro"]),
+                obterValor(pedido, ["city", "cidade"]),
+                obterValor(pedido, ["state", "estado"]),
+                obterValor(pedido, ["zip", "zipcode", "cep"])
+            ].filter(Boolean);
+
+            return partes.join(", ");
+        }
+
+        function renderizarItem(item, produto) {
+
+            const nome = obterNomeProduto(produto, item);
+            const quantidade = obterQuantidade(item);
+            const preco = obterPrecoUnitario(item);
+            const subtotal = obterSubtotalItem(item);
+
+            const cor = obterValor(
+                item,
+                ["color", "cor"],
+                null
+            );
+
+            const tamanho = obterValor(
+                item,
+                ["size", "tamanho"],
+                null
+            );
+
+            const personalizacao = obterValor(
+                item,
+                [
+                    "personalization",
+                    "personalizacao",
+                    "personalização"
+                ],
+                null
+            );
+
+            const imagem = obterImagemProduto(produto);
+
+            let imagemHTML;
+
+            if (imagem) {
+
+                imagemHTML = `
+                    <img
+                        class="item-imagem"
+                        src="${escaparHTML(imagem)}"
+                        alt="${escaparHTML(nome)}"
+                    >
+                `;
+
+            } else {
+
+                imagemHTML = `
+                    <div class="item-sem-imagem">
+                        Sem imagem
+                    </div>
+                `;
+
+            }
+
+            const informacoes = [];
+
+            informacoes.push(
+                "Quantidade: " + quantidade
+            );
+
+            if (cor) {
+                informacoes.push(
+                    "Cor: " + cor
+                );
+            }
+
+            if (tamanho) {
+                informacoes.push(
+                    "Tamanho: " + tamanho
+                );
+            }
+
+            if (personalizacao) {
+                informacoes.push(
+                    "Personalização: " + personalizacao
+                );
+            }
+
+            return `
+                <div class="item-pedido">
+
+                    ${imagemHTML}
+
+                    <div>
+                        <div class="item-nome">
+                            ${escaparHTML(nome)}
+                        </div>
+
+                        <div class="item-informacoes">
+                            ${escaparHTML(informacoes.join(" · "))}
+                            <br>
+                            ${formatarMoeda(preco)} cada
+                        </div>
+                    </div>
+
+                    <div class="item-valor">
+                        ${formatarMoeda(subtotal)}
+                    </div>
+
+                </div>
+            `;
+        }
+
+        async function montarDetalhesPedido(pedido) {
+
+            const orderId = obterValor(
+                pedido,
+                ["id", "order_id"]
+            );
+
+            const itens = await buscarItensPedido(orderId);
+
+            const produtos = await buscarProdutos(itens);
+
+            const subtotal = calcularProdutosPedido(
+                pedido,
+                itens
+            );
+
+            const frete = obterFrete(pedido);
+            const desconto = obterDesconto(pedido);
+
+            const total = calcularTotalPedido(
+                pedido,
+                itens
+            );
+
+            const pagamento = obterValor(
+                pedido,
+                [
+                    "payment_method",
+                    "metodo_pagamento",
+                    "payment",
+                    "forma_pagamento"
+                ],
+                "Não informado"
+            );
+
+            const pagamentoStatus = obterValor(
+                pedido,
+                [
+                    "payment_status",
+                    "status_pagamento"
+                ],
+                null
+            );
+
+            const entrega = obterValor(
+                pedido,
+                [
+                    "shipping_method",
+                    "delivery_method",
+                    "metodo_entrega",
+                    "forma_entrega"
+                ],
+                "Não informado"
+            );
+
+            const rastreio = obterValor(
+                pedido,
+                [
+                    "tracking_code",
+                    "tracking",
+                    "codigo_rastreio",
+                    "rastreio"
+                ],
+                null
+            );
+
+            const endereco = montarEndereco(pedido);
+
+            const itensHTML = itens.length
+                ? itens.map(function (item) {
+
+                    const produtoId = obterIdProduto(item);
+
+                    const produto = produtoId
+                        ? produtos[String(produtoId)]
+                        : null;
+
+                    return renderizarItem(
+                        item,
+                        produto
+                    );
+
+                }).join("")
+                : `
+                    <div class="info-box">
+                        <div class="info-valor">
+                            Os itens deste pedido ainda não estão disponíveis para visualização.
+                        </div>
+                    </div>
+                `;
+
+            return `
+                <div class="detalhes-grid">
+
+                    <div class="info-box">
+                        <div class="info-label">
+                            Data do pedido
+                        </div>
+
+                        <div class="info-valor">
+                            ${formatarData(
+                                obterValor(
+                                    pedido,
+                                    [
+                                        "created_at",
+                                        "created",
+                                        "data_criacao"
+                                    ]
+                                )
+                            )}
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-label">
+                            Forma de pagamento
+                        </div>
+
+                        <div class="info-valor">
+                            ${escaparHTML(pagamento)}
+                            ${
+                                pagamentoStatus
+                                    ? `<br>${escaparHTML(formatarStatus(pagamentoStatus))}`
+                                    : ""
+                            }
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-label">
+                            Entrega
+                        </div>
+
+                        <div class="info-valor">
+                            ${escaparHTML(entrega)}
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-label">
+                            Endereço
+                        </div>
+
+                        <div class="info-valor">
+                            ${
+                                endereco
+                                    ? escaparHTML(endereco)
+                                    : "Endereço não informado"
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="secao-detalhes">
+
+                    <h2 class="secao-detalhes-titulo">
+                        Itens do pedido
+                    </h2>
+
+                    ${itensHTML}
+
+                </div>
+
+                <div class="secao-detalhes">
+
+                    <h2 class="secao-detalhes-titulo">
+                        Resumo
+                    </h2>
+
+                    <div class="financeiro">
+
+                        <div class="financeiro-linha">
+                            <span>Produtos</span>
+                            <span>${formatarMoeda(subtotal)}</span>
+                        </div>
+
+                        <div class="financeiro-linha">
+                            <span>Frete</span>
+                            <span>${formatarMoeda(frete)}</span>
+                        </div>
+
+                        ${
+                            desconto > 0
+                                ? `
+                                    <div class="financeiro-linha">
+                                        <span>Desconto</span>
+                                        <span>- ${formatarMoeda(desconto)}</span>
+                                    </div>
+                                `
+                                : ""
+                        }
+
+                        <div class="financeiro-linha total">
+                            <span>Total</span>
+                            <strong>
+                                ${formatarMoeda(total)}
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                ${
+                    rastreio
+                        ? `
+                            <div class="rastreio">
+
+                                <div class="rastreio-label">
+                                    Código de rastreio
+                                </div>
+
+                                <div class="rastreio-valor">
+                                    ${escaparHTML(rastreio)}
+                                </div>
+
+                            </div>
+                        `
+                        : ""
+                }
+            `;
+        }
+
+        async function renderizarPedidos(pedidos) {
+
+            if (!pedidos.length) {
+
+                areaPedidos.innerHTML = `
+                    <div class="estado">
+
+                        <div class="estado-icone">
+                            ✦
+                        </div>
+
+                        <h2 class="estado-titulo">
+                            Você ainda não fez nenhum pedido
+                        </h2>
+
+                        <p class="estado-texto">
+                            Quando você realizar uma compra na Saraviei,
+                            seus pedidos aparecerão aqui para você acompanhar
+                            o status e os detalhes da entrega.
+                        </p>
+
+                        <a
+                            href="index.html"
+                            class="botao-principal"
+                        >
+                            IR PARA A LOJA
+                        </a>
+
+                    </div>
+                `;
+
+                return;
+            }
+
+            areaPedidos.innerHTML = `
+                <div class="lista-pedidos">
+
+                    ${pedidos.map(function (pedido, indice) {
+
+                        const status = obterValor(
+                            pedido,
+                            ["status", "order_status", "pedido_status"],
+                            "novo"
+                        );
+
+                        const itensQuantidade = obterValor(
+                            pedido,
+                            [
+                                "items_count",
+                                "item_count",
+                                "quantidade_itens"
+                            ],
+                            null
+                        );
+
+                        const total = obterValor(
+                            pedido,
+                            [
+                                "total",
+                                "total_amount",
+                                "valor_total",
+                                "total_pedido"
+                            ],
+                            null
+                        );
+
+                        return `
+                            <article
+                                class="pedido-card"
+                                data-indice="${indice}"
+                            >
+
+                                <div
+                                    class="pedido-resumo"
+                                    data-abrir-pedido="${indice}"
+                                >
+
+                                    <div class="pedido-principal">
+
+                                        <div class="pedido-numero">
+                                            ${formatarNumeroPedido(pedido)}
+                                        </div>
+
+                                        <div class="pedido-data">
+                                            ${formatarData(
+                                                obterValor(
+                                                    pedido,
+                                                    [
+                                                        "created_at",
+                                                        "created",
+                                                        "data_criacao"
+                                                    ]
+                                                )
+                                            )}
+                                        </div>
+
+                                    </div>
+
+                                    <div class="pedido-itens-resumo">
+                                        ${
+                                            itensQuantidade !== null
+                                                ? itensQuantidade +
+                                                  (
+                                                      Number(itensQuantidade) === 1
+                                                          ? " item"
+                                                          : " itens"
+                                                  )
+                                                : "Ver detalhes"
+                                        }
+                                    </div>
+
+                                    <div>
+
+                                        ${
+                                            total !== null
+                                                ? `
+                                                    <div class="pedido-total">
+                                                        ${formatarMoeda(total)}
+                                                    </div>
+                                                `
+                                                : ""
+                                        }
+
+                                        <div
+                                            class="pedido-status ${classeStatus(status)}"
+                                        >
+                                            ${escaparHTML(
+                                                formatarStatus(status)
+                                            )}
+                                        </div>
+
+                                    </div>
+
+                                    <div class="pedido-seta">
+                                        ↓
+                                    </div>
+
+                                </div>
+
+                                <div
+                                    class="pedido-detalhes"
+                                    data-detalhes="${indice}"
+                                >
+                                    <div class="carregando">
+                                        <span class="ponto-carregando"></span>
+                                        Carregando detalhes...
+                                    </div>
+                                </div>
+
+                            </article>
+                        `;
+
+                    }).join("")}
+
+                </div>
+            `;
+
+            const botoes = areaPedidos.querySelectorAll(
+                "[data-abrir-pedido]"
+            );
+
+            botoes.forEach(function (botao) {
+
+                botao.addEventListener(
+                    "click",
+                    async function () {
+
+                        const indice = Number(
+                            botao.getAttribute(
+                                "data-abrir-pedido"
+                            )
+                        );
+
+                        const card = areaPedidos.querySelector(
+                            `.pedido-card[data-indice="${indice}"]`
+                        );
+
+                        if (!card) {
+                            return;
+                        }
+
+                        const detalhes = card.querySelector(
+                            `[data-detalhes="${indice}"]`
+                        );
+
+                        const estavaAberto =
+                            card.classList.contains("aberto");
+
+                        document
+                            .querySelectorAll(".pedido-card.aberto")
+                            .forEach(function (outroCard) {
+
+                                if (outroCard !== card) {
+                                    outroCard.classList.remove("aberto");
+                                }
+
+                            });
+
+                        if (estavaAberto) {
+
+                            card.classList.remove("aberto");
+
+                            return;
+                        }
+
+                        card.classList.add("aberto");
+
+                        const pedido = pedidos[indice];
+
+                        try {
+
+                            detalhes.innerHTML =
+                                await montarDetalhesPedido(
+                                    pedido
+                                );
+
+                        } catch (erro) {
+
+                            console.error(
+                                "Erro ao carregar detalhes:",
+                                erro
+                            );
+
+                            detalhes.innerHTML = `
+                                <div class="mensagem erro" style="display:block;">
+                                    Não foi possível carregar os detalhes deste pedido.
+                                </div>
+                            `;
+
+                        }
+
+                    }
+                );
+
+            });
+        }
+
+        async function iniciar() {
+
+            esconderMensagem();
+
+            try {
+
+                const sessaoResultado =
+                    await supabaseClient.auth.getSession();
+
+                if (sessaoResultado.error) {
+                    throw sessaoResultado.error;
+                }
+
+                const sessao =
+                    sessaoResultado.data.session;
+
+                if (!sessao || !sessao.user) {
+
+                    sessionStorage.setItem(
+                        "saravieiDestinoDepoisLogin",
+                        "meus-pedidos.html"
+                    );
+
+                    window.location.replace(
+                        "cliente-login.html"
+                    );
+
+                    return;
+                }
+
+                const user = sessao.user;
+
+                const cliente =
+                    obterDadosCliente(user);
+
+                subtituloCliente.textContent =
+                    "Olá, " +
+                    cliente.nome +
+                    ". Aqui você pode acompanhar seus pedidos.";
+
+                const pedidos =
+                    await buscarPedidos(user.id);
+
+                await renderizarPedidos(pedidos);
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao carregar meus pedidos:",
+                    erro
+                );
+
+                areaPedidos.innerHTML = `
+                    <div class="estado">
+
+                        <div class="estado-icone">
+                            !
+                        </div>
+
+                        <h2 class="estado-titulo">
+                            Não foi possível carregar seus pedidos
+                        </h2>
+
+                        <p class="estado-texto">
+                            Ocorreu um problema ao consultar seus pedidos.
+                            Tente atualizar a página.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="botao-principal"
+                            id="botao-tentar-novamente"
+                        >
+                            TENTAR NOVAMENTE
+                        </button>
+
+                    </div>
+                `;
+
+                const tentarNovamente =
+                    document.getElementById(
+                        "botao-tentar-novamente"
+                    );
+
+                if (tentarNovamente) {
+
+                    tentarNovamente.addEventListener(
+                        "click",
+                        function () {
+                            window.location.reload();
+                        }
+                    );
+
+                }
+
+            }
+
+        }
+
+        botaoSair.addEventListener(
+            "click",
+            async function () {
+
+                botaoSair.disabled = true;
+                botaoSair.textContent = "Saindo...";
+
+                const resultado =
+                    await supabaseClient.auth.signOut();
+
+                if (resultado.error) {
+
+                    console.error(
+                        "Erro ao sair:",
+                        resultado.error
+                    );
+
+                    botaoSair.disabled = false;
+                    botaoSair.textContent = "Sair da conta";
+
+                    mostrarMensagem(
+                        "Não foi possível sair da conta.",
+                        "erro"
+                    );
+
+                    return;
+                }
+
+                window.location.replace(
+                    "cliente-login.html"
+                );
+
+            }
+        );
+
+        supabaseClient.auth.onAuthStateChange(
+            function (evento, sessao) {
+
+                if (
+                    evento === "SIGNED_OUT" ||
+                    !sessao
+                ) {
+
+                    window.location.replace(
+                        "cliente-login.html"
+                    );
+
+                }
+
+            }
+        );
+
+        await iniciar();
+
+    });
+</script>
+
+</body>
+</html>

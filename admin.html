@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Painel Administrativo | Saraviei</title>
+
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+
+    <style>
+        .area-variacoes-produto { margin-top: 18px; padding: 22px; border: 1px solid rgba(196, 154, 76, 0.28); border-radius: 14px; background: rgba(13, 9, 6, 0.55); }
+        .area-variacoes-produto[hidden], .campo[hidden] { display: none !important; }
+        .area-variacoes-produto .cabecalho-lista h3 { margin: 6px 0; }
+        .area-variacoes-produto .cabecalho-lista p, .area-variacoes-produto small { opacity: 0.72; }
+        .acoes-variacoes { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 18px 0; }
+        #resumo-variacoes { color: #c49a4c; font-weight: 700; }
+        .tabela-variacoes-wrap { width: 100%; overflow-x: auto; }
+        .tabela-variacoes { width: 100%; min-width: 780px; border-collapse: collapse; }
+        .tabela-variacoes th, .tabela-variacoes td { padding: 10px; border-bottom: 1px solid rgba(196, 154, 76, 0.16); text-align: left; vertical-align: middle; }
+        .tabela-variacoes th { color: #c49a4c; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; }
+        .tabela-variacoes input[type="text"], .tabela-variacoes input[type="number"] { width: 100%; min-width: 100px; box-sizing: border-box; }
+        .campo-check { display: flex; justify-content: center; align-items: center; }
+        .botao-remover-variacao { border: 1px solid rgba(196, 154, 76, 0.35); background: transparent; color: #eadfce; border-radius: 8px; padding: 7px 10px; cursor: pointer; }
+        .botao-remover-variacao:hover { border-color: #c49a4c; color: #c49a4c; }
+    </style>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script
+        src="admin.js"
+        defer
+    ></script>
+
+    <script
+        src="pedidos.js"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+
+<div class="painel">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="marca-sidebar">
+
+            <div class="logo-sidebar">
+                SARAVIEI
+            </div>
+
+            <div class="sublogo-sidebar">
+                PAINEL ADMINISTRATIVO
+            </div>
+
+        </div>
+
+
+        <nav class="menu-sidebar">
+
+
+            <button
+                type="button"
+                class="botao-menu ativo"
+                data-destino="dashboard"
+            >
+
+                <span class="icone-menu">
+                    ⌂
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="botao-menu"
+                data-destino="produtos"
+            >
+
+                <span class="icone-menu">
+                    ◇
+                </span>
+
+                <span>
+                    Produtos
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="botao-menu"
+                data-destino="home"
+            >
+
+                <span class="icone-menu">
+                    ✦
+                </span>
+
+                <span>
+                    Página inicial
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="botao-menu"
+                data-destino="colecoes"
+            >
+
+                <span class="icone-menu">
+                    ◆
+                </span>
+
+                <span>
+                    Coleções
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="botao-menu"
+                data-destino="pedidos"
+            >
+
+                <span class="icone-menu">
+                    ▣
+                </span>
+
+                <span>
+                    Pedidos
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="botao-menu"
+                data-destino="personalizados"
+            >
+
+                <span class="icone-menu">
+                    ✧
+                </span>
+
+                <span>
+                    Personalizados
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="botao-menu"
+                data-destino="configuracoes"
+            >
+
+                <span class="icone-menu">
+                    ⚙
+                </span>
+
+                <span>
+                    Configurações
+                </span>
+
+            </button>
+
+
+        </nav>
+
+
+        <div class="usuario-sidebar">
+
+
+            <div class="avatar-usuario">
+                M
+            </div>
+
+
+            <div class="dados-usuario">
+
+                <strong>
+                    Manuela
+                </strong>
+
+                <span>
+                    ADMINISTRADORA
+                </span>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="botao-sair"
+                id="botao-sair"
+            >
+                Sair
+            </button>
+
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         CONTEÚDO
+         ===================================================== -->
+
+    <main class="conteudo-painel">
+
+
+        <!-- =================================================
+             DASHBOARD
+             ================================================= -->
+
+        <section
+            class="secao-painel"
+            id="secao-dashboard"
+        >
+
+
+            <header class="cabecalho-pagina">
+
+
+                <div>
+
+                    <span class="eyebrow">
+                        VISÃO GERAL
+                    </span>
+
+
+                    <h1>
+                        Dashboard
+                    </h1>
+
+
+                    <p>
+                        Acompanhe sua loja de forma simples.
+                    </p>
+
+                </div>
+
+
+            </header>
+
+
+
+            <div class="grid-dashboard">
+
+
+                <div
+                    class="card-dashboard card-clicavel"
+                    id="dashboard-total-produtos"
+                    data-destino="produtos"
+                >
+
+                    <span class="icone-card">
+                        ◇
+                    </span>
+
+
+                    <span class="titulo">
+                        CATÁLOGO
+                    </span>
+
+
+                    <strong
+                        class="numero"
+                        id="numero-total-produtos"
+                    >
+                        0
+                    </strong>
+
+
+                    <span class="descricao-card">
+                        Produtos cadastrados
+                    </span>
+
+
+                    <span class="seta-card">
+                        →
+                    </span>
+
+                </div>
+
+
+
+                <div
+                    class="card-dashboard card-clicavel"
+                    id="dashboard-total-colecoes"
+                    data-destino="colecoes"
+                >
+
+                    <span class="icone-card">
+                        ✦
+                    </span>
+
+
+                    <span class="titulo">
+                        ORGANIZAÇÃO
+                    </span>
+
+
+                    <strong
+                        class="numero"
+                        id="numero-total-colecoes"
+                    >
+                        0
+                    </strong>
+
+
+                    <span class="descricao-card">
+                        Coleções cadastradas
+                    </span>
+
+
+                    <span class="seta-card">
+                        →
+                    </span>
+
+                </div>
+
+
+
+                <div
+                    class="card-dashboard card-clicavel"
+                    id="dashboard-total-pedidos"
+                    data-destino="pedidos"
+                >
+
+                    <span class="icone-card">
+                        ▣
+                    </span>
+
+
+                    <span class="titulo">
+                        VENDAS
+                    </span>
+
+
+                    <strong
+                        class="numero"
+                        id="numero-total-pedidos"
+                    >
+                        0
+                    </strong>
+
+
+                    <span class="descricao-card">
+                        Pedidos registrados
+                    </span>
+
+
+                    <span class="seta-card">
+                        →
+                    </span>
+
+                </div>
+
+
+
+                <div
+                    class="card-dashboard card-clicavel"
+                    id="dashboard-total-personalizados"
+                    data-destino="personalizados"
+                >
+
+                    <span class="icone-card">
+                        ✧
+                    </span>
+
+
+                    <span class="titulo">
+                        SOB MEDIDA
+                    </span>
+
+
+                    <strong
+                        class="numero"
+                        id="numero-total-personalizados"
+                    >
+                        0
+                    </strong>
+
+
+                    <span class="descricao-card">
+                        Solicitações personalizadas
+                    </span>
+
+
+                    <span class="seta-card">
+                        →
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ACESSO RÁPIDO -->
+
+            <div class="bloco-dashboard">
+
+
+                <div class="titulo-bloco">
+
+                    <span>
+                        ACESSO RÁPIDO
+                    </span>
+
+                </div>
+
+
+                <h2>
+                    Gerencie sua loja
+                </h2>
+
+
+                <div class="atalhos-dashboard">
+
+
+                    <a
+                        href="#secao-produtos"
+                        class="atalho-dashboard"
+                        data-atalho="produtos"
+                    >
+
+                        <span class="atalho-icone">
+                            ◇
+                        </span>
+
+                        <span>
+                            Produtos
+                        </span>
+
+                        <span class="atalho-seta">
+                            →
+                        </span>
+
+                    </a>
+
+
+
+                    <a
+                        href="#secao-colecoes"
+                        class="atalho-dashboard"
+                        data-atalho="colecoes"
+                    >
+
+                        <span class="atalho-icone">
+                            ◆
+                        </span>
+
+                        <span>
+                            Coleções
+                        </span>
+
+                        <span class="atalho-seta">
+                            →
+                        </span>
+
+                    </a>
+
+
+
+                    <a
+                        href="#secao-pedidos"
+                        class="atalho-dashboard"
+                        data-atalho="pedidos"
+                    >
+
+                        <span class="atalho-icone">
+                            ▣
+                        </span>
+
+                        <span>
+                            Pedidos
+                        </span>
+
+                        <span class="atalho-seta">
+                            →
+                        </span>
+
+                    </a>
+
+
+
+                    <a
+                        href="#secao-personalizados"
+                        class="atalho-dashboard"
+                        data-atalho="personalizados"
+                    >
+
+                        <span class="atalho-icone">
+                            ✧
+                        </span>
+
+                        <span>
+                            Personalizados
+                        </span>
+
+                        <span class="atalho-seta">
+                            →
+                        </span>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             PRODUTOS
+             ================================================= -->
+
+        <section
+            class="secao-painel"
+            id="secao-produtos"
+        >
+
+
+            <header class="cabecalho-com-botao">
+
+
+                <div>
+
+                    <span class="eyebrow">
+                        CATÁLOGO
+                    </span>
+
+
+                    <h1>
+                        Produtos
+                    </h1>
+
+
+                    <p>
+                        Cadastre e organize as peças da Saraviei.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="botao-principal"
+                    id="botao-novo-produto"
+                >
+                    + Novo produto
+                </button>
+
+
+            </header>
+
+
+
+            <div class="filtro-produtos">
+
+
+                <div class="filtro-titulo">
+                    VER PRODUTOS DE
+                </div>
+
+
+                <select
+                    id="filtro-colecoes"
+                    class="select-principal"
+                >
+
+                    <option value="">
+                        Todas as categorias
+                    </option>
+
+                </select>
+
+
+                <div
+                    class="contador-produtos"
+                    id="contador-produtos"
+                >
+                    0 produtos
+                </div>
+
+
+            </div>
+
+
+
+            <!-- FORMULÁRIO -->
+
+            <div
+                class="formulario-produto"
+                id="formulario-produto"
+                hidden
+            >
+
+
+                <div class="formulario-topo">
+
+
+                    <div>
+
+                        <span class="eyebrow">
+                            CATÁLOGO
+                        </span>
+
+
+                        <h2
+                            id="titulo-formulario-produto"
+                        >
+                            Novo produto
+                        </h2>
+
+
+                        <p>
+                            Cadastre uma nova peça.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="botao-fechar"
+                        id="botao-fechar-formulario"
+                    >
+                        ×
+                    </button>
+
+
+                </div>
+
+
+
+                <form id="form-produto">
+
+
+                    <input
+                        type="hidden"
+                        id="produto-id"
+                    >
+
+
+                    <div class="grid-formulario">
+
+
+                        <div class="campo campo-grande">
+
+                            <label for="produto-nome">
+                                Nome do produto
+                            </label>
+
+                            <input
+                                type="text"
+                                id="produto-nome"
+                                placeholder="Ex.: Porta-vela consagrado"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="campo campo-grande">
+
+                            <label for="produto-descricao">
+                                Descrição
+                            </label>
+
+                            <textarea
+                                id="produto-descricao"
+                                rows="4"
+                                placeholder="Descreva a peça."
+                            ></textarea>
+
+                        </div>
+
+
+
+                        <div class="campo">
+
+                            <label for="produto-preco">
+                                Preço
+                            </label>
+
+                            <input
+                                type="text"
+                                id="produto-preco"
+                                inputmode="decimal"
+                                placeholder="34,00"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="campo">
+
+                            <label for="produto-promocional">
+                                Preço promocional
+                            </label>
+
+                            <input
+                                type="text"
+                                id="produto-promocional"
+                                inputmode="decimal"
+                                placeholder="Opcional"
+                            >
+
+                        </div>
+
+
+
+                        <div class="campo">
+
+                            <label for="produto-custo">
+                                Custo
+                            </label>
+
+                            <input
+                                type="text"
+                                id="produto-custo"
+                                inputmode="decimal"
+                                placeholder="Opcional"
+                            >
+
+                        </div>
+
+
+
+                        <div class="campo">
+
+                            <label for="produto-peso">
+                                Peso
+                            </label>
+
+                            <input
+                                type="text"
+                                id="produto-peso"
+                                placeholder="Opcional"
+                            >
+
+                        </div>
+
+
+
+                        <div class="campo">
+
+                            <label for="produto-altura">
+                                Altura
+                            </label>
+
+                            <input
+                                type="text"
+                                id="produto-altura"
+                                placeholder="Opcional"
+                            >
+
+                        </div>
+
+
+
+                        <div class="campo">
+
+                            <label for="produto-largura">
+                                Largura
+                            </label>
+
+                            <input
+                                type="text"
+                                id="produto-largura"
+                                placeholder="Opcional"
+                            >
+
+                        </div>
+
+
+
+                        <div class="campo">
+
+                            <label for="produto-comprimento">
+                                Comprimento
+                            </label>
+
+                            <input
+                                type="text"
+                                id="produto-comprimento"
+                                placeholder="Opcional"
+                            >
+
+                        </div>
+
+
+
+                        <div class="campo campo-grande">
+
+                            <label>
+                                Categorias
+                            </label>
+
+
+                            <div
+                                class="seletor-colecoes"
+                                id="produto-colecoes"
+                            ></div>
+
+
+                        </div>
+
+
+
+                        <!-- =================================================
+                             IMAGEM DO PRODUTO
+                             ================================================= -->
+
+                        <div class="campo campo-grande campo-imagem-produto">
+
+                            <label for="produto-imagem">
+                                Imagem do produto
+                            </label>
+
+
+                            <div
+                                class="area-upload-imagem"
+                                id="area-upload-imagem"
+                            >
+
+                                <input
+                                    type="file"
+                                    id="produto-imagem"
+                                    name="imagem"
+                                    accept="image/png,image/jpeg,image/webp"
+                                >
+
+
+                                <label
+                                    for="produto-imagem"
+                                    class="botao-upload-imagem"
+                                >
+
+                                    <span class="icone-upload">
+                                        ↑
+                                    </span>
+
+
+                                    <span>
+                                        Escolher imagem
+                                    </span>
+
+
+                                    <small>
+                                        PNG, JPG ou WEBP — até 5 MB
+                                    </small>
+
+                                </label>
+
+                            </div>
+
+
+
+                            <div
+                                class="preview-imagem-produto"
+                                id="preview-imagem-produto"
+                                hidden
+                            >
+
+                                <img
+                                    id="preview-imagem-produto-img"
+                                    src=""
+                                    alt="Prévia da imagem do produto"
+                                >
+
+
+                                <div class="preview-imagem-info">
+
+                                    <span
+                                        id="nome-imagem-produto"
+                                    >
+                                        Imagem selecionada
+                                    </span>
+
+
+                                    <button
+                                        type="button"
+                                        id="botao-remover-imagem"
+                                        class="botao-remover-imagem"
+                                    >
+                                        Remover
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div
+                                class="status-upload-imagem"
+                                id="status-upload-imagem"
+                            ></div>
+
+                        </div>
+
+
+
+                        <div class="campo">
+
+                            <label class="check-opcao">
+
+                                <input
+                                    type="checkbox"
+                                    id="produto-ativo"
+                                    checked
+                                >
+
+                                <span>
+                                    Produto ativo
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+
+                        <div class="campo">
+
+                            <label class="check-opcao">
+
+                                <input
+                                    type="checkbox"
+                                    id="produto-destaque"
+                                >
+
+                                <span>
+                                    Produto em destaque
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label class="check-opcao">
+
+                                <input
+                                    type="checkbox"
+                                    id="produto-esgotado"
+                                >
+
+                                <span>
+                                    Produto esgotado
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label class="check-opcao">
+
+                                <input
+                                    type="checkbox"
+                                    id="produto-tem-cor"
+                                >
+
+                                <span>
+                                    Este produto possui opções de cor
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label class="check-opcao">
+
+                                <input
+                                    type="checkbox"
+                                    id="produto-tem-tamanho"
+                                >
+
+                                <span>
+                                    Este produto possui opções de tamanho
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div
+                            id="area-variacoes-produto"
+                            class="area-variacoes-produto"
+                            hidden
+                        >
+
+                            <div class="cabecalho-lista">
+
+                                <div>
+                                    <span class="eyebrow">
+                                        VARIAÇÕES
+                                    </span>
+
+                                    <h3>
+                                        Cores, tamanhos, preços e estoque
+                                    </h3>
+
+                                    <p>
+                                        Cada combinação pode ter preço, promoção, estoque e status esgotado próprios.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="campos-formulario">
+
+                                <div
+                                    class="campo"
+                                    id="campo-cores-variacoes"
+                                    hidden
+                                >
+
+                                    <label for="produto-cores">
+                                        Cores
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="produto-cores"
+                                        placeholder="Ex.: Preto, Branco, Vermelho"
+                                    >
+
+                                    <small>
+                                        Separe as cores por vírgula.
+                                    </small>
+
+                                </div>
+
+
+                                <div
+                                    class="campo"
+                                    id="campo-tamanhos-variacoes"
+                                    hidden
+                                >
+
+                                    <label for="produto-tamanhos">
+                                        Tamanhos
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="produto-tamanhos"
+                                        placeholder="Ex.: P, M, G"
+                                    >
+
+                                    <small>
+                                        Separe os tamanhos por vírgula.
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="acoes-variacoes">
+
+                                <button
+                                    type="button"
+                                    class="botao-secundario"
+                                    id="botao-gerar-variacoes"
+                                >
+                                    Gerar combinações
+                                </button>
+
+                                <span id="resumo-variacoes"></span>
+
+                            </div>
+
+
+                            <div class="tabela-variacoes-wrap">
+
+                                <table class="tabela-variacoes">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Cor</th>
+                                            <th>Tamanho</th>
+                                            <th>Preço</th>
+                                            <th>Promoção</th>
+                                            <th>Estoque</th>
+                                            <th>Esgotado</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="lista-variacoes-produto"></tbody>
+
+                                </table>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div
+                        class="mensagem-produto"
+                        id="mensagem-produto"
+                    ></div>
+
+
+
+                    <div class="acoes-formulario">
+
+
+                        <button
+                            type="button"
+                            class="botao-secundario"
+                            id="botao-cancelar-formulario"
+                        >
+                            Cancelar
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="botao-principal"
+                            id="botao-salvar-produto"
+                        >
+                            Salvar produto
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+
+
+            <!-- LISTA -->
+
+            <div class="cabecalho-lista">
+
+
+                <div>
+
+                    <span class="eyebrow">
+                        CATÁLOGO
+                    </span>
+
+
+                    <h2>
+                        Seus produtos
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="botao-secundario"
+                    id="botao-atualizar-produtos"
+                >
+                    Atualizar
+                </button>
+
+
+            </div>
+
+
+
+            <div
+                class="produtos-container"
+                id="produtos-container"
+            >
+
+                <div class="estado-carregando">
+                    Carregando produtos...
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             PÁGINA INICIAL
+             ================================================= -->
+
+        <section
+            class="secao-painel"
+            id="secao-home"
+        >
+
+
+            <header class="cabecalho-pagina">
+
+
+                <div>
+
+                    <span class="eyebrow">
+                        VITRINE
+                    </span>
+
+
+                    <h1>
+                        Página inicial
+                    </h1>
+
+
+                    <p>
+                        Escolha os produtos que aparecerão em
+                        destaque na página inicial.
+                    </p>
+
+                </div>
+
+
+            </header>
+
+
+
+            <div
+                class="mensagem-produto"
+                id="mensagem-home"
+            ></div>
+
+
+
+            <div
+                class="produtos-container"
+                id="produtos-home-container"
+            >
+
+                <div class="estado-carregando">
+                    Carregando produtos...
+                </div>
+
+            </div>
+
+
+
+            <div class="acoes-formulario">
+
+                <button
+                    type="button"
+                    class="botao-principal"
+                    id="botao-salvar-home"
+                >
+                    Salvar página inicial
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             COLEÇÕES
+             ================================================= -->
+
+        <section
+            class="secao-painel"
+            id="secao-colecoes"
+        >
+
+
+            <header class="cabecalho-com-botao">
+
+
+                <div>
+
+                    <span class="eyebrow">
+                        ORGANIZAÇÃO
+                    </span>
+
+
+                    <h1>
+                        Coleções
+                    </h1>
+
+
+                    <p>
+                        Organize os produtos da Saraviei.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="botao-principal"
+                    id="botao-nova-colecao"
+                >
+                    + Nova coleção
+                </button>
+
+
+            </header>
+
+
+
+            <div
+                class="aviso-colecoes"
+                id="aviso-colecoes"
+            ></div>
+
+
+
+            <div
+                class="lista-colecoes"
+                id="lista-colecoes"
+            >
+
+                <div class="estado-carregando">
+                    Carregando coleções...
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             PEDIDOS
+             ================================================= -->
+
+        <section
+            class="secao-painel"
+            id="secao-pedidos"
+        >
+
+
+            <header class="cabecalho-com-botao">
+
+
+                <div>
+
+                    <span class="eyebrow">
+                        VENDAS
+                    </span>
+
+
+                    <h1>
+                        Pedidos
+                    </h1>
+
+
+                    <p>
+                        Acompanhe os pedidos realizados na loja.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="contador-produtos"
+                    id="contador-pedidos"
+                >
+                    0 pedidos
+                </div>
+
+
+            </header>
+
+
+
+            <div class="filtro-produtos">
+
+
+                <button
+                    type="button"
+                    class="filtro-pedido ativo"
+                    data-status="todos"
+                >
+                    Todos
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filtro-pedido"
+                    data-status="novo"
+                >
+                    Novos
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filtro-pedido"
+                    data-status="pagamento_confirmado"
+                >
+                    Pagamento confirmado
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filtro-pedido"
+                    data-status="em_preparacao"
+                >
+                    Em preparação
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filtro-pedido"
+                    data-status="enviado"
+                >
+                    Enviados
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filtro-pedido"
+                    data-status="entregue"
+                >
+                    Entregues
+                </button>
+
+
+            </div>
+
+
+
+            <div
+                class="produtos-container"
+                id="pedidos-container"
+            >
+
+                <div class="estado-carregando">
+                    Carregando pedidos...
+                </div>
+
+            </div>
+
+
+
+            <!-- DETALHES -->
+
+            <div
+                class="formulario-produto"
+                id="pedido-detalhes"
+                hidden
+            >
+
+
+                <div class="formulario-topo">
+
+
+                    <div>
+
+                        <span class="eyebrow">
+                            PEDIDO
+                        </span>
+
+
+                        <h2
+                            id="pedido-detalhes-titulo"
+                        >
+                            Pedido
+                        </h2>
+
+
+                        <p
+                            id="pedido-detalhes-data"
+                        ></p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="botao-fechar"
+                        id="botao-voltar-pedidos"
+                    >
+                        ×
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- 1. CLIENTE -->
+
+                <div class="bloco-dashboard">
+
+                    <div class="titulo-bloco">
+                        <span>
+                            1. CLIENTE
+                        </span>
+                    </div>
+
+
+                    <div id="pedido-cliente"></div>
+
+                </div>
+
+
+
+                <!-- 2. ITENS -->
+
+                <div class="bloco-dashboard">
+
+                    <div class="titulo-bloco">
+                        <span>
+                            2. ITENS DO PEDIDO
+                        </span>
+                    </div>
+
+
+                    <div id="pedido-itens"></div>
+
+                </div>
+
+
+
+                <!-- 3. ENTREGA -->
+
+                <div class="bloco-dashboard">
+
+                    <div class="titulo-bloco">
+                        <span>
+                            3. ENTREGA
+                        </span>
+                    </div>
+
+
+                    <div id="pedido-entrega"></div>
+
+                </div>
+
+
+
+                <!-- 4. FINANCEIRO -->
+
+                <div class="bloco-dashboard">
+
+                    <div class="titulo-bloco">
+                        <span>
+                            4. RESUMO FINANCEIRO
+                        </span>
+                    </div>
+
+
+                    <div id="pedido-financeiro"></div>
+
+                </div>
+
+
+
+                <!-- 5. PAGAMENTO -->
+
+                <div class="bloco-dashboard">
+
+                    <div class="titulo-bloco">
+                        <span>
+                            5. PAGAMENTO
+                        </span>
+                    </div>
+
+
+                    <div id="pedido-pagamento"></div>
+
+                </div>
+
+
+
+                <!-- 6. STATUS / RASTREIO -->
+
+                <div class="bloco-dashboard">
+
+                    <div class="titulo-bloco">
+                        <span>
+                            6. STATUS / RASTREIO
+                        </span>
+                    </div>
+
+
+
+                    <div class="campo">
+
+                        <label for="pedido-status">
+                            Status do pedido
+                        </label>
+
+
+                        <select
+                            id="pedido-status"
+                            class="select-principal"
+                        >
+
+                            <option value="novo">
+                                NOVO
+                            </option>
+
+                            <option value="pagamento_confirmado">
+                                PAGAMENTO CONFIRMADO
+                            </option>
+
+                            <option value="em_preparacao">
+                                EM PREPARAÇÃO
+                            </option>
+
+                            <option value="enviado">
+                                ENVIADO
+                            </option>
+
+                            <option value="entregue">
+                                ENTREGUE
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="campo">
+
+                        <label for="pedido-rastreio-input">
+                            Código de rastreio
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="pedido-rastreio-input"
+                            placeholder="Opcional"
+                        >
+
+                    </div>
+
+
+
+                    <div class="campo">
+
+                        <label for="pedido-status-rastreio">
+                            Informações de rastreio
+                        </label>
+
+
+                        <textarea
+                            id="pedido-status-rastreio"
+                            rows="3"
+                            placeholder="Opcional"
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <div
+                        class="mensagem-produto"
+                        id="mensagem-status-pedido"
+                    ></div>
+
+
+
+                    <div
+                        class="mensagem-produto"
+                        id="mensagem-rastreio"
+                    ></div>
+
+
+
+                    <div class="acoes-formulario">
+
+
+                        <button
+                            type="button"
+                            class="botao-principal"
+                            id="botao-salvar-status-pedido"
+                        >
+                            Salvar status
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="botao-secundario"
+                            id="botao-salvar-rastreio"
+                        >
+                            Salvar rastreio
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             PERSONALIZADOS
+             ================================================= -->
+
+        <section
+            class="secao-painel"
+            id="secao-personalizados"
+        >
+
+
+            <header class="cabecalho-pagina">
+
+
+                <div>
+
+                    <span class="eyebrow">
+                        SOB MEDIDA
+                    </span>
+
+
+                    <h1>
+                        Personalizados
+                    </h1>
+
+
+                    <p>
+                        Gerencie solicitações de produtos
+                        personalizados.
+                    </p>
+
+                </div>
+
+
+            </header>
+
+
+
+            <div class="estado-vazio">
+
+
+                <div class="estado-vazio-icone">
+                    ✧
+                </div>
+
+
+                <h2>
+                    Personalizados
+                </h2>
+
+
+                <p>
+                    Esta área será usada para administrar
+                    solicitações personalizadas.
+                </p>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             CONFIGURAÇÕES
+             ================================================= -->
+
+        <section
+            class="secao-painel"
+            id="secao-configuracoes"
+        >
+
+
+            <header class="cabecalho-pagina">
+
+
+                <div>
+
+                    <span class="eyebrow">
+                        SISTEMA
+                    </span>
+
+
+                    <h1>
+                        Configurações
+                    </h1>
+
+
+                    <p>
+                        Configurações gerais da loja.
+                    </p>
+
+                </div>
+
+
+            </header>
+
+
+
+            <div class="estado-vazio">
+
+
+                <div class="estado-vazio-icone">
+                    ⚙
+                </div>
+
+
+                <h2>
+                    Configurações
+                </h2>
+
+
+                <p>
+                    As configurações da loja serão organizadas
+                    nesta área.
+                </p>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        const secoes =
+            document.querySelectorAll(
+                ".secao-painel"
+            );
+
+
+        const botoesMenu =
+            document.querySelectorAll(
+                ".botao-menu"
+            );
+
+
+        function rolarParaSecao(
+            nome
+        ) {
+
+            const secao =
+                document.getElementById(
+                    "secao-" + nome
+                );
+
+
+            if (!secao) {
+                return;
+            }
+
+
+            secao.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+
+            botoesMenu.forEach(
+                function (botao) {
+
+                    botao.classList.toggle(
+                        "ativo",
+                        botao.dataset.destino === nome
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        botoesMenu.forEach(
+            function (botao) {
+
+                botao.addEventListener(
+                    "click",
+                    function () {
+
+                        rolarParaSecao(
+                            botao.dataset.destino
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        document.addEventListener(
+            "click",
+            function (evento) {
+
+
+                const card =
+                    evento.target.closest(
+                        ".card-clicavel[data-destino]"
+                    );
+
+
+                if (card) {
+
+                    rolarParaSecao(
+                        card.dataset.destino
+                    );
+
+                }
+
+
+                const atalho =
+                    evento.target.closest(
+                        ".atalho-dashboard[data-atalho]"
+                    );
+
+
+                if (atalho) {
+
+                    evento.preventDefault();
+
+
+                    if (
+                        atalho.dataset.atalho ===
+                        "novo-produto"
+                    ) {
+
+                        rolarParaSecao(
+                            "produtos"
+                        );
+
+
+                        setTimeout(
+                            function () {
+
+                                const botao =
+                                    document.getElementById(
+                                        "botao-novo-produto"
+                                    );
+
+
+                                if (botao) {
+                                    botao.click();
+                                }
+
+                            },
+                            250
+                        );
+
+
+                    } else {
+
+                        rolarParaSecao(
+                            atalho.dataset.atalho
+                        );
+
+                    }
+
+                }
+
+            }
+        );
+
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
